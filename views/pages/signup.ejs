@@ -1,0 +1,52 @@
+<div class="modal-dialog" role="document">
+  <div class="modal-content rounded-4 shadow gls">
+    <div class="modal-header p-5 pb-4 border-bottom-0">
+      <!-- <h5 class="modal-title">Modal title</h5> -->
+      <h2 class="fw-bold mb-0">التسجيل</h2>
+      <!-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> -->
+    </div>
+
+    <div class="modal-body p-5 pt-0">
+      <form action="/user/signup" method="post" class="">
+        <%- include ('../partials/error') %>
+          <div class="form-floating mb-3">
+            <input type="text" name="name" minlength="4" required class="form-control rounded-3" id="floatingInput"
+              placeholder="name@example.com">
+            <label for="floatingInput">الاسم الاول</label>
+          </div>
+
+          <div class="form-floating mb-3">
+            <input type="email" name="username" minlength="3" required class="form-control rounded-3" id="floatingInput"
+              placeholder="name@example.com">
+            <label for="floatingInput">البريد الالكتروني</label>
+          </div>
+
+          <div class="form-floating mb-3">
+            <input type="password" name="password" minlength="6" required class="form-control rounded-3"
+              id="floatingPassword" placeholder="Password">
+            <label for="floatingPassword">كلمه السر</label>
+          </div>
+
+
+
+
+          <button class="w-100 mb-2 btn btn-lg rounded-3 btn-primary" type="submit">التسجيل</button>
+          <a class="w-100 btn btn-lg btn-primary my-2" href="/user/login">لديك حساب مسبقا !!</a>
+
+          <small class="text-muted">بالضغط علي تسجيل فانت توافق علي <a href="/term">الشروط و الاحكام</a></small>
+          <hr class="my-4">
+          <h2 class="fs-5 fw-bold mb-3">او يمكنك استخدام</h2>
+          <button class="w-100 py-2 mb-2 btn btn-outline-danger rounded-3" type="submit">
+            <i class="fab fa-google"></i>
+            التسجيل بواسطه قوقل
+          </button>
+          <button class="w-100 py-2 mb-2 btn btn-outline-primary rounded-3" type="submit">
+            <i class="fab fa-facebook"></i>
+            التسجيل بواسطه فيسبوك
+          </button>
+
+
+      </form>
+    </div>
+  </div>
+</div>

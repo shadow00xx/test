@@ -1,0 +1,87 @@
+<style>
+  .bg {
+    background-image: url(/imgs/annie-spratt-01Wa3tPoQQ8-unsplash.jpg);
+  }
+
+  .form-signin {
+    max-width: 330px;
+    padding: 15px;
+  }
+
+  .form-signin .form-floating:focus-within {
+    z-index: 2;
+  }
+
+  .form-signin input[type="email"] {
+    margin-bottom: -1px;
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+  }
+
+  .form-signin input[type="password"] {
+    margin-bottom: 10px;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+  }
+
+  .gls {
+    background: rgba(123, 225, 182, 0.45);
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+  }
+
+  form img {
+
+    border-radius: 50%;
+  }
+</style>
+
+
+
+
+<pre></pre>
+<%- include ('../partials/_dashboardHeader') %>
+
+  <div class="container-fluid">
+    <div class="row">
+      <%- include ('../partials/_sidebarmenu') %>
+
+
+        <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+
+          <div class="text-center bg">
+            <main class="form-signin w-100 m-auto gls">
+              <form action="/user/login" method="post">
+                <img class="mb-4" src="/imgs/delala-logo.png" alt="" width="57" height="57">
+                <h1 class="h3 mb-3 fw-normal">الرجاء تسجيل الدخول</h1>
+                <%- include ('../partials/error') %>
+
+                  <div class="form-floating">
+                    <input type="text" name="username" class="form-control" id="floatingInput"
+                      placeholder="اسم المستخدم">
+                    <label for="floatingInput">اسم المستخدم</label>
+                  </div>
+                  <div class="form-floating">
+                    <input type="password" name="password" class="form-control" id="floatingPassword"
+                      placeholder="Password">
+                    <label for="floatingPassword">كلمه السر</label>
+                  </div>
+                  <div class="checkbox mb-3">
+                    <label>
+                      <input type="checkbox" value="remember-me"> تزكرني لاحقا
+                    </label>
+                  </div>
+                  <button class="w-100 btn btn-lg btn-primary" type="submit">تسجيل الدخول</button>
+                  <a class="w-100 btn btn-lg  my-2" href="/user/signup">ليس لديك حساب !!</a>
+                  <p class="mt-5 mb-3 text-muted">© دلالة 2023</p>
+              </form>
+            </main>
+
+            <%- include ('../partials/_footer') %>
+
+        </main>
+    </div>
+  </div>

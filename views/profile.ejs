@@ -1,0 +1,40 @@
+<%- include ('./partials/_dashboardHeader') %>
+
+    <div class="container-fluid">
+        <div class="row">
+
+            <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+                <%- include ('./partials/_sidebarmenu') %>
+                    <% user.forEach(e=> { %>
+                        <h2>
+                            ملف <%= e.name %> الشخصي
+                        </h2>
+                        <p>
+                            <strong>الاسم</strong>: <%= e.name %><br>
+                                <strong>اسم المستخدم</strong>: <input type="text" value="<%= e.username %>"><br>
+                                <strong>كلمه السر</strong>:<input type="password" value="<%= e.password %>"><br>
+
+                                <strong>تاريخ الانضمام</strong>: <%= e.createdAt %>
+
+                        </p>
+                        <% }); %>
+
+                            <div class="b-example-divider"></div>
+
+                            <div class="edit-profile">
+                                <h2>
+                                    تعديل الملف الشخصي
+                                </h2>
+                                <button id="edit-btn" class="btn btn-outline-info"> تعديل</button>
+                                <div class="">
+                                    <form action="/user/edit" method="post" class="" id="edit-info">
+                                        <input type="hidden" name="_method" value="PUT">
+
+                                    </form>
+                                </div>
+                            </div>
+
+            </main>
+        </div>
+    </div>
+    </div>

@@ -1,0 +1,35 @@
+<div class="pro-con">
+
+    <div class="title-pro">
+        <h1>عنوان هنا</h1>
+        <a href="/"> اعرض المزيد من العنوان</a>
+    </div>
+    <div class="flex-con">
+        <% march.forEach(e=> { %>
+
+            <div class="item-1">
+                <div class="card">
+
+
+                    <div class="img-con">
+                        <img src="/uploads/<%= e.image %>" alt="" srcset="">
+                    </div>
+                    <div class="card-det">
+                        <a class="card-t" href="/prodects/<%- e._id %> ">
+                            <%= e.title %>
+                        </a>
+                        <h4 class="price">
+                            <%= e.prise %> جنية
+                        </h4>
+                    </div>
+                </div>
+
+            </div>
+            <% }); %>
+
+    </div>
+    <div class="link-pro">
+        <a href="/">اعرض المزيد</a>
+    </div>
+
+</div>

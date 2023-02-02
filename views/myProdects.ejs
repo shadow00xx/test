@@ -1,0 +1,75 @@
+<%- include ('./partials/_dashboardHeader') %>
+
+    <div class="container-fluid">
+        <div class="row">
+
+            <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+                <%- include ('./partials/_sidebarmenu') %>
+
+
+                    <div class="user-prodects">
+                        <h1>سلع <%= user.name %>
+                        </h1>
+                    </div>
+                    <div class="prodect-con">
+                        <% march.forEach(e=> { %>
+
+                            <div class="products">
+                                <div class="card" style="height: fit-content;">
+                                    <div class="row g-0">
+                                        <div class="col-md-4">
+                                            <img src="/uploads/<%= e.image %>" width="100%" alt="" srcset="">
+
+                                        </div>
+                                        <div class="col-md-8">
+                                            <div class="card-body">
+                                                <h5 class="card-title">
+                                                    <a href="/prodects/<%- e._id %> " class="">
+                                                        <%= e.title %>
+                                                    </a>
+                                                    <p class="card-text">
+                                                        السعر <%= e.prise %> SDG
+                                                    </p>
+                                                    <p class="card-text">
+                                                        <%= e.body %>
+                                                    </p>
+
+                                                    <p class="card-text"><small class="text-muted">
+
+                                                            تم الرفع بواسطه <%= e.user.name %> قبل <%=
+                                                                    moment(e.createdAt).fromNow() %>
+                                                        </small>
+
+
+                                                    </p>
+                                                    <div class="d-flex">
+                                                        <a href="/prodects/edit" class="btn btn-info">تعديل</a>
+                                                        <form action="/prodects/<%- e._id %>" method="post"
+                                                            id="delete-form">
+                                                            <input type="hidden" name="_method" value="DELETE">
+
+                                                            <button type="submit" class="btn btn-danger">حزف</button>
+                                                        </form>
+                                                    </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <% }); %>
+
+                    </div>
+
+
+        </div>
+    </div>
+    </div>
+
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>

@@ -1,0 +1,33 @@
+<%- include ('./partials/_dashboardHeader') %>
+
+
+    <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+        <%- include ('./partials/_sidebarmenu') %>
+
+
+            <!-- <form action="/prodects/catogry" method="post"> -->
+            <select class="form-select" aria-label="Default select example" id="prodects-catogery">
+                <option selected>اي انواع السلع تقدم</option>
+                <option value="cars">سيارات</option>
+                <option value="eloctronic">الكترونيات</option>
+                <option value="realstate">عقارات </option>
+                <option value="fashon">الازياء والموضه</option>
+                <option value="makeup">مستحضرات وادوات تجميل</option>
+                <option value="kids">أطفال وألعاب</option>
+                <option value="food">طعام وغذاء</option>
+                <option value="others">سلع اخري </option>
+            </select>
+            <button id="cat-select" class="btn btn-outline-dark btn-block">تاكيد</button>
+
+            <!-- </form> -->
+            <h1 class="out">
+            </h1>
+
+            <form action="/prodects/add-prodect" method="post" id="prodects-form" class="prodects-form"
+                enctype="multipart/form-data">
+
+
+
+            </form>
+
+    </main>
