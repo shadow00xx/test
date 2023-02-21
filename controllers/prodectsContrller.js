@@ -26,14 +26,15 @@ exports.addprodect = (req, res) => {
 exports.addproPost = async (req, res, next) => {
 
     try {
+        const result = await cloudinary.uploader.upload(req.file.path)
         req.body.user = req.user.id
         const prodect = req.body
         if (req.file) {
-            prodect.image = req.file.filename
+            prodect.image = result.secure_url
 
         }
 
-        const result = await cloudinary.uploader.upload(req.file.path)
+        
         if (prodect.cloudinary_id) {
          cloudinary_id: result.public_id
     
