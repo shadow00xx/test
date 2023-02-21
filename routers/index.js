@@ -1,34 +1,28 @@
 const express = require('express');
 const router = express.Router();
-const prodects = require('../models/Prodects')
-const User = require('../models/User')
-const { ensureAuth, ensureGuest } = require('../middlewares/auth')
+const indexContrller = require('../controllers/indexContrller')
 
 // landing page
+router.get("/", indexContrller.landingPage)
 
-router.get("/", async (req, res) => {
-    try {
-        const march = await prodects.find()
-            .populate('user')
-            .sort({ createdAt: 'desc' })
-            .lean()
+// searching
+router.post("/search", indexContrller.search)
 
-        res.render('index', { march, title: 'دلالة' })
-    } catch (err) {
-        console.log(err)
-        res.render('error/500')
-    }
-})
+// store
+router.get('/stores', indexContrller.store)
 
+// last
+router.get('/latest', indexContrller.exploreLatest)
+
+// serveces
+router.get('/serveces', indexContrller.serveces)
 
 // about page
+router.get('/about', indexContrller.about)
 
-router.get('/about', (req, res) => {
-    res.render('pages/about', { title: 'من نحن' })
-})
+// term page
+router.get('/term', indexContrller.terms)
 
-
-
-
-
+router.get('/categories', indexContrller.exploreCategories);
+router.get('/categories/:id', indexContrller.exploreCategoriesById);
 module.exports = router
