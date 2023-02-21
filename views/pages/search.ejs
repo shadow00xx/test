@@ -1,0 +1,37 @@
+<%- include ('../partials/_dashboardHeader') %>
+
+    <div class="container-fluid">
+        <div class="row">
+            <%- include ('../partials/_sidebarmenu') %>
+
+
+                <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+
+
+
+
+                    <h1 class="pb-4"> نتائج البحث</h1>
+
+                    <div class="row row-cols-2 row-cols-lg-5 g-2 g-lg-3">
+                        <% if(search !='' ) { %>
+                            <% search.forEach((p, index)=>{ %>
+                                <a href="/prodects/<%= p._id %>" class="col text-center category__link">
+                                    <div class="category__img category__img--large shadow">
+                                        <img src="/uploads/<%= p.image %>" alt="<%= p.name %>" loading="lazy">
+                                    </div>
+                                    <div class="pt-1">
+                                        <%= p.name %>
+                                    </div>
+                                </a>
+                                <% }) %>
+                                    <% } else { %>
+                                        <p>لا يوجد نتائج بحث</p>
+                                        <% } %>
+                    </div>
+
+
+
+
+                </main>
+        </div>
+    </div>

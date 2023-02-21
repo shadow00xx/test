@@ -10,14 +10,13 @@ const passport = require('passport');
 const connectDB = require('./config/db')
 const flash = require('connect-flash');
 
-
+// require('./config/database')
 
 // load config 
 dotenv.config({ path: './config/config.env' })
 
 // init app
 const app = express()
-
 
 // morgan for login
 if (process.env.NODE_ENV === 'develpmont') {
@@ -29,7 +28,6 @@ connectDB()
 // Body parser
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
-
 
 // Method override
 app.use(
@@ -53,6 +51,7 @@ app.use(session({
 
 // passport
 require('./config/passport')(passport)
+require('./config/passportGoogle')(passport)
 
 
 // Passport middleware
@@ -88,6 +87,8 @@ app.set('view engine', 'ejs')
 app.use('/', require('./routers/index'))
 app.use('/user', require('./routers/user'))
 app.use('/prodects', require('./routers/prodects'))
+app.use('/auth', require('./routers/auth'))
+
 
 // moment js
 app.locals.moment = require('moment');

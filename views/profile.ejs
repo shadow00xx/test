@@ -7,8 +7,9 @@
                 <%- include ('./partials/_sidebarmenu') %>
                     <% user.forEach(e=> { %>
                         <h2>
-                            ملف <%= e.name %> الشخصي
+                            ملف <%= e.displayName %> الشخصي
                         </h2>
+                        <img src="<%= e.image %>" alt="" srcset="">
                         <p>
                             <strong>الاسم</strong>: <%= e.name %><br>
                                 <strong>اسم المستخدم</strong>: <input type="text" value="<%= e.username %>"><br>

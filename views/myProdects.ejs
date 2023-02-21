@@ -7,60 +7,35 @@
                 <%- include ('./partials/_sidebarmenu') %>
 
 
-                    <div class="user-prodects">
-                        <h1>سلع <%= user.name %>
-                        </h1>
-                    </div>
-                    <div class="prodect-con">
-                        <% march.forEach(e=> { %>
 
-                            <div class="products">
-                                <div class="card" style="height: fit-content;">
-                                    <div class="row g-0">
-                                        <div class="col-md-4">
-                                            <img src="/uploads/<%= e.image %>" width="100%" alt="" srcset="">
+                    <!--  Start -->
+                    <section class="pb-4 pt-4">
+                        <div class="d-flex mb-2 align-items-center">
+                            <h2>سلع <%= user.name %>
+                            </h2>
 
-                                        </div>
-                                        <div class="col-md-8">
-                                            <div class="card-body">
-                                                <h5 class="card-title">
-                                                    <a href="/prodects/<%- e._id %> " class="">
-                                                        <%= e.title %>
-                                                    </a>
-                                                    <p class="card-text">
-                                                        السعر <%= e.prise %> SDG
-                                                    </p>
-                                                    <p class="card-text">
-                                                        <%= e.body %>
-                                                    </p>
+                        </div>
 
-                                                    <p class="card-text"><small class="text-muted">
+                        <div class="row row-cols-2 row-cols-lg-5 g-2 g-lg-3">
+                            <% march.forEach(e=> { %>
 
-                                                            تم الرفع بواسطه <%= e.user.name %> قبل <%=
-                                                                    moment(e.createdAt).fromNow() %>
-                                                        </small>
+                                <a href="/prodects/<%= e._id %>" class="col text-center category__link1">
+                                    <div class="category__img1 category__img--large">
+                                        <img src="/uploads/<%= e.image %>" width="100%" alt="<%= e.name %> "
+                                            loading="lazy">
 
-
-                                                    </p>
-                                                    <div class="d-flex">
-                                                        <a href="/prodects/edit" class="btn btn-info">تعديل</a>
-                                                        <form action="/prodects/<%- e._id %>" method="post"
-                                                            id="delete-form">
-                                                            <input type="hidden" name="_method" value="DELETE">
-
-                                                            <button type="submit" class="btn btn-danger">حزف</button>
-                                                        </form>
-                                                    </div>
-                                            </div>
-                                        </div>
                                     </div>
-                                </div>
-                            </div>
+                                    <div class="pt-1">
+                                        <%= e.name %>
+                                    </div>
+                                </a>
+                                <% }) %>
+
+                        </div>
+                    </section>
 
 
-                            <% }); %>
 
-                    </div>
 
 
         </div>

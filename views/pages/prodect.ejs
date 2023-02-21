@@ -3,63 +3,127 @@
     <div class="container-fluid">
         <div class="row">
             <%- include ('../partials/_sidebarmenu') %>
-
-
                 <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
 
 
 
-                    <div class="prodect-con">
+                    <%- include ('../partials/_ads') %>
 
 
-                        <div class="products">
-                            <div class="card">
-                                <div class="row g-0">
-                                    <div class="col-md-4">
-                                        <img src="/uploads/<%= e.image %>" width="100%" alt="" srcset="">
+                        <div class="prodect-secetion">
+                            <div class="row">
 
-                                    </div>
-                                    <div class="col-md-8">
-                                        <div class="card-body">
-                                            <h5 class="card-title">
-                                                <a href="" class="">
-                                                    <%= e.title %>
-                                                </a>
-                                                <p class="card-text">
-                                                    السعر <%= e.prise %> SDG
-                                                </p>
-                                                <p class="card-text body-pro">
-                                                    <%= e.body %>
-                                                </p>
-                                                <p class="card-text">
-
-                                                </p>
-                                                <p class="card-text"><small class="text-muted">
-
-                                                        تم الرفع بواسطه <a href="/">
-                                                            <%= e.user.name %>
-                                                        </a>
-                                                        قبل <%= moment(e.createdAt).fromNow() %>
-
-                                                    </small>
+                                <div class="col-12 col-md-4">
+                                    <img src="/uploads/<%- e.image %>" class="img-fluid sticky-top" style="top: 20px;"
+                                        alt="<%- e.name %>" loading="lazy">
+                                </div>
 
 
-                                                </p>
+                                <div class="col-12 col-md-8">
+                                    <div class="row py-2">
+
+                                        <div class="col-12">
+
+                                            <h1>
+                                                اسم السلعة : <%- e.name %>
+                                            </h1>
                                         </div>
+
+
+
+                                        <h4>
+                                            العنوان البائع : <%- e.address %>
+                                        </h4>
+
+
+                                        <h4>
+                                            رقم الهاتف : <%- e.phone %>
+                                        </h4>
+
+
+                                        <h4>
+                                            التفاصيل : <%- e.body %>
+                                        </h4>
+
+                                        <div class="col-12 mb-4"><i class="bi bi-tag"></i>
+                                            السعر : <%= e.prise %> SDG
+                                        </div>
+
+                                        <% if(e.modal){ %>
+                                            <h1>
+                                                موديل : <%= e.modal %>
+                                            </h1>
+                                            <% } %>
+
+                                                <% if(e.gas){ %>
+                                                    <h1>
+                                                        نوع اوقود : <%= e.gas %>
+                                                    </h1>
+                                                    <% } %>
+
+
+                                                        <% if(e.conditions){ %>
+                                                            <% if(e.conditions==="new" ){ %>
+                                                                <h1>
+                                                                    الحالة : جديد
+                                                                </h1>
+                                                                <% } %>
+                                                                    <% if(e.conditions==="use" ){ %>
+                                                                        <h1>
+                                                                            الحالة : مستخدم
+                                                                        </h1>
+                                                                        <% } %>
+                                                                            <% } %>
+
+
+
+
+                                                                                <% if(e.owners){ %>
+                                                                                    <h1>
+                                                                                        <%= e.owners %>
+                                                                                    </h1>
+                                                                                    <% } %>
+
+
+                                                                                        <p class="lead">
+
+                                                                                            <small class="text-muted">
+                                                                                                تم الرفع بواسطه
+                                                                                                <a href="/">
+                                                                                                    <% if(e.user.displayName) { %>
+                                                                                                       
+
+
+                                                                                                        <%= e.user.displayName %>
+                                                                                                           
+
+
+                                                                                                            <% } %>
+                                                                                                                <% if(e.user.name){ %>
+                                                                                                                    
+
+                                                                                                                   
+                                                                                                                       <%=  e.user.name %>
+
+                                                                                                                        <% } %>
+                                                                                                                           
+
+                                                                                                </a>
+                                                                                                منذ
+                                                                                                <%= moment(e.createdAt).fromNow() %>
+                                                                                                   
+
+
+                                                                                            </small>
+                                                                                        </p>
                                     </div>
                                 </div>
+
                             </div>
                         </div>
 
 
 
-                    </div>
-
-
-
-
-
-
                 </main>
-        </div>
+        </div> 
     </div>

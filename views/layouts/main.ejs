@@ -7,8 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/css/bootstrap.rtl.css">
     <link rel="stylesheet" href="/css/dashboard.rtl.css">
-    <link rel="stylesheet" href="/vendor/swiper/swiper-bundle.min.css">
-    <link href="/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+    <!-- <link rel="stylesheet" href="/vendor/swiper/swiper-bundle.min.css">
+    <link href="/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet"> -->
 
     <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css" /> -->
 
@@ -16,9 +16,11 @@
     <link rel="stylesheet" href="/css/fontawesome.css">
     <link rel="stylesheet" href="/css/style.css">
     <!-- <link rel="stylesheet" href="/css/dashboard.rtl.css"> -->
+
     <title>
-        <%= title %>
+        <%= typeof title !='undefined' ? title: 'دلالة' %>
     </title>
+
 </head>
 
 <body>
@@ -26,9 +28,9 @@
     <%- body %>
 
 
-        <script src="/js/bootstrap.min.js"></script>
+        <script src="/js/bootstrap.js"></script>
         <script src="/js/fontawesome.js"></script>
-        <script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+        <!-- <script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script> -->
 
         <script src="/js/main.js"></script>
 </body>

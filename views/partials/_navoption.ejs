@@ -1,15 +1,22 @@
-<div class="mb-2 mb-md-0  flex-wrap flex-md-nowrap">
-    <ul class="d-flex p-2 justify-content-between c-nav-opiton">
+<!-- Categories Start -->
+<!-- row-cols-2 -->
+<div class="row sm-row-cols-2 row-cols-lg-6 g-2 g-lg-3 py-4">
 
-        <li class=""><a class="p-1" href="">سيارات <i class="fa fa-car"></i></a></li>
-        <li class=""><a class="p-1" href="">الكترونيات</a></li>
-        <li class=""><a class="p-1" href="#"> عقارات <i class="fa fa-home"></i></a></li>
-        <li class=""> <a class="p-1" href="">الازياء والموضه<i class=""></i></a></li>
-        <li class=""><a class="p-1" href=""> مستحضرات وادوات تجميل<i class=""></i></a></li>
-        <li class=""> <a class="p-1" href="">أطفال وألعاب<i class=""></i></a></li>
-        <li class=""> <a class="p-1" href="">سلع اخري <i class=""></i></a></li>
+    <% if(categories !='' ) { %>
+        <% categories.forEach(function(category, index) { %>
+            <a href="/categories/<%- category.name %>" class="col text-center category__link btn-dark">
 
-    </ul>
+                <div class="pt-1 ">
+                    <%- category.ar %>
+                </div>
+            </a>
+            <% }) %>
+                <% } %>
 
+                    <a href="/categories" class="col text-center category__link  btn-dark">
+
+                        <div class="pt-1">عرض الكل</div>
+                    </a>
 
 </div>
+<!-- Categories End -->

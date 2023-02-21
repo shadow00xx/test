@@ -5,29 +5,78 @@
         <%- include ('./partials/_sidebarmenu') %>
 
 
-            <!-- <form action="/prodects/catogry" method="post"> -->
-            <select class="form-select" aria-label="Default select example" id="prodects-catogery">
+
+            <select class="form-select" aria-label="Default select example" name="category" id="prodects-categorys">
                 <option selected>اي انواع السلع تقدم</option>
-                <option value="cars">سيارات</option>
-                <option value="eloctronic">الكترونيات</option>
-                <option value="realstate">عقارات </option>
-                <option value="fashon">الازياء والموضه</option>
-                <option value="makeup">مستحضرات وادوات تجميل</option>
-                <option value="kids">أطفال وألعاب</option>
-                <option value="food">طعام وغذاء</option>
-                <option value="others">سلع اخري </option>
+                <option value="Vehicles">سيارات</option>
+                <option value="Electronics">الكترونيات</option>
+                <option value="Realestate">عقارات </option>
+                <option value="Fashions">الازياء والموضه</option>
+                <option value="Makup">مستحضرات وادوات تجميل</option>
+                <option value="ForKides">أطفال وألعاب</option>
+                <option value="Foods">طعام وغذاء</option>
+                <option value="Others">سلع اخري </option>
             </select>
-            <button id="cat-select" class="btn btn-outline-dark btn-block">تاكيد</button>
 
-            <!-- </form> -->
-            <h1 class="out">
-            </h1>
+            <button id="cat-select" onclick="xb()" class="btn btn-outline-dark btn-block">تاكيد</button>
+            <form action="/prodects/add-prodect" method="post" id="prodects-form" enctype="multipart/form-data">
+                <h1 class="out">
+                </h1>
+            </form>
 
+            <!-- 
             <form action="/prodects/add-prodect" method="post" id="prodects-form" class="prodects-form"
                 enctype="multipart/form-data">
 
+                <select class="form-select" aria-label="Default select example" name="category" id="prodects-categorys">
+                    <option selected>اي انواع السلع تقدم</option>
+                    <option value="Vehicles">سيارات</option>
+                    <option value="Electronics">الكترونيات</option>
+                    <option value="Realestate">عقارات </option>
+                    <option value="Fashions">الازياء والموضه</option>
+                    <option value="Makup">مستحضرات وادوات تجميل</option>
+                    <option value="ForKides">أطفال وألعاب</option>
+                    <option value="Foods">طعام وغذاء</option>
+                    <option value="Others">سلع اخري </option>
+                </select>
 
 
-            </form>
+                <div class="form-floating mb-3">
+                    <input type="text" name="name" minlength="3" maxlength="20" required class="form-control rounded-3"
+                        id="floatingInput" placeholder="اسم المنتج">
+                    <label for="floatingInput">ادخل اسم المنتج</label>
+                </div>
+                <div class="form-floating mb-3">
+                    <textarea type="text" name="body" minlength="10" required class="form-control rounded-3"
+                        id="floatingInput" placeholder="وصف المنتج"></textarea>
+                    <label for="floatingInput">ادخل وصف للمنتج</label>
+                </div>
+                <div class="form-floating mb-3">
+                    <input type="number" name="prise" id="floatingInput" class="form-control p-0" required
+                        placeholder="السعر ">
+                    <label for="floatingInput"> السعر </label>
+                </div>
+
+                <div class="form-floating mb-3">
+                    <input type="number" name="phone" id="floatingInput" class="form-control p-0" required
+                        placeholder="رقم الهاتف للتواصل ">
+                    <label for="floatingInput"> رقم الهاتف للتواصل </label>
+                </div>
+
+                <div class="form-floating mb-3">
+                    <input type="text" name="address" id="floatingInput" class="form-control p-0" required
+                        placeholder="العنوان ">
+                    <label for="floatingInput"> العنوان </label>
+                </div>
+
+          
+
+            <div class="mb-3">
+                <input type="file" class="form-control" id="disabledCustomFile" name="image" required>
+            </div>
+            <button class="btn btn-outline-primary bt" type="submit">ارسال</button>
+
+
+            </form> -->
 
     </main>
