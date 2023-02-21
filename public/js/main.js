@@ -56,19 +56,45 @@ const prodectsForm = document.getElementById("prodects-form")
 const out = document.querySelector('.out');
 const btnSelectCat = document.getElementById('cat-select');
 
-btnSelectCat.addEventListener('click', xb)
+// btnSelectCat.addEventListener('click', xb)
 
 
 
 function xb() {
-  const catogerys = document.querySelector('#prodects-catogery');
-  let catogery = catogerys.value
-  if (catogery === 'cars') {
-    prodectsForm.innerHTML += ` <div class="form-floating mb-3">
-  <input type="text" name="title" minlength="3" maxlength="20" required class="form-control rounded-3"
-      id="floatingInput" placeholder="الاسم">
-  <label for="floatingInput">ادخل اسم المنتج</label>
-  </div>
+    const categorys = document.querySelector('#prodects-categorys');
+    let category = categorys.value
+    // السيارات
+    if (category === 'Vehicles') {
+        prodectsForm.innerHTML += ` 
+        <div class="form-floating mb-3">
+        <input type="text" name="name" minlength="3" maxlength="20" required class="form-control rounded-3"
+            id="floatingInput" placeholder="اسم المنتج">
+        <label for="floatingInput">ادخل اسم المنتج</label>
+    </div>
+    <div class="form-floating mb-3">
+        <textarea type="text" name="body" minlength="10" required class="form-control rounded-3"
+            id="floatingInput" placeholder="وصف المنتج"></textarea>
+        <label for="floatingInput">ادخل وصف للمنتج</label>
+    </div>
+    <div class="form-floating mb-3">
+        <input type="number" name="prise" id="floatingInput" class="form-control p-0" required
+            placeholder="السعر ">
+        <label for="floatingInput"> السعر </label>
+    </div>
+
+    <div class="form-floating mb-3">
+        <input type="number" name="phone" id="floatingInput" class="form-control p-0" required
+            placeholder="رقم الهاتف للتواصل ">
+        <label for="floatingInput"> رقم الهاتف للتواصل </label>
+    </div>
+
+    <div class="form-floating mb-3">
+        <input type="text" name="address" id="floatingInput" class="form-control p-0" required
+            placeholder="العنوان ">
+        <label for="floatingInput"> العنوان </label>
+    </div>
+    <input type="hidden" name="category" value="${category}" id="">
+
   <div class="form-floating mb-3">
   <input type="number" name="modal" minlength="3" maxlength="20" required class="form-control rounded-3"
       id="floatingInput" placeholder="الاسم">
@@ -80,209 +106,309 @@ function xb() {
   <label for="floatingInput">نوع الوقود  </label>
   </div>
   <div class="form-floating mb-3">
-  <input type="text" name="conditions" minlength="3" maxlength="20" required class="form-control rounded-3"
-      id="floatingInput" placeholder="جديد ام مستحدم">
-  <label for="floatingInput">ادخل اسم المنتج</label>
+
+  <select name="conditions" class="form-control">
+  <option value="use">مستجدم</option>
+  <option value="new">جديد</option>
+</select>
   </div>
-  <div class="form-floating mb-3">
-  <textarea type="text" name="body" minlength="10" required class="form-control rounded-3"
-      id="floatingInput" placeholder="وصف المنتج"></textarea>
-  <label for="floatingInput">ادخل وصف للمنتج</label>
-  </div>
-  <div class="form-floating mb-3">
-  <input type="number" name="prise" id="floatingInput" class="form-control p-0" required
-      placeholder="السعر ">
-  <label for="floatingInput"> السعر </label>
-  <input type="hidden" name="catogery" value="${catogery}" id="">
+  <input type="file" class="form-control" name="image" required>
+  
+                <button class="btn btn-outline-primary bt" type="submit">ارسال</button>
+ 
+  
+
+  `
+
+        // الالكترونيات
+    } if (category === 'Electronics') {
+        prodectsForm.innerHTML += ` 
+        <div class="form-floating mb-3">
+        <input type="text" name="name" minlength="3" maxlength="20" required class="form-control rounded-3"
+            id="floatingInput" placeholder="اسم المنتج">
+        <label for="floatingInput">ادخل اسم المنتج</label>
+    </div>
+    <div class="form-floating mb-3">
+        <textarea type="text" name="body" minlength="10" required class="form-control rounded-3"
+            id="floatingInput" placeholder="وصف المنتج"></textarea>
+        <label for="floatingInput">ادخل وصف للمنتج</label>
+    </div>
+    <div class="form-floating mb-3">
+        <input type="number" name="prise" id="floatingInput" class="form-control p-0" required
+            placeholder="السعر ">
+        <label for="floatingInput"> السعر </label>
+    </div>
+
+    <div class="form-floating mb-3">
+        <input type="number" name="phone" id="floatingInput" class="form-control p-0" required
+            placeholder="رقم الهاتف للتواصل ">
+        <label for="floatingInput"> رقم الهاتف للتواصل </label>
+    </div>
+
+    <div class="form-floating mb-3">
+        <input type="text" name="address" id="floatingInput" class="form-control p-0" required
+            placeholder="العنوان ">
+        <label for="floatingInput"> العنوان </label>
+    </div>
+
+  <input type="hidden" name="category" value="${category}" id="">
   </div>
   <div class="mb-3">
-  <label class="form-label" for="disabledCustomFile">رفع معطل</label>
-  <input type="file" class="form-control" id="disabledCustomFile" name="image" required>
-  </div>
+  <input type="file" class="form-control" name="image" required>
+</div>
   <button class="btn btn-outline-primary bt" type="submit">ارسال</button>
 
   `
 
-  } if (catogery === 'eloctronic') {
-    prodectsForm.innerHTML += ` <div class="form-floating mb-3">
-  <input type="text" name="title" minlength="3" maxlength="20" required class="form-control rounded-3"
-      id="floatingInput" placeholder="اسم المنتج">
-  <label for="floatingInput">ادخل اسم المنتج</label>
-  </div>
-  <div class="form-floating mb-3">
-  <textarea type="text" name="body" minlength="10" required class="form-control rounded-3"
-      id="floatingInput" placeholder="وصف المنتج"></textarea>
-  <label for="floatingInput">ادخل وصف للمنتج</label>
-  </div>
-  <div class="form-floating mb-3">
-  <input type="number" name="prise" id="floatingInput" class="form-control p-0" required
-      placeholder="السعر ">
-  <label for="floatingInput"> السعر </label>
-  <input type="hidden" name="catogery" value="${catogery}" id="">
+    }
+
+    // العقارات
+    if (category === 'Realestate') {
+        prodectsForm.innerHTML += `
+        <div class="form-floating mb-3">
+        <input type="text" name="name" minlength="3" maxlength="20" required class="form-control rounded-3"
+            id="floatingInput" placeholder="اسم المنتج">
+        <label for="floatingInput">ادخل اسم المنتج</label>
+    </div>
+    <div class="form-floating mb-3">
+        <textarea type="text" name="body" minlength="10" required class="form-control rounded-3"
+            id="floatingInput" placeholder="وصف المنتج"></textarea>
+        <label for="floatingInput">ادخل وصف للمنتج</label>
+    </div>
+    <div class="form-floating mb-3">
+        <input type="number" name="prise" id="floatingInput" class="form-control p-0" required
+            placeholder="السعر ">
+        <label for="floatingInput"> السعر </label>
+    </div>
+
+    <div class="form-floating mb-3">
+        <input type="number" name="phone" id="floatingInput" class="form-control p-0" required
+            placeholder="رقم الهاتف للتواصل ">
+        <label for="floatingInput"> رقم الهاتف للتواصل </label>
+    </div>
+
+    <div class="form-floating mb-3">
+        <input type="text" name="address" id="floatingInput" class="form-control p-0" required
+            placeholder="العنوان ">
+        <label for="floatingInput"> العنوان </label>
+    </div>
+
+  <input type="hidden" name="category" value="${category}" id="">
   </div>
   <div class="mb-3">
-  <label class="form-label" for="disabledCustomFile">رفع معطل</label>
-  <input type="file" class="form-control" id="disabledCustomFile" name="image" required>
+  <input type="file" class="form-control" name="image" required>
+</div>
+  <button class="btn btn-outline-primary bt" type="submit">ارسال</button>
+
+
+`
+    }
+    if (category === 'Fashions') {
+        prodectsForm.innerHTML += ` 
+
+        <div class="form-floating mb-3">
+        <input type="text" name="name" minlength="3" maxlength="20" required class="form-control rounded-3"
+            id="floatingInput" placeholder="اسم المنتج">
+        <label for="floatingInput">ادخل اسم المنتج</label>
+    </div>
+    <div class="form-floating mb-3">
+        <textarea type="text" name="body" minlength="10" required class="form-control rounded-3"
+            id="floatingInput" placeholder="وصف المنتج"></textarea>
+        <label for="floatingInput">ادخل وصف للمنتج</label>
+    </div>
+    <div class="form-floating mb-3">
+        <input type="number" name="prise" id="floatingInput" class="form-control p-0" required
+            placeholder="السعر ">
+        <label for="floatingInput"> السعر </label>
+    </div>
+
+    <div class="form-floating mb-3">
+        <input type="number" name="phone" id="floatingInput" class="form-control p-0" required
+            placeholder="رقم الهاتف للتواصل ">
+        <label for="floatingInput"> رقم الهاتف للتواصل </label>
+    </div>
+
+    <div class="form-floating mb-3">
+        <input type="text" name="address" id="floatingInput" class="form-control p-0" required
+            placeholder="العنوان ">
+        <label for="floatingInput"> العنوان </label>
+    </div>
+
+  <input type="hidden" name="category" value="${category}" id="">
   </div>
+  <div class="mb-3">
+  <input type="file" class="form-control" name="image" required>
+</div>
+  <button class="btn btn-outline-primary bt" type="submit">ارسال</button>
+
+
+  `
+
+    } if (category === 'Makup') {
+        prodectsForm.innerHTML += `
+  
+        <div class="form-floating mb-3">
+        <input type="text" name="name" minlength="3" maxlength="20" required class="form-control rounded-3"
+            id="floatingInput" placeholder="اسم المنتج">
+        <label for="floatingInput">ادخل اسم المنتج</label>
+    </div>
+    <div class="form-floating mb-3">
+        <textarea type="text" name="body" minlength="10" required class="form-control rounded-3"
+            id="floatingInput" placeholder="وصف المنتج"></textarea>
+        <label for="floatingInput">ادخل وصف للمنتج</label>
+    </div>
+    <div class="form-floating mb-3">
+        <input type="number" name="prise" id="floatingInput" class="form-control p-0" required
+            placeholder="السعر ">
+        <label for="floatingInput"> السعر </label>
+    </div>
+
+    <div class="form-floating mb-3">
+        <input type="number" name="phone" id="floatingInput" class="form-control p-0" required
+            placeholder="رقم الهاتف للتواصل ">
+        <label for="floatingInput"> رقم الهاتف للتواصل </label>
+    </div>
+
+    <div class="form-floating mb-3">
+        <input type="text" name="address" id="floatingInput" class="form-control p-0" required
+            placeholder="العنوان ">
+        <label for="floatingInput"> العنوان </label>
+    </div>
+
+  <input type="hidden" name="category" value="${category}" id="">
+  </div>
+  <div class="mb-3">
+  <input type="file" class="form-control" name="image" required>
+</div>
+  <button class="btn btn-outline-primary bt" type="submit">ارسال</button>
+
+
+  `
+
+    } if (category === 'ForKides') {
+        prodectsForm.innerHTML += ` 
+        <div class="form-floating mb-3">
+        <input type="text" name="name" minlength="3" maxlength="20" required class="form-control rounded-3"
+            id="floatingInput" placeholder="اسم المنتج">
+        <label for="floatingInput">ادخل اسم المنتج</label>
+    </div>
+    <div class="form-floating mb-3">
+        <textarea type="text" name="body" minlength="10" required class="form-control rounded-3"
+            id="floatingInput" placeholder="وصف المنتج"></textarea>
+        <label for="floatingInput">ادخل وصف للمنتج</label>
+    </div>
+    <div class="form-floating mb-3">
+        <input type="number" name="prise" id="floatingInput" class="form-control p-0" required
+            placeholder="السعر ">
+        <label for="floatingInput"> السعر </label>
+    </div>
+
+    <div class="form-floating mb-3">
+        <input type="number" name="phone" id="floatingInput" class="form-control p-0" required
+            placeholder="رقم الهاتف للتواصل ">
+        <label for="floatingInput"> رقم الهاتف للتواصل </label>
+    </div>
+
+    <div class="form-floating mb-3">
+        <input type="text" name="address" id="floatingInput" class="form-control p-0" required
+            placeholder="العنوان ">
+        <label for="floatingInput"> العنوان </label>
+    </div>
+
+  <input type="hidden" name="category" value="${category}" id="">
+  </div>
+  <div class="mb-3">
+  <input type="file" class="form-control" name="image" required>
+</div>
+  <button class="btn btn-outline-primary bt" type="submit">ارسال</button>
+
+
+  `
+
+    } if (category === 'Foods') {
+        prodectsForm.innerHTML += ` 
+        <div class="form-floating mb-3">
+        <input type="text" name="name" minlength="3" maxlength="20" required class="form-control rounded-3"
+            id="floatingInput" placeholder="اسم المنتج">
+        <label for="floatingInput">ادخل اسم المنتج</label>
+    </div>
+    <div class="form-floating mb-3">
+        <textarea type="text" name="body" minlength="10" required class="form-control rounded-3"
+            id="floatingInput" placeholder="وصف المنتج"></textarea>
+        <label for="floatingInput">ادخل وصف للمنتج</label>
+    </div>
+    <div class="form-floating mb-3">
+        <input type="number" name="prise" id="floatingInput" class="form-control p-0" required
+            placeholder="السعر ">
+        <label for="floatingInput"> السعر </label>
+    </div>
+
+    <div class="form-floating mb-3">
+        <input type="number" name="phone" id="floatingInput" class="form-control p-0" required
+            placeholder="رقم الهاتف للتواصل ">
+        <label for="floatingInput"> رقم الهاتف للتواصل </label>
+    </div>
+
+    <div class="form-floating mb-3">
+        <input type="text" name="address" id="floatingInput" class="form-control p-0" required
+            placeholder="العنوان ">
+        <label for="floatingInput"> العنوان </label>
+    </div>
+
+  <input type="hidden" name="category" value="${category}" id="">
+  </div>
+  <div class="mb-3">
+  <input type="file" class="form-control" name="image" required>
+</div>
+  <button class="btn btn-outline-primary bt" type="submit">ارسال</button>
+
+
+  `
+
+    } if (category === 'Others') {
+        prodectsForm.innerHTML += `
+        <div class="form-floating mb-3">
+        <input type="text" name="name" minlength="3" maxlength="20" required class="form-control rounded-3"
+            id="floatingInput" placeholder="اسم المنتج">
+        <label for="floatingInput">ادخل اسم المنتج</label>
+    </div>
+    <div class="form-floating mb-3">
+        <textarea type="text" name="body" minlength="10" required class="form-control rounded-3"
+            id="floatingInput" placeholder="وصف المنتج"></textarea>
+        <label for="floatingInput">ادخل وصف للمنتج</label>
+    </div>
+    <div class="form-floating mb-3">
+        <input type="number" name="prise" id="floatingInput" class="form-control p-0" required
+            placeholder="السعر ">
+        <label for="floatingInput"> السعر </label>
+    </div>
+
+    <div class="form-floating mb-3">
+        <input type="number" name="phone" id="floatingInput" class="form-control p-0" required
+            placeholder="رقم الهاتف للتواصل ">
+        <label for="floatingInput"> رقم الهاتف للتواصل </label>
+    </div>
+
+    <div class="form-floating mb-3">
+        <input type="text" name="address" id="floatingInput" class="form-control p-0" required
+            placeholder="العنوان ">
+        <label for="floatingInput"> العنوان </label>
+    </div>
+
+  <input type="hidden" name="category" value="${category}" id="">
+  </div>
+  <div class="mb-3">
+  <input type="file" class="form-control" name="image" required>
+</div>
   <button class="btn btn-outline-primary bt" type="submit">ارسال</button>
 
   `
 
-  } if (catogery === 'realstate') {
-    prodectsForm.innerHTML += ` <div class="form-floating mb-3">
-  <input type="text" name="title" minlength="3" maxlength="20" required class="form-control rounded-3"
-      id="floatingInput" placeholder="اسم المنتج">
-  <label for="floatingInput">ادخل اسم المنتج</label>
-  </div>
-  <div class="form-floating mb-3">
-  <textarea type="text" name="body" minlength="10" required class="form-control rounded-3"
-      id="floatingInput" placeholder="وصف المنتج"></textarea>
-  <label for="floatingInput">ادخل وصف للمنتج</label>
-  </div>
-  <div class="form-floating mb-3">
-  <input type="number" name="prise" id="floatingInput" class="form-control p-0" required
-      placeholder="السعر ">
-  <label for="floatingInput"> السعر </label>
-  <input type="hidden" name="catogery" value="${catogery}" id="">
-  </div>
-  <div class="mb-3">
-  <label class="form-label" for="disabledCustomFile">رفع معطل</label>
-  <input type="file" class="form-control" id="disabledCustomFile" name="image" required>
-  </div>
-  <button class="btn btn-outline-primary bt" type="submit">ارسال</button>
 
-  `
-
-  } if (catogery === 'fashon') {
-    prodectsForm.innerHTML += ` <div class="form-floating mb-3">
-  <input type="text" name="title" minlength="3" maxlength="20" required class="form-control rounded-3"
-      id="floatingInput" placeholder="اسم المنتج">
-  <label for="floatingInput">ادخل اسم المنتج</label>
-  </div>
-  <div class="form-floating mb-3">
-  <textarea type="text" name="body" minlength="10" required class="form-control rounded-3"
-      id="floatingInput" placeholder="وصف المنتج"></textarea>
-  <label for="floatingInput">ادخل وصف للمنتج</label>
-  </div>
-  <div class="form-floating mb-3">
-  <input type="number" name="prise" id="floatingInput" class="form-control p-0" required
-      placeholder="السعر ">
-  <label for="floatingInput"> السعر </label>
-  <input type="hidden" name="catogery" value="${catogery}" id="">
-  </div>
-  <div class="mb-3">
-  <label class="form-label" for="disabledCustomFile">رفع معطل</label>
-  <input type="file" class="form-control" id="disabledCustomFile" name="image" required>
-  </div>
-  <button class="btn btn-outline-primary bt" type="submit">ارسال</button>
-
-  `
-
-  } if (catogery === 'makeup') {
-    prodectsForm.innerHTML += ` <div class="form-floating mb-3">
-  <input type="text" name="title" minlength="3" maxlength="20" required class="form-control rounded-3"
-      id="floatingInput" placeholder="اسم المنتج">
-  <label for="floatingInput">ادخل اسم المنتج</label>
-  </div>
-  <div class="form-floating mb-3">
-  <textarea type="text" name="body" minlength="10" required class="form-control rounded-3"
-      id="floatingInput" placeholder="وصف المنتج"></textarea>
-  <label for="floatingInput">ادخل وصف للمنتج</label>
-  </div>
-  <div class="form-floating mb-3">
-  <input type="number" name="prise" id="floatingInput" class="form-control p-0" required
-      placeholder="السعر ">
-  <label for="floatingInput"> السعر </label>
-  <input type="hidden" name="catogery" value="${catogery}" id="">
-  </div>
-  <div class="mb-3">
-  <label class="form-label" for="disabledCustomFile">رفع معطل</label>
-  <input type="file" class="form-control" id="disabledCustomFile" name="image" required>
-  </div>
-  <button class="btn btn-outline-primary bt" type="submit">ارسال</button>
-
-  `
-
-  } if (catogery === 'kids') {
-    prodectsForm.innerHTML += ` <div class="form-floating mb-3">
-  <input type="text" name="title" minlength="3" maxlength="20" required class="form-control rounded-3"
-      id="floatingInput" placeholder="اسم المنتج">
-  <label for="floatingInput">ادخل اسم المنتج</label>
-  </div>
-  <div class="form-floating mb-3">
-  <textarea type="text" name="body" minlength="10" required class="form-control rounded-3"
-      id="floatingInput" placeholder="وصف المنتج"></textarea>
-  <label for="floatingInput">ادخل وصف للمنتج</label>
-  </div>
-  <div class="form-floating mb-3">
-  <input type="number" name="prise" id="floatingInput" class="form-control p-0" required
-      placeholder="السعر ">
-  <label for="floatingInput"> السعر </label>
-  <input type="hidden" name="catogery" value="${catogery}" id="">
-  </div>
-  <div class="mb-3">
-  <label class="form-label" for="disabledCustomFile">رفع معطل</label>
-  <input type="file" class="form-control" id="disabledCustomFile" name="image" required>
-  </div>
-  <button class="btn btn-outline-primary bt" type="submit">ارسال</button>
-
-  `
-
-  } if (catogery === 'food') {
-    prodectsForm.innerHTML += ` <div class="form-floating mb-3">
-  <input type="text" name="title" minlength="3" maxlength="20" required class="form-control rounded-3"
-      id="floatingInput" placeholder="اسم المنتج">
-  <label for="floatingInput">ادخل اسم المنتج</label>
-  </div>
-  <div class="form-floating mb-3">
-  <textarea type="text" name="body" minlength="10" required class="form-control rounded-3"
-      id="floatingInput" placeholder="وصف المنتج"></textarea>
-  <label for="floatingInput">ادخل وصف للمنتج</label>
-  </div>
-  <div class="form-floating mb-3">
-  <input type="number" name="prise" id="floatingInput" class="form-control p-0" required
-      placeholder="السعر ">
-  <label for="floatingInput"> السعر </label>
-  <input type="hidden" name="catogery" value="${catogery}" id="">
-  </div>
-  <div class="mb-3">
-  <label class="form-label" for="disabledCustomFile">رفع معطل</label>
-  <input type="file" class="form-control" id="disabledCustomFile" name="image" required>
-  </div>
-  <button class="btn btn-outline-primary bt" type="submit">ارسال</button>
-
-  `
-
-  } if (catogery === 'others') {
-    prodectsForm.innerHTML += ` <div class="form-floating mb-3">
-  <input type="text" name="title" minlength="3" maxlength="20" required class="form-control rounded-3"
-      id="floatingInput" placeholder="اسم المنتج">
-  <label for="floatingInput">ادخل اسم المنتج</label>
-  </div>
-  <div class="form-floating mb-3">
-  <textarea type="text" name="body" minlength="10" required class="form-control rounded-3"
-      id="floatingInput" placeholder="وصف المنتج"></textarea>
-  <label for="floatingInput">ادخل وصف للمنتج</label>
-  </div>
-  <div class="form-floating mb-3">
-  <input type="number" name="prise" id="floatingInput" class="form-control p-0" required
-      placeholder="السعر ">
-  <label for="floatingInput"> السعر </label>
-  <input type="hidden" name="catogery" value="${catogery}" id="">
-  </div>
-  <div class="mb-3">
-  <label class="form-label" for="disabledCustomFile">رفع معطل</label>
-  <input type="file" class="form-control" id="disabledCustomFile" name="image" required>
-  </div>
-  <button class="btn btn-outline-primary bt" type="submit">ارسال</button>
-
-  `
-
-  } else {
-    prodectsForm.innerHTML += 'اختر نوع من فضلك'
-  }
+    } else {
+        prodectsForm.innerHTML += 'اختر نوع من فضلك'
+    }
 }
-
 
 
 
