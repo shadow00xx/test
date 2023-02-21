@@ -1,0 +1,303 @@
+<%- include ('./partials/_dashboardHeader') %>
+
+  <div class="container-fluid">
+    <div class="row">
+      <%- include ('./partials/_sidebarmenu') %>
+
+
+        <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+          <div
+            class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+            <h1 class="h2">
+              <% if(user) { %>
+                <%= user.displayName %> مرحبا
+                  <% } %>
+                    <% if(user) { %>
+                      <%= user.name %>
+                        <% }else{ %>
+                          مرحبا بكم
+                          <% } %>
+            </h1>
+            <div class="btn-toolbar mb-2 mb-md-0">
+              <div class="btn-group me-2">
+                <button type="button" class="btn btn-sm btn-outline-secondary">مشاركة <i
+                    class="fa fa-share"></i></button>
+                <!-- <button type="button" class="btn btn-sm btn-outline-secondary">Export</button> -->
+              </div>
+              <!-- <button type="button" class="btn btn-sm btn-outline-secondary dropdown-toggle">
+                <span data-feather="calendar" class="align-text-bottom"></span>
+                This week
+              </button> -->
+            </div>
+          </div>
+
+          <!-- nav-optins -->
+
+          <%- include ('./partials/_navoption') %>
+
+
+
+            <!-- slide -->
+            <%- include ('./partials/_carasel') %>
+              <br>
+              <br>
+
+
+
+
+
+              <!-- المنتجات -->
+
+              <!-- Latest Start -->
+
+              <section class="pb-4 pt-4">
+                <div class="d-flex mb-2 align-items-center">
+                  <h2> احدث الاضافات </h2>
+                  <a href="/latest" class="ms-auto">عرض المزيد</a>
+                </div>
+
+                <div class="row row-cols-2 row-cols-lg-5 g-2 g-lg-3">
+
+                  <% if(pros !='' ) { %>
+                    <% pros.latest.forEach(function(prodect, index){ %>
+                      <a href="/prodects/<%= prodect._id %>" class="col text-center category__link">
+                        <div class="category__img category__img--large shadow">
+                          <img src="<%= prodect.image %>" alt="<%= prodect.name %>" loading="lazy">
+                        </div>
+                        <div class="pt-1">
+                          <%= prodect.name %>
+                        </div>
+                      </a>
+                      <% }) %>
+                        <% } else { %>
+                          <p>لا يوجد سلع حاليا</p>
+                          <% } %>
+                </div>
+
+              </section>
+              <!-- Latest End -->
+
+
+              <!-- Electronics Start -->
+              <section class="pb-4 pt-4">
+                <div class="d-flex mb-2 align-items-center">
+                  <h2>الكترونيات </h2>
+                  <a href="/categories/Electronics" class="ms-auto">عرض المزيد</a>
+                </div>
+
+                <div class="row row-cols-2 row-cols-lg-5 g-2 g-lg-3">
+                  <% if(typeof pros.Electronics !=='undefined' && pros.Electronics.length> 0) { %>
+                    <% pros.Electronics.forEach(function(prodect, index){ %>
+                      <a href="/prodects/<%= prodect._id %>" class="col text-center category__link">
+                        <div class="category__img category__img--large shadow">
+                          <img src="<%= prodect.image %>" alt="<%= prodect.name %>" loading="lazy">
+                        </div>
+                        <div class="pt-1">
+                          <%= prodect.name %>
+                        </div>
+                      </a>
+                      <% }) %>
+                        <% } else { %>
+                          <p>لا يوجد سلع حاليا</p>
+                          <% } %>
+                </div>
+              </section>
+              <!-- Electronics End -->
+
+
+              <!-- Vehicles Start -->
+              <section class="pb-4 pt-4">
+                <div class="d-flex mb-2 align-items-center">
+                  <h2>سيارات ونحوها </h2>
+                  <a href="/categories/Vehicles" class="ms-auto">عرض المزيد</a>
+                </div>
+
+                <div class="row row-cols-2 row-cols-lg-5 g-2 g-lg-3">
+                  <% if(typeof pros.Vehicles !=='undefined' && pros.Vehicles.length> 0) { %>
+                    <% pros.Vehicles.forEach(function(prodect, index){ %>
+                      <a href="/prodects/<%= prodect._id %>" class="col text-center category__link">
+                        <div class="category__img category__img--large shadow">
+                          <img src="<%= prodect.image %>" alt="<%= prodect.name %>" loading="lazy">
+                        </div>
+                        <div class="pt-1">
+                          <%= prodect.name %>
+                        </div>
+                      </a>
+                      <% }) %>
+                        <% } else { %>
+                          <p>لا يوجد سلع حاليا</p>
+                          <% } %>
+                </div>
+              </section>
+              <!-- Vehicles End -->
+
+
+              <!-- Realestate Start -->
+              <section class="pb-4 pt-4">
+                <div class="d-flex mb-2 align-items-center">
+                  <h2>عقارات </h2>
+                  <a href="/categories/Realestate" class="ms-auto">عرض المزيد</a>
+                </div>
+
+                <div class="row row-cols-2 row-cols-lg-5 g-2 g-lg-3">
+                  <% if(typeof pros.Realestate !=='undefined' && pros.Realestate.length> 0) { %>
+                    <% pros.Realestate.forEach(function(prodect, index){ %>
+                      <a href="/prodects/<%= prodect._id %>" class="col text-center category__link">
+                        <div class="category__img category__img--large shadow">
+                          <img src="<%= prodect.image %>" alt="<%= prodect.name %>" loading="lazy">
+                        </div>
+                        <div class="pt-1">
+                          <%= prodect.name %>
+                        </div>
+                      </a>
+                      <% }) %>
+                        <% } else { %>
+                          <p>لا يوجد سلع حاليا</p>
+                          <% } %>
+                </div>
+              </section>
+              <!-- Realestate End -->
+
+
+              <!-- Fashions Start -->
+              <section class="pb-4 pt-4">
+                <div class="d-flex mb-2 align-items-center">
+                  <h2>موضة وازياء </h2>
+                  <a href="/categories/Fashions" class="ms-auto">عرض المزيد</a>
+                </div>
+
+                <div class="row row-cols-2 row-cols-lg-5 g-2 g-lg-3">
+                  <% if(typeof pros.Fashions !=='undefined' && pros.Fashions.length> 0) { %>
+                    <% pros.Fashions.forEach(function(prodect, index){ %>
+                      <a href="/prodects/<%= prodect._id %>" class="col text-center category__link">
+                        <div class="category__img category__img--large shadow">
+                          <img src="<%= prodect.image %>" alt="<%= prodect.name %>" loading="lazy">
+                        </div>
+                        <div class="pt-1">
+                          <%= prodect.name %>
+                        </div>
+                      </a>
+                      <% }) %>
+                        <% } else { %>
+                          <p>لا يوجد سلع حاليا</p>
+                          <% } %>
+                </div>
+              </section>
+              <!-- Fashions End -->
+
+
+              <!-- Makup Start -->
+              <section class="pb-4 pt-4">
+                <div class="d-flex mb-2 align-items-center">
+                  <h2>مستحضرات تجميل </h2>
+                  <a href="/categories/Makup" class="ms-auto">عرض المزيد</a>
+                </div>
+
+                <div class="row row-cols-2 row-cols-lg-5 g-2 g-lg-3">
+                  <% if(typeof pros.Makup !=='undefined' && pros.Makup.length> 0) { %>
+                    <% pros.Makup.forEach(function(prodect, index){ %>
+                      <a href="/prodects/<%= prodect._id %>" class="col text-center category__link">
+                        <div class="category__img category__img--large shadow">
+                          <img src="<%= prodect.image %>" alt="<%= prodect.name %>" loading="lazy">
+                        </div>
+                        <div class="pt-1">
+                          <%= prodect.name %>
+                        </div>
+                      </a>
+                      <% }) %>
+                        <% } else { %>
+                          <p>لا يوجد سلع حاليا</p>
+                          <% } %>
+                </div>
+              </section>
+              <!-- Makup End -->
+
+
+              <!-- ForKides Start -->
+              <section class="pb-4 pt-4">
+                <div class="d-flex mb-2 align-items-center">
+                  <h2>العاب اطفال </h2>
+                  <a href="/categories/ForKides" class="ms-auto">عرض المزيد</a>
+                </div>
+
+                <div class="row row-cols-2 row-cols-lg-5 g-2 g-lg-3">
+                  <% if(typeof pros.ForKides !=='undefined' && pros.ForKides.length> 0) { %>
+                    <% pros.ForKides.forEach(function(prodect, index){ %>
+                      <a href="/prodects/<%= prodect._id %>" class="col text-center category__link">
+                        <div class="category__img category__img--large shadow">
+                          <img src="<%= prodect.image %>" alt="<%= prodect.name %>" loading="lazy">
+                        </div>
+                        <div class="pt-1">
+                          <%= prodect.name %>
+                        </div>
+                      </a>
+                      <% }) %>
+                        <% } else { %>
+                          <p>لا يوجد سلع حاليا</p>
+                          <% } %>
+                </div>
+              </section>
+              <!-- ForKides End -->
+
+
+              <!-- Foods Start -->
+              <section class="pb-4 pt-4">
+                <div class="d-flex mb-2 align-items-center">
+                  <h2>منتجات الاطعمة </h2>
+                  <a href="/categories/Foods" class="ms-auto">عرض المزيد</a>
+                </div>
+
+                <div class="row row-cols-2 row-cols-lg-5 g-2 g-lg-3">
+                  <% if(typeof pros.Foods !=='undefined' && pros.Foods.length> 0) { %>
+                    <% pros.Foods.forEach(function(prodect, index){ %>
+                      <a href="/prodects/<%= prodect._id %>" class="col text-center category__link">
+                        <div class="category__img category__img--large shadow">
+                          <img src="<%= prodect.image %>" alt="<%= prodect.name %>" loading="lazy">
+                        </div>
+                        <div class="pt-1">
+                          <%= prodect.name %>
+                        </div>
+                      </a>
+                      <% }) %>
+                        <% } else { %>
+                          <p>لا يوجد سلع حاليا</p>
+                          <% } %>
+                </div>
+              </section>
+              <!-- Foods End -->
+
+
+              <!-- Others Start -->
+              <section class="pb-4 pt-4">
+                <div class="d-flex mb-2 align-items-center">
+                  <h2>سلع اخري </h2>
+                  <a href="/categories/Others" class="ms-auto">عرض المزيد</a>
+                </div>
+
+                <div class="row row-cols-2 row-cols-lg-5 g-2 g-lg-3">
+                  <% if(typeof pros.Others !=='undefined' && pros.Others.length> 0) { %>
+                    <% pros.Others.forEach(function(prodect, index){ %>
+                      <a href="/prodects/<%= prodect._id %>" class="col text-center category__link">
+                        <div class="category__img category__img--large shadow">
+                          <img src="<%= prodect.image %>" alt="<%= prodect.name %>" loading="lazy">
+                        </div>
+                        <div class="pt-1">
+                          <%= prodect.name %>
+                        </div>
+                      </a>
+                      <% }) %>
+                        <% } else { %>
+                          <p>لا يوجد سلع حاليا</p>
+                          <% } %>
+                </div>
+              </section>
+              <!-- Others End -->
+
+              <!-- footer -->
+              <%- include ('./partials/_footer') %>
+
+                <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
+                    class="bi bi-arrow-up-short"></i> </a>
+        </main>
+    </div>
+  </div>

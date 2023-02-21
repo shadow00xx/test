@@ -1,0 +1,66 @@
+<div class="signup d-flex  text-center text-dark">
+
+  <div class="cover-container d-flex p-3 mx-auto flex-column">
+
+    <a class="mob-logo text- btn" href="/">
+      <h3 class="text-center">دلالة</h3>
+
+    </a>
+
+
+    <main class="px-3  p-3 ">
+
+      <img class="mb-4 logo" src="/imgs/delala-logo.png" alt="" width="57" height="57">
+      <h2 class="fw-bold mb-0">التسجيل</h2>
+
+
+      <div class="modal-body p-5 pt-0">
+        <form action="/user/signup" method="post" class="">
+          <%- include ('../partials/error') %>
+            <div class="form-floating mb-3">
+              <input type="text" name="name" minlength="4" required class="form-control rounded-3" id="floatingInput"
+                placeholder="الاسم">
+              <!-- <label for="floatingInput">الاسم الاول</label> -->
+            </div>
+
+            <div class="form-floating mb-3">
+              <input type="email" name="username" minlength="3" required class="form-control rounded-3"
+                id="floatingInput" placeholder=" البريد الالكتروني">
+              <!-- <label for="floatingInput"> البريد الالكتروني</label> -->
+            </div>
+
+            <div class="form-floating mb-3">
+              <input type="password" name="password" minlength="6" required class="form-control rounded-3"
+                id="floatingPassword" placeholder="كلمه السر">
+              <!-- <label for="floatingPassword"> كلمه السر</label> -->
+            </div>
+
+            <button class="w-100 mb-2 btn btn-lg rounded-3 btn-primary" type="submit">التسجيل</button>
+            <a class="w-100 btn btn-lg btn-primary my-2" href="/user/login">لديك حساب مسبقا !!</a>
+
+            <small class="text-muted">بالضغط علي تسجيل فانت توافق علي <a href="/term">الشروط و الاحكام</a></small>
+            <hr class="my-4">
+            <h2 class="fs-5 fw-bold mb-3">او يمكنك استخدام</h2>
+            <button class="w-100 py-2 mb-2 btn btn-outline-danger rounded-3" type="submit">
+              <i class="fab fa-google"></i>
+              التسجيل بواسطه قوقل
+            </button>
+            <button class="w-100 py-2 mb-2 btn btn-outline-primary rounded-3" type="submit">
+              <i class="fab fa-facebook"></i>
+              التسجيل بواسطه فيسبوك
+            </button>
+        </form>
+      </div>
+
+
+
+    </main>
+
+
+
+    <p class="mt-5 mb-3 text-muted text-white">© دلالة 2023</p>
+
+
+  </div>
+
+</div>
