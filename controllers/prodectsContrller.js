@@ -9,20 +9,6 @@ exports.addprodect = (req, res) => {
     res.render('add_prodect', { title: 'اضافه سلعه' })
 }
 
-// post
-// add prodect 
-
-// const uploder = async(path)=>{
-//     await cloudinry.uplouds(path, 'Images')
-
-//     if (req.method === 'post') {
-//         const urls = []
-//         prodect.image = req.file.filename
-
-//     }
-// }
-
-
 exports.addproPost = async (req, res, next) => {
 
     try {
@@ -34,10 +20,10 @@ exports.addproPost = async (req, res, next) => {
 
         }
 
-        
+
         if (prodect.cloudinary_id) {
-         cloudinary_id: result.public_id
-    
+            cloudinary_id: result.public_id
+
         }
         const x = await new prodects(prodect)
         await x.save()
@@ -59,7 +45,6 @@ exports.showMyPro = async (req, res) => {
             .populate('user')
             .sort({ createdAt: 'desc' })
         res.render('myProdects', { march, title: 'منتجاتي ' })
-
 
     } catch (err) {
         console.log(err);
@@ -88,24 +73,12 @@ exports.showOnePro = async (req, res) => {
 
 exports.deletePro = async (req, res) => {
     try {
-
-        let e = await prodects.findByIdAndRemove({ _id: req.params._id })
-            .populate('user')
-            .lean()
-        if (!e) {
-            res.render('error/500')
-
-        }
-        else {
-            console.log(e);
-            res.render('pages/prodect', { e, title: 'منتجاتي ' })
-
-        }
-
-
+        await prodects.findByIdAndRemove({ _id: req.params._id })
+        res.redirect('/prodects/myProdects')
+        
     } catch (err) {
         console.log(err);
-        // res.render('error/500')
+        res.render('error/500')
     }
 }
 
