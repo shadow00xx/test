@@ -1,7 +1,7 @@
 {
   "name": "fullPro",
   "version": "1.0.0",
-  "description": "just for fun",
+  "description": "just for fun meme",
   "main": "app.js",
   "scripts": {
     "start": "node app",
