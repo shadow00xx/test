@@ -4,16 +4,18 @@ const mongoose = require('mongoose');
 
 const ProdectsSchema = new mongoose.Schema({
 
-    catogery: {
+    name: {
         type: String,
         require: true
     },
-
-    title: {
+    phone: {
+        type: Number,
+        require: true
+    },
+    address: {
         type: String,
         require: true
     },
-
     body: {
         type: String,
         require: true
@@ -27,21 +29,58 @@ const ProdectsSchema = new mongoose.Schema({
     image: {
         type: String,
     },
+    image1: {
+        type: String,
+    },
+    image2: {
+        type: String,
+    },
+    image3: {
+        type: String,
+    },
 
     user: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User'
     },
+    category: {
+        type: String,
+        enum: ['Vehicles', 'Electronics', 'Fashions', 'Realestate', 'Makup', 'ForKides', 'Foods', 'Others'],
+        required: true
+    },
+    img: {
+        public_id: {
+            type: 'string',
+        },
+        secure_url: {
+            type: 'string',
+        }
+    },  
+    cloudinary_id: {
+        type: String,
+      },
+
     // cars
     modal: {
         type: String,
-    }, gas: { type: String }, conditions: { type: String },
+    },
+    gas: { type: String },
+    conditions: {
+        type: String,
+        enum: ['use', 'new']
+    },
 
-
+    // realstate
+    location: { type: String }, num: { type: Number },
+    owners: { type: String }
 
 },
     { timestamps: true }
 
-)
+);
+
+
+ProdectsSchema.index({ name: 'text', description: 'text' });
+// ProdectsSchema.index({ "$**": 'text' });
 
 module.exports = mongoose.model('Prodects', ProdectsSchema)
