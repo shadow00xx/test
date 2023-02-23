@@ -58,6 +58,14 @@ const btnSelectCat = document.getElementById('cat-select');
 
 // btnSelectCat.addEventListener('click', xb)
 
+const preload = document.getElementById('preloader');
+// preloader
+
+function preloader() {
+    setTimeout(() => {
+        preload.remove()
+    }, 1000);
+}
 
 
 function xb() {
@@ -97,21 +105,28 @@ function xb() {
 
   <div class="form-floating mb-3">
   <input type="number" name="modal" minlength="3" maxlength="20" required class="form-control rounded-3"
-      id="floatingInput" placeholder="الاسم">
-  <label for="floatingInput"> الموديال </label>
+      id="floatingInput" placeholder="الموديل">
+  <label for="floatingInput"> الموديل </label>
   </div>
   <div class="form-floating mb-3">
   <input type="text" name="gas" minlength="3" maxlength="20" required class="form-control rounded-3"
-      id="floatingInput" placeholder="الاسم">
+      id="floatingInput" placeholder="نوع الوقود">
   <label for="floatingInput">نوع الوقود  </label>
   </div>
-  <div class="form-floating mb-3">
 
+  <div class="form-floating mb-3">
   <select name="conditions" class="form-control">
-  <option value="use">مستجدم</option>
+  <option value="use">مستخدم</option>
   <option value="new">جديد</option>
-</select>
+  </select>
   </div>
+
+  <div class="form-floating mb-3">
+  <select name="owners" class="form-control">
+  <option selected>انت المالك ام وسيط</option>
+  <option value="owner">المالك</option>
+  <option value="middle">الوسيط</option>
+</select>
   <input type="file" class="form-control" name="image" required>
   
                 <button class="btn btn-outline-primary bt" type="submit">ارسال</button>
@@ -171,6 +186,22 @@ function xb() {
         <label for="floatingInput">ادخل اسم المنتج</label>
     </div>
     <div class="form-floating mb-3">
+    <select name="reson" class="form-control">
+    <option selected>للبيع او للايجار </option>
+    <option value="sale">للبيع</option>
+    <option value="rent">الايجار</option>
+  </select>
+    </div>
+
+    <div class="form-floating mb-3">
+    <select name="owners" class="form-control">
+    <option selected>انت المالك ام وسيط</option>
+    <option value="owner">المالك</option>
+    <option value="middle">الوسيط</option>
+  </select>
+    </div>
+
+    <div class="form-floating mb-3">
         <textarea type="text" name="body" minlength="10" required class="form-control rounded-3"
             id="floatingInput" placeholder="وصف المنتج"></textarea>
         <label for="floatingInput">ادخل وصف للمنتج</label>
@@ -188,9 +219,9 @@ function xb() {
     </div>
 
     <div class="form-floating mb-3">
-        <input type="text" name="address" id="floatingInput" class="form-control p-0" required
-            placeholder="العنوان ">
-        <label for="floatingInput"> العنوان </label>
+        <input type="text" name="location" id="floatingInput" class="form-control p-0" required
+            placeholder="الموقع ">
+        <label for="floatingInput"> الموقع </label>
     </div>
 
   <input type="hidden" name="category" value="${category}" id="">
