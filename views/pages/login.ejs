@@ -1,50 +1,47 @@
-<div class="login d-flex w-100 text-center text-white bg-dark">
 
-  <div class="cover-container d-flex w-100 p-3 mx-auto flex-column">
 
-    <a class="mob-logo text-white btn" href="/">
+
+
+<body class="text-center">
+    
+  <main class="form-signin w-100 m-auto">
+    <a class="mob-logo text-dark btn" href="/">
       <h3 class="text-center">دلالة</h3>
-
     </a>
+    <form action="/user/login" method="post">
+      <img class="mb-4 logo" src="/imgs/delala-logo.png" alt="" width="72" height="57">
+      <h1 class="h3 mb-3 fw-normal"> تسجيل الدخول</h1>
+      <%- include ('../partials/error') %>
+  
+      <div class="form-floating">
+        <input type="email" class="form-control" name="username" id="floatingInput" placeholder="name@example.com">
+        <label for="floatingInput">الايميل</label>
+      </div>
+      <div class="form-floating">
+        <input type="password" class="form-control" id="floatingPassword" placeholder="Password" name="password">
+        <label for="floatingPassword">كلمه السر</label>
+      </div>
+  
+      <div class="checkbox mb-3">
+        <label>
+          <input type="checkbox" value="remember-me"> تزكرني
+        </label>
+      </div>
+      <button class="w-100 btn btn-lg btn-success" type="submit">تسجيل الدخول</button>
 
-
-    <main class="px-3  p-3 glass">
-
-      <form action="/user/login" method="post">
-        <img class="mb-4 logo" src="/imgs/delala-logo.png" alt="" width="57" height="57">
-        <h1> الرجاء تسجيل الدخول</h1>
-        <%- include ('../partials/error') %>
-
-          <div class="form-floating mb-3">
-            <input type="text" name="username" class="form-control" id="floatingInput"
-              placeholder=" اسم المستخدم او الايميل">
-            <!-- <label for="floatingInput">اسم المستخدم</label> -->
-          </div>
-          <div class="form-floating mb-3">
-            <input type="password" name="password" class="form-control" id="floatingPassword" placeholder="كلمه السر">
-            <!-- <label for="floatingPassword">كلمه السر</label> -->
-          </div>
-          <div class="checkbox mb-3">
-            <label>
-              <input type="checkbox" value="remember-me"> تزكرني لاحقا
-            </label>
-          </div>
-          <button class="w-100 btn btn-lg btn-primary" type="submit">تسجيل الدخول</button>
-
-
-          <a href="/auth/google" class="w-100 py-2 my-2 btn btn-danger rounded-3">
-            <i class="fab fa-google"></i>
-            التسجيل بحساب قوقل
-          </a>
-          <a class="w-100 btn btn-lg my-2" href="/user/signup">ليس لديك حساب !!</a>
-
-      </form>
-    </main>
-
-
-    <p class="mt-5 mb-3 text-muted text-white">© دلالة 2023</p>
-
-
-  </div>
-
-</div>
+    </form>
+    <a href="/auth/google" class="w-100 py-2 my-2 btn btn-danger rounded-3">
+      <i class="fab fa-google"></i>
+      التسجيل بحساب قوقل
+    </a>
+    <a href="/auth/facebook" class="w-100 py-2 my-2 btn btn-primary rounded-3">
+      <i class="fab fa-facebook"></i>
+      التسجيل بواسطه فيسبوك
+    </a>
+    <a class="w-100 btn btn-lg my-2" href="/user/signup">ليس لديك حساب !!</a>
+    <p class="mt-5 mb-3 text-muted"> دلالة &copy; 2023</p>
+  </main>
+  
+  
+      
+</body>
