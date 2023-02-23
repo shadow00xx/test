@@ -11,7 +11,7 @@ let errors = []
 // get
 // login
 exports.login = (req, res) => {
-    res.render('pages/login', { title: ' تسجيل الدخول' })
+    res.render('pages/login', { title: ' تسجيل الدخول',layout:"layouts/register" })
 }
 
 // get
@@ -26,7 +26,7 @@ exports.signupPost = async (req, res) => {
 
 
     try {
-        const { name, username, password } = req.body
+        const { displayName, username, password } = req.body
 
         const user = await User.findOne({ username: username })
         if (user) {
@@ -36,7 +36,7 @@ exports.signupPost = async (req, res) => {
                 errors
             })
         } else {
-            const newUser = await new User({ name, username, password, })
+            const newUser = await new User({ displayName, username, password, })
             bcrypt.genSalt(10, (err, salt) => {
                 bcrypt.hash(newUser.password, salt, async (err, hash) => {
                     if (err) throw err;
