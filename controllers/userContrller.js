@@ -17,7 +17,7 @@ exports.login = (req, res) => {
 // get
 // signup
 exports.signup = (req, res) => {
-    res.render('pages/signup', { title: ' التسجيل' })
+    res.render('pages/signup', { title: ' التسجيل',layout:"layouts/register"  })
 }
 
 // post 
