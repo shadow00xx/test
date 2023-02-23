@@ -26,9 +26,13 @@
 
                                             <h1>
                                                 اسم السلعة : <%- e.name %>
+                                          
                                             </h1>
                                         </div>
 
+                                        <h4>
+                                            
+                                        </h4>
 
 
                                         <h4>
@@ -90,30 +94,11 @@
                                                                                             <small class="text-muted">
                                                                                                 تم الرفع بواسطه
                                                                                                 <a href="/">
-                                                                                                    <% if(e.user.displayName) { %>
-                                                                                                       
-
-
-                                                                                                        <%= e.user.displayName %>
-                                                                                                           
-
-
-                                                                                                            <% } %>
-                                                                                                                <% if(e.user.name){ %>
-                                                                                                                    
-
-                                                                                                                   
-                                                                                                                       <%=  e.user.name %>
-
-                                                                                                                        <% } %>
-                                                                                                                           
-
+                                                                                                        <%= e.user.displayName %>      
                                                                                                 </a>
                                                                                                 منذ
                                                                                                 <%= moment(e.createdAt).fromNow() %>
-                                                                                                   
-
-
+                                             
                                                                                             </small>
                                                                                         </p>
                                     </div>

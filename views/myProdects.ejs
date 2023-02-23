@@ -11,27 +11,44 @@
                     <!--  Start -->
                     <section class="pb-4 pt-4">
                         <div class="d-flex mb-2 align-items-center">
-                            <h2>سلع <%= user.name %>
+                            <h2>سلع <%= user.displayName %>
                             </h2>
 
                         </div>
 
                         <div class="row row-cols-2 row-cols-lg-5 g-2 g-lg-3">
-                            <% march.forEach(e=> { %>
+                            <% if(march !='' ) { %>
+                                <% march.forEach(function(prodect, index){ %>
 
-                                <a href="/prodects/<%= e._id %>" class="col text-center category__link1">
-                                    <div class="category__img1 category__img--large">
-                                        <img src="<%= e.image %>" width="100%" alt="<%= e.name %> "
-                                            loading="lazy">
 
+                                    <div class="col text-center">
+                                        <div class="category__img1 category__img--large">
+                                            <img src="<%= prodect.image %>" width="100%" alt="<%= prodect.name %> "
+                                                loading="lazy">
+
+                                        </div>
+                                        <a href="/prodects/<%= prodect._id %>" class="pt-1">
+                                            <%= prodect.name %>
+                                        </a>
+
+                                        
+                                            <!-- <a href=""> </i></a> -->
+                                            <form action="/prodects/<%- prodect._id %>" method="post"
+                                                id="delete-form">
+                                                <input type="hidden" name="_method" value="DELETE">
+                                                <button type="submit" class="btn btn-danger">
+                                                <i class="fa fa-trash text-danger"></i>
+                                                حزف</button>
+                                            </form>
+                                     
                                     </div>
-                                    <div class="pt-1">
-                                        <%= e.name %>
-                                    </div>
-                                </a>
-                                <% }) %>
-
+                                    <% }) %>
+                                        <% } else { %>
+                                            <p>لا يوجد سلع حاليا</p>
+                                            <% } %>
                         </div>
+
+
                     </section>
 
 
