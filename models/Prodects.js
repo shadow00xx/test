@@ -65,6 +65,7 @@ const ProdectsSchema = new mongoose.Schema({
         type: String,
     },
     gas: { type: String },
+
     conditions: {
         type: String,
         enum: ['use', 'new']
@@ -72,7 +73,12 @@ const ProdectsSchema = new mongoose.Schema({
 
     // realstate
     location: { type: String }, num: { type: Number },
-    owners: { type: String }
+    owners: { type: String ,enum: ['owner', 'middle']},
+    reson: {
+        type: String,
+        enum: ['sale', 'rent']
+    },
+
 
 },
     { timestamps: true }
