@@ -11,7 +11,7 @@ module.exports = function (passport) {
             try {
                 const user = await User.findOne({ username: username })
                 if (!user) {
-                    return done(null, false, { message: 'user does not exist' })
+                    return done(null, false, { message: 'المستخدم غير موجود' })
 
                 }
                 if (user) {
@@ -22,7 +22,7 @@ module.exports = function (passport) {
                         if (isMatch) {
                             return done(null, user)
                         } else {
-                            return done(null, false, { message: 'password wrong' })
+                            return done(null, false, { message: 'كلمة السر خطأ' })
                         }
                     })
                 }
