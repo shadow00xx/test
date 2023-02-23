@@ -1,11 +1,11 @@
 {
   "name": "fullPro",
   "version": "1.0.0",
-  "description": "just for fun meme",
-  "main": "app.js",
+  "description": "just for fun",
+  "main": "index.js",
   "scripts": {
-    "start": "node app",
-    "dev": "nodemon app"
+    "start": "cross-env NODE_ENV=production node app",
+    "dev": "cross-env NODE_ENV=develpmont nodemon app"
   },
   "author": "Nabil",
   "license": "ISC",
@@ -29,6 +29,7 @@
     "morgan": "^1.10.0",
     "multer": "^1.4.5-lts.1",
     "passport": "^0.6.0",
+    "passport-facebook": "^3.0.0",
     "passport-google-oauth20": "^2.0.0",
     "passport-local": "^1.0.0",
     "sharp": "^0.31.3",
