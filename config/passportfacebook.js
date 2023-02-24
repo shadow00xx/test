@@ -19,7 +19,7 @@ passport.use(
           console.log('Adding new facebook user to DB..');
           const user = new User({
             accountId: profile.id,
-            name: profile.displayName,
+            displayName: profile.displayName,
             provider: profile.provider,
           });
           await user.save();
