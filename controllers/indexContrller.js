@@ -14,13 +14,13 @@ exports.landingPage = async (req, res) => {
         const categories = await Category.find({}).limit(limitNumber);
         const latest = await prodects.find({}).sort({ _id: -1 }).limit(limitNumber);
         const Vehicles = await prodects.find({ 'category': 'Vehicles' }).limit(limitNumber);
-        const Electronics = await prodects.find({ 'category': 'Electronics' }).limit(limitNumber);
-        const Fashions = await prodects.find({ 'category': 'Fashions' }).limit(limitNumber)
-        const Realestate = await prodects.find({ 'category': 'Realestate' }).limit(limitNumber);
-        const Makup = await prodects.find({ 'category': 'Makup' }).limit(limitNumber);
-        const ForKides = await prodects.find({ 'category': 'ForKides' }).limit(limitNumber);
-        const Foods = await prodects.find({ 'category': 'Foods' }).limit(limitNumber);
-        const Others = await prodects.find({ 'category': 'Others' }).limit(limitNumber);
+        const Electronics = await prodects.find({ 'category': 'Electronics' }).sort({ _id: -1 }).limit(limitNumber);
+        const Fashions = await prodects.find({ 'category': 'Fashions' }).limit(limitNumber).sort({ _id: -1 });
+        const Realestate = await prodects.find({ 'category': 'Realestate' }).limit(limitNumber).sort({ _id: -1 });
+        const Makup = await prodects.find({ 'category': 'Makup' }).limit(limitNumber).sort({ _id: -1 });
+        const ForKides = await prodects.find({ 'category': 'ForKides' }).limit(limitNumber).sort({ _id: -1 });
+        const Foods = await prodects.find({ 'category': 'Foods' }).limit(limitNumber).sort({ _id: -1 });
+        const Others = await prodects.find({ 'category': 'Others' }).limit(limitNumber).sort({ _id: -1 });
         const pros = { latest, Foods, Vehicles, ForKides, Others, Electronics, Fashions, Realestate, Makup };
 
         res.render('index', { categories, pros, title: 'دلالة' })
