@@ -58,14 +58,7 @@ const btnSelectCat = document.getElementById('cat-select');
 
 // btnSelectCat.addEventListener('click', xb)
 
-const preload = document.getElementById('preloader');
-// preloader
 
-function preloader() {
-    setTimeout(() => {
-        preload.remove()
-    }, 1000);
-}
 
 
 function xb() {
@@ -74,370 +67,387 @@ function xb() {
     // السيارات
     if (category === 'Vehicles') {
         prodectsForm.innerHTML += ` 
-        <div class="form-floating mb-3">
-        <input type="text" name="name" minlength="3" maxlength="20" required class="form-control rounded-3"
-            id="floatingInput" placeholder="اسم المنتج">
-        <label for="floatingInput">ادخل اسم المنتج</label>
-    </div>
-    <div class="form-floating mb-3">
-        <textarea type="text" name="body" minlength="10" required class="form-control rounded-3"
-            id="floatingInput" placeholder="وصف المنتج"></textarea>
-        <label for="floatingInput">ادخل وصف للمنتج</label>
-    </div>
-    <div class="form-floating mb-3">
-        <input type="number" name="prise" id="floatingInput" class="form-control p-0" required
-            placeholder="السعر ">
-        <label for="floatingInput"> السعر </label>
-    </div>
-
-    <div class="form-floating mb-3">
-        <input type="number" name="phone" id="floatingInput" class="form-control p-0" required
-            placeholder="رقم الهاتف للتواصل ">
-        <label for="floatingInput"> رقم الهاتف للتواصل </label>
-    </div>
-
-    <div class="form-floating mb-3">
-        <input type="text" name="address" id="floatingInput" class="form-control p-0" required
-            placeholder="العنوان ">
-        <label for="floatingInput"> العنوان </label>
-    </div>
+     <div class="input-group mb-3">
+        <span class="input-group-text" id="basic-addon1"> اسم العربة</span>
+        <input type="text" name="name" minlength="3" maxlength="20" required class="form-control"  aria-label="اسم العربة" aria-describedby="basic-addon1">
+      </div>
+    
+      <div class="input-group mb-3">
+        <span class="input-group-text" >وصف العربة </span>
+        <textarea class="form-control" name="body" minlength="10" aria-label="مع textarea"></textarea>
+      </div>
+    
+      <div class="input-group mb-3">
+        <span class="input-group-text"><bdo>المبلغ المطلوب</bdo></span>
+        <input type="number"  name="prise" class="form-control" aria-label="المبلغ (لأقرب دولار)" maxlength="10" required>
+        <span class="input-group-text">$</span>
+      </div>
+    
+      <div class="input-group mb-3">
+        <span class="input-group-text" id="basic-addon1"> رقم الهاتف للتواصل  </span>
+        <input type="number" maxlength="10" name="phone" required class="form-control" 
+         aria-label=" رقم الهاتف للتواصل " aria-describedby="basic-addon1">
+      </div>
+    
+      <div class="input-group mb-3">
+        <span class="input-group-text" id="basic-addon1"> العنوان </span>
+        <input type="text" name="address" minlength="3" maxlength="20" required class="form-control" 
+         aria-label=" العنوان" aria-describedby="basic-addon1">
+      </div>
+    
     <input type="hidden" name="category" value="${category}" id="">
 
-  <div class="form-floating mb-3">
-  <input type="number" name="modal" minlength="3" maxlength="20" required class="form-control rounded-3"
-      id="floatingInput" placeholder="الموديل">
-  <label for="floatingInput"> الموديل </label>
-  </div>
-  <div class="form-floating mb-3">
-  <input type="text" name="gas" minlength="3" maxlength="20" required class="form-control rounded-3"
-      id="floatingInput" placeholder="نوع الوقود">
-  <label for="floatingInput">نوع الوقود  </label>
+  <div class="input-group mb-3">
+    <span class="input-group-text" id="basic-addon1"> الموديل </span>
+    <input type="number" name="modal" minlength="3" maxlength="7" required class="form-control"  aria-label="الموديل " aria-describedby="basic-addon1">
   </div>
 
-  <div class="form-floating mb-3">
-  <select name="conditions" class="form-control">
-  <option value="use">مستخدم</option>
-  <option value="new">جديد</option>
-  </select>
-  </div>
+  <div class="input-group mb-3">
+  <span class="input-group-text" id="basic-addon1"> نوع الوقود  </span>
+  <input type="text" name="gas" minlength="3" maxlength="10" required class="form-control"  aria-label="نوع الوقود  " aria-describedby="basic-addon1">
+</div>
 
-  <div class="form-floating mb-3">
-  <select name="owners" class="form-control">
-  <option selected>انت المالك ام وسيط</option>
-  <option value="owner">المالك</option>
-  <option value="middle">الوسيط</option>
-</select>
-  <input type="file" class="form-control" name="image" required>
+  <div class="mb-3">
+          <select class="form-select form-select-md mb-3" name="conditions" aria-label=".form-select-lg مثال">
+            <option selected> حالة العربة الحالية</option>
+            <option value="use">مستخدم</option>
+            <option value="new">جديد</option>
+          </select>
+    </div>
+
+<div class="mb-3">
+    <select class="form-select form-select-md mb-3" name="owners" aria-label=".form-select-lg مثال">
+    <option selected>انت المالك ام وسيط</option>
+    <option value="owner">المالك</option>
+    <option value="middle">الوسيط</option>
+    </select>
+</div>
+
+<div class="mb-3">
+<input type="file" class="form-control" name="image" required>
+</div>
   
-                <button class="btn btn-outline-primary bt" type="submit">ارسال</button>
+ <button class="btn btn-primary w-100 mb-3" type="submit">ارسال</button>
  
-  
-
   `
-
+  btnSelectCat.style.display= 'none'
+  categorys.style.display= 'none'
         // الالكترونيات
     } if (category === 'Electronics') {
-        prodectsForm.innerHTML += ` 
-        <div class="form-floating mb-3">
-        <input type="text" name="name" minlength="3" maxlength="20" required class="form-control rounded-3"
-            id="floatingInput" placeholder="اسم المنتج">
-        <label for="floatingInput">ادخل اسم المنتج</label>
-    </div>
-    <div class="form-floating mb-3">
-        <textarea type="text" name="body" minlength="10" required class="form-control rounded-3"
-            id="floatingInput" placeholder="وصف المنتج"></textarea>
-        <label for="floatingInput">ادخل وصف للمنتج</label>
-    </div>
-    <div class="form-floating mb-3">
-        <input type="number" name="prise" id="floatingInput" class="form-control p-0" required
-            placeholder="السعر ">
-        <label for="floatingInput"> السعر </label>
-    </div>
+        prodectsForm.innerHTML += `
+      
+  <div class="input-group mb-3">
+    <span class="input-group-text" id="basic-addon1"> اسم السلعة</span>
+    <input type="text" name="name" minlength="3" maxlength="20" required class="form-control"  aria-label="اسم السلعة" aria-describedby="basic-addon1">
+  </div>
 
-    <div class="form-floating mb-3">
-        <input type="number" name="phone" id="floatingInput" class="form-control p-0" required
-            placeholder="رقم الهاتف للتواصل ">
-        <label for="floatingInput"> رقم الهاتف للتواصل </label>
-    </div>
+  <div class="input-group mb-3">
+    <span class="input-group-text" >وصف السلعة </span>
+    <textarea class="form-control" name="body" minlength="10" aria-label="مع textarea"></textarea>
+  </div>
 
-    <div class="form-floating mb-3">
-        <input type="text" name="address" id="floatingInput" class="form-control p-0" required
-            placeholder="العنوان ">
-        <label for="floatingInput"> العنوان </label>
-    </div>
+  <div class="input-group mb-3">
+    <span class="input-group-text"><bdo>المبلغ المطلوب</bdo></span>
+    <input type="number"  name="prise" class="form-control" aria-label="المبلغ (لأقرب دولار)" maxlength="10" required>
+    <span class="input-group-text">$</span>
+  </div>
+
+  <div class="input-group mb-3">
+    <span class="input-group-text" id="basic-addon1"> رقم الهاتف للتواصل  </span>
+    <input type="number" maxlength="10" name="phone" required class="form-control" 
+     aria-label=" رقم الهاتف للتواصل " aria-describedby="basic-addon1">
+  </div>
+
+  <div class="input-group mb-3">
+    <span class="input-group-text" id="basic-addon1"> العنوان </span>
+    <input type="text" name="address" minlength="3" maxlength="20" required class="form-control" 
+     aria-label=" العنوان" aria-describedby="basic-addon1">
+  </div>
 
   <input type="hidden" name="category" value="${category}" id="">
-  </div>
+ 
   <div class="mb-3">
   <input type="file" class="form-control" name="image" required>
 </div>
-  <button class="btn btn-outline-primary bt" type="submit">ارسال</button>
+  <button class="btn btn-primary w-100 mb-3" type="submit">ارسال</button>
 
   `
+  btnSelectCat.style.display= 'none'
+  categorys.style.display= 'none'
 
     }
 
     // العقارات
     if (category === 'Realestate') {
         prodectsForm.innerHTML += `
-        <div class="form-floating mb-3">
-        <input type="text" name="name" minlength="3" maxlength="20" required class="form-control rounded-3"
-            id="floatingInput" placeholder="اسم المنتج">
-        <label for="floatingInput">ادخل اسم المنتج</label>
+    <div class="input-group mb-3">
+        <span class="input-group-text" id="basic-addon1"> اسم السلعة</span>
+        <input type="text" name="name" minlength="3" maxlength="20" required class="form-control"  aria-label="اسم السلعة" aria-describedby="basic-addon1">
     </div>
-    <div class="form-floating mb-3">
-    <select name="reson" class="form-control">
+
+ <div class="mb-3">
+    <select class="form-select form-select-md mb-3"  name="reson" aria-label=".form-select-lg مثال">
     <option selected>للبيع او للايجار </option>
     <option value="sale">للبيع</option>
     <option value="rent">الايجار</option>
-  </select>
-    </div>
+    </select>
+</div>
 
-    <div class="form-floating mb-3">
-    <select name="owners" class="form-control">
+<div class="mb-3">
+    <select class="form-select form-select-md mb-3" name="owners" aria-label=".form-select-lg مثال">
     <option selected>انت المالك ام وسيط</option>
     <option value="owner">المالك</option>
     <option value="middle">الوسيط</option>
-  </select>
-    </div>
+    </select>
+</div>
 
-    <div class="form-floating mb-3">
-        <textarea type="text" name="body" minlength="10" required class="form-control rounded-3"
-            id="floatingInput" placeholder="وصف المنتج"></textarea>
-        <label for="floatingInput">ادخل وصف للمنتج</label>
-    </div>
-    <div class="form-floating mb-3">
-        <input type="number" name="prise" id="floatingInput" class="form-control p-0" required
-            placeholder="السعر ">
-        <label for="floatingInput"> السعر </label>
-    </div>
 
-    <div class="form-floating mb-3">
-        <input type="number" name="phone" id="floatingInput" class="form-control p-0" required
-            placeholder="رقم الهاتف للتواصل ">
-        <label for="floatingInput"> رقم الهاتف للتواصل </label>
-    </div>
+<div class="input-group mb-3">
+<span class="input-group-text" id="basic-addon1"> الموقع </span>
+<input type="text" name="location" minlength="3" required class="form-control"  aria-label="الموقع " aria-describedby="basic-addon1">
+</div>
 
-    <div class="form-floating mb-3">
-        <input type="text" name="location" id="floatingInput" class="form-control p-0" required
-            placeholder="الموقع ">
-        <label for="floatingInput"> الموقع </label>
-    </div>
+<div class="input-group mb-3">
+  <span class="input-group-text"><bdo>المبلغ المطلوب</bdo></span>
+  <input type="number"  name="prise" class="form-control" aria-label="المبلغ (لأقرب دولار)" maxlength="10" required>
+  <span class="input-group-text">$</span>
+</div>
+
+<div class="input-group mb-3">
+<span class="input-group-text" > المواصفات </span>
+<textarea class="form-control" name="body" minlength="10" aria-label="مع textarea"></textarea>
+</div>
+
+  
+
+
+    <div class="input-group mb-3">
+    <span class="input-group-text" id="basic-addon1"> رقم الهاتف للتواصل  </span>
+    <input type="number" maxlength="10" name="phone" required class="form-control" 
+     aria-label=" رقم الهاتف للتواصل " aria-describedby="basic-addon1">
+  </div>
+
 
   <input type="hidden" name="category" value="${category}" id="">
-  </div>
-  <div class="mb-3">
+  
+<div class="mb-3">
   <input type="file" class="form-control" name="image" required>
 </div>
-  <button class="btn btn-outline-primary bt" type="submit">ارسال</button>
-
+<button class="btn btn-primary w-100 mb-3" type="submit">ارسال</button>
 
 `
+btnSelectCat.style.display= 'none'
+categorys.style.display= 'none'
     }
     if (category === 'Fashions') {
-        prodectsForm.innerHTML += ` 
+        prodectsForm.innerHTML += `
+      
+  <div class="input-group mb-3">
+    <span class="input-group-text" id="basic-addon1"> اسم السلعة</span>
+    <input type="text" name="name" minlength="3" maxlength="20" required class="form-control"  aria-label="اسم السلعة" aria-describedby="basic-addon1">
+  </div>
 
-        <div class="form-floating mb-3">
-        <input type="text" name="name" minlength="3" maxlength="20" required class="form-control rounded-3"
-            id="floatingInput" placeholder="اسم المنتج">
-        <label for="floatingInput">ادخل اسم المنتج</label>
-    </div>
-    <div class="form-floating mb-3">
-        <textarea type="text" name="body" minlength="10" required class="form-control rounded-3"
-            id="floatingInput" placeholder="وصف المنتج"></textarea>
-        <label for="floatingInput">ادخل وصف للمنتج</label>
-    </div>
-    <div class="form-floating mb-3">
-        <input type="number" name="prise" id="floatingInput" class="form-control p-0" required
-            placeholder="السعر ">
-        <label for="floatingInput"> السعر </label>
-    </div>
+  <div class="input-group mb-3">
+    <span class="input-group-text" >وصف السلعة </span>
+    <textarea class="form-control" name="body" minlength="10" aria-label="مع textarea"></textarea>
+  </div>
 
-    <div class="form-floating mb-3">
-        <input type="number" name="phone" id="floatingInput" class="form-control p-0" required
-            placeholder="رقم الهاتف للتواصل ">
-        <label for="floatingInput"> رقم الهاتف للتواصل </label>
-    </div>
+  <div class="input-group mb-3">
+    <span class="input-group-text"><bdo>المبلغ المطلوب</bdo></span>
+    <input type="number"  name="prise" class="form-control" aria-label="المبلغ (لأقرب دولار)" maxlength="10" required>
+    <span class="input-group-text">$</span>
+  </div>
 
-    <div class="form-floating mb-3">
-        <input type="text" name="address" id="floatingInput" class="form-control p-0" required
-            placeholder="العنوان ">
-        <label for="floatingInput"> العنوان </label>
-    </div>
+  <div class="input-group mb-3">
+    <span class="input-group-text" id="basic-addon1"> رقم الهاتف للتواصل  </span>
+    <input type="number" maxlength="10" name="phone" required class="form-control" 
+     aria-label=" رقم الهاتف للتواصل " aria-describedby="basic-addon1">
+  </div>
+
+  <div class="input-group mb-3">
+    <span class="input-group-text" id="basic-addon1"> العنوان </span>
+    <input type="text" name="address" minlength="3" maxlength="20" required class="form-control" 
+     aria-label=" العنوان" aria-describedby="basic-addon1">
+  </div>
 
   <input type="hidden" name="category" value="${category}" id="">
-  </div>
-  <div class="mb-3">
+  
+<div class="mb-3">
   <input type="file" class="form-control" name="image" required>
 </div>
-  <button class="btn btn-outline-primary bt" type="submit">ارسال</button>
-
+ <button class="btn btn-primary w-100 mb-3" type="submit">ارسال</button>
 
   `
+  btnSelectCat.style.display= 'none'
+  categorys.style.display= 'none'
 
     } if (category === 'Makup') {
         prodectsForm.innerHTML += `
-  
-        <div class="form-floating mb-3">
-        <input type="text" name="name" minlength="3" maxlength="20" required class="form-control rounded-3"
-            id="floatingInput" placeholder="اسم المنتج">
-        <label for="floatingInput">ادخل اسم المنتج</label>
-    </div>
-    <div class="form-floating mb-3">
-        <textarea type="text" name="body" minlength="10" required class="form-control rounded-3"
-            id="floatingInput" placeholder="وصف المنتج"></textarea>
-        <label for="floatingInput">ادخل وصف للمنتج</label>
-    </div>
-    <div class="form-floating mb-3">
-        <input type="number" name="prise" id="floatingInput" class="form-control p-0" required
-            placeholder="السعر ">
-        <label for="floatingInput"> السعر </label>
-    </div>
+      
+  <div class="input-group mb-3">
+    <span class="input-group-text" id="basic-addon1"> اسم السلعة</span>
+    <input type="text" name="name" minlength="3" maxlength="20" required class="form-control"  aria-label="اسم السلعة" aria-describedby="basic-addon1">
+  </div>
 
-    <div class="form-floating mb-3">
-        <input type="number" name="phone" id="floatingInput" class="form-control p-0" required
-            placeholder="رقم الهاتف للتواصل ">
-        <label for="floatingInput"> رقم الهاتف للتواصل </label>
-    </div>
+  <div class="input-group mb-3">
+    <span class="input-group-text" >وصف السلعة </span>
+    <textarea class="form-control" name="body" minlength="10" aria-label="مع textarea"></textarea>
+  </div>
 
-    <div class="form-floating mb-3">
-        <input type="text" name="address" id="floatingInput" class="form-control p-0" required
-            placeholder="العنوان ">
-        <label for="floatingInput"> العنوان </label>
-    </div>
+  <div class="input-group mb-3">
+    <span class="input-group-text"><bdo>المبلغ المطلوب</bdo></span>
+    <input type="number"  name="prise" class="form-control" aria-label="المبلغ (لأقرب دولار)" maxlength="10" required>
+    <span class="input-group-text">$</span>
+  </div>
+
+  <div class="input-group mb-3">
+    <span class="input-group-text" id="basic-addon1"> رقم الهاتف للتواصل  </span>
+    <input type="number" maxlength="10" name="phone" required class="form-control" 
+     aria-label=" رقم الهاتف للتواصل " aria-describedby="basic-addon1">
+  </div>
+
+  <div class="input-group mb-3">
+    <span class="input-group-text" id="basic-addon1"> العنوان </span>
+    <input type="text" name="address" minlength="3" maxlength="20" required class="form-control" 
+     aria-label=" العنوان" aria-describedby="basic-addon1">
+  </div>
 
   <input type="hidden" name="category" value="${category}" id="">
-  </div>
-  <div class="mb-3">
+
+<div class="mb-3">
   <input type="file" class="form-control" name="image" required>
 </div>
-  <button class="btn btn-outline-primary bt" type="submit">ارسال</button>
-
+ <button class="btn btn-primary w-100 mb-3" type="submit">ارسال</button>
 
   `
+  btnSelectCat.style.display= 'none'
+  categorys.style.display= 'none'
 
     } if (category === 'ForKides') {
-        prodectsForm.innerHTML += ` 
-        <div class="form-floating mb-3">
-        <input type="text" name="name" minlength="3" maxlength="20" required class="form-control rounded-3"
-            id="floatingInput" placeholder="اسم المنتج">
-        <label for="floatingInput">ادخل اسم المنتج</label>
-    </div>
-    <div class="form-floating mb-3">
-        <textarea type="text" name="body" minlength="10" required class="form-control rounded-3"
-            id="floatingInput" placeholder="وصف المنتج"></textarea>
-        <label for="floatingInput">ادخل وصف للمنتج</label>
-    </div>
-    <div class="form-floating mb-3">
-        <input type="number" name="prise" id="floatingInput" class="form-control p-0" required
-            placeholder="السعر ">
-        <label for="floatingInput"> السعر </label>
-    </div>
+        prodectsForm.innerHTML += `
+      
+  <div class="input-group mb-3">
+    <span class="input-group-text" id="basic-addon1"> اسم السلعة</span>
+    <input type="text" name="name" minlength="3" maxlength="20" required class="form-control"  aria-label="اسم السلعة" aria-describedby="basic-addon1">
+  </div>
 
-    <div class="form-floating mb-3">
-        <input type="number" name="phone" id="floatingInput" class="form-control p-0" required
-            placeholder="رقم الهاتف للتواصل ">
-        <label for="floatingInput"> رقم الهاتف للتواصل </label>
-    </div>
+  <div class="input-group mb-3">
+    <span class="input-group-text" >وصف السلعة </span>
+    <textarea class="form-control" name="body" minlength="10" aria-label="مع textarea"></textarea>
+  </div>
 
-    <div class="form-floating mb-3">
-        <input type="text" name="address" id="floatingInput" class="form-control p-0" required
-            placeholder="العنوان ">
-        <label for="floatingInput"> العنوان </label>
-    </div>
+  <div class="input-group mb-3">
+    <span class="input-group-text"><bdo>المبلغ المطلوب</bdo></span>
+    <input type="number"  name="prise" class="form-control" aria-label="المبلغ (لأقرب دولار)" maxlength="10" required>
+    <span class="input-group-text">$</span>
+  </div>
+
+  <div class="input-group mb-3">
+    <span class="input-group-text" id="basic-addon1"> رقم الهاتف للتواصل  </span>
+    <input type="number" maxlength="10" name="phone" required class="form-control" 
+     aria-label=" رقم الهاتف للتواصل " aria-describedby="basic-addon1">
+  </div>
+
+  <div class="input-group mb-3">
+    <span class="input-group-text" id="basic-addon1"> العنوان </span>
+    <input type="text" name="address" minlength="3" maxlength="20" required class="form-control" 
+     aria-label=" العنوان" aria-describedby="basic-addon1">
+  </div>
 
   <input type="hidden" name="category" value="${category}" id="">
-  </div>
-  <div class="mb-3">
+
+<div class="mb-3">
   <input type="file" class="form-control" name="image" required>
 </div>
-  <button class="btn btn-outline-primary bt" type="submit">ارسال</button>
-
+ <button class="btn btn-primary w-100 mb-3" type="submit">ارسال</button>
 
   `
+  btnSelectCat.style.display= 'none'
+  categorys.style.display= 'none'
 
     } if (category === 'Foods') {
-        prodectsForm.innerHTML += ` 
-        <div class="form-floating mb-3">
-        <input type="text" name="name" minlength="3" maxlength="20" required class="form-control rounded-3"
-            id="floatingInput" placeholder="اسم المنتج">
-        <label for="floatingInput">ادخل اسم المنتج</label>
+        prodectsForm.innerHTML += `
+      
+        <div class="input-group mb-3">
+          <span class="input-group-text" id="basic-addon1"> اسم السلعة</span>
+          <input type="text" name="name" minlength="3" maxlength="20" required class="form-control"  aria-label="اسم السلعة" aria-describedby="basic-addon1">
+        </div>
+      
+        <div class="input-group mb-3">
+          <span class="input-group-text" >وصف السلعة </span>
+          <textarea class="form-control" name="body" minlength="10" aria-label="مع textarea"></textarea>
+        </div>
+      
+        <div class="input-group mb-3">
+          <span class="input-group-text"><bdo>المبلغ المطلوب</bdo></span>
+          <input type="number"  name="prise" class="form-control" aria-label="المبلغ (لأقرب دولار)" maxlength="10" required>
+          <span class="input-group-text">$</span>
+        </div>
+      
+        <div class="input-group mb-3">
+          <span class="input-group-text" id="basic-addon1"> رقم الهاتف للتواصل  </span>
+          <input type="number" maxlength="10" name="phone" required class="form-control" 
+           aria-label=" رقم الهاتف للتواصل " aria-describedby="basic-addon1">
+        </div>
+      
+        <div class="input-group mb-3">
+          <span class="input-group-text" id="basic-addon1"> العنوان </span>
+          <input type="text" name="address" minlength="3" maxlength="20" required class="form-control" 
+           aria-label=" العنوان" aria-describedby="basic-addon1">
+        </div>
+      
+        <input type="hidden" name="category" value="${category}" id="">
+   
+    <div class="mb-3">
+        <input type="file" class="form-control" name="image" required>
     </div>
-    <div class="form-floating mb-3">
-        <textarea type="text" name="body" minlength="10" required class="form-control rounded-3"
-            id="floatingInput" placeholder="وصف المنتج"></textarea>
-        <label for="floatingInput">ادخل وصف للمنتج</label>
-    </div>
-    <div class="form-floating mb-3">
-        <input type="number" name="prise" id="floatingInput" class="form-control p-0" required
-            placeholder="السعر ">
-        <label for="floatingInput"> السعر </label>
-    </div>
-
-    <div class="form-floating mb-3">
-        <input type="number" name="phone" id="floatingInput" class="form-control p-0" required
-            placeholder="رقم الهاتف للتواصل ">
-        <label for="floatingInput"> رقم الهاتف للتواصل </label>
-    </div>
-
-    <div class="form-floating mb-3">
-        <input type="text" name="address" id="floatingInput" class="form-control p-0" required
-            placeholder="العنوان ">
-        <label for="floatingInput"> العنوان </label>
-    </div>
-
-  <input type="hidden" name="category" value="${category}" id="">
-  </div>
-  <div class="mb-3">
-  <input type="file" class="form-control" name="image" required>
-</div>
-  <button class="btn btn-outline-primary bt" type="submit">ارسال</button>
-
-
-  `
+       <button class="btn btn-primary w-100 mb-3" type="submit">ارسال</button>
+      
+        `
+        btnSelectCat.style.display= 'none'
+        categorys.style.display= 'none'
 
     } if (category === 'Others') {
         prodectsForm.innerHTML += `
-        <div class="form-floating mb-3">
-        <input type="text" name="name" minlength="3" maxlength="20" required class="form-control rounded-3"
-            id="floatingInput" placeholder="اسم المنتج">
-        <label for="floatingInput">ادخل اسم المنتج</label>
-    </div>
-    <div class="form-floating mb-3">
-        <textarea type="text" name="body" minlength="10" required class="form-control rounded-3"
-            id="floatingInput" placeholder="وصف المنتج"></textarea>
-        <label for="floatingInput">ادخل وصف للمنتج</label>
-    </div>
-    <div class="form-floating mb-3">
-        <input type="number" name="prise" id="floatingInput" class="form-control p-0" required
-            placeholder="السعر ">
-        <label for="floatingInput"> السعر </label>
-    </div>
+      
+  <div class="input-group mb-3">
+    <span class="input-group-text" id="basic-addon1"> اسم السلعة</span>
+    <input type="text" name="name" minlength="3" maxlength="20" required class="form-control"  aria-label="اسم السلعة" aria-describedby="basic-addon1">
+  </div>
 
-    <div class="form-floating mb-3">
-        <input type="number" name="phone" id="floatingInput" class="form-control p-0" required
-            placeholder="رقم الهاتف للتواصل ">
-        <label for="floatingInput"> رقم الهاتف للتواصل </label>
-    </div>
+  <div class="input-group mb-3">
+    <span class="input-group-text" >وصف السلعة </span>
+    <textarea class="form-control" name="body" minlength="10" aria-label="مع textarea"></textarea>
+  </div>
 
-    <div class="form-floating mb-3">
-        <input type="text" name="address" id="floatingInput" class="form-control p-0" required
-            placeholder="العنوان ">
-        <label for="floatingInput"> العنوان </label>
-    </div>
+  <div class="input-group mb-3">
+    <span class="input-group-text"><bdo>المبلغ المطلوب</bdo></span>
+    <input type="number"  name="prise" class="form-control" aria-label="المبلغ (لأقرب دولار)" maxlength="10" required>
+    <span class="input-group-text">$</span>
+  </div>
+
+  <div class="input-group mb-3">
+    <span class="input-group-text" id="basic-addon1"> رقم الهاتف للتواصل  </span>
+    <input type="number" maxlength="10" name="phone" required class="form-control" 
+     aria-label=" رقم الهاتف للتواصل " aria-describedby="basic-addon1">
+  </div>
+
+  <div class="input-group mb-3">
+    <span class="input-group-text" id="basic-addon1"> العنوان </span>
+    <input type="text" name="address" minlength="3" maxlength="20" required class="form-control" 
+     aria-label=" العنوان" aria-describedby="basic-addon1">
+  </div>
 
   <input type="hidden" name="category" value="${category}" id="">
-  </div>
-  <div class="mb-3">
+ 
+<div class="mb-3">
   <input type="file" class="form-control" name="image" required>
 </div>
-  <button class="btn btn-outline-primary bt" type="submit">ارسال</button>
+ <button class="btn btn-primary w-100 mb-3" type="submit">ارسال</button>
 
   `
-
-
-    } else {
-        prodectsForm.innerHTML += 'اختر نوع من فضلك'
+  btnSelectCat.style.display= 'none'
+  categorys.style.display= 'none'
     }
 }
 
