@@ -23,6 +23,9 @@ router.get('/about', indexContrller.about)
 // term page
 router.get('/term', indexContrller.terms)
 
+// test page
+router.get('/test', indexContrller.test)
+
 router.get('/categories', indexContrller.exploreCategories);
 router.get('/categories/:id', indexContrller.exploreCategoriesById);
 module.exports = router

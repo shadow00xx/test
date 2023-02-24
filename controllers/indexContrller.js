@@ -75,6 +75,12 @@ exports.store = (req, res) => {
 }
 
 // get
+// test 
+exports.test = (req, res) => {
+    res.render('pages/test', { title: 'test', layout:"layouts/chat" })
+}
+
+// get
 // serveces 
 exports.serveces = (req, res) => {
     res.render('pages/serveces', { title: 'خدمات' })

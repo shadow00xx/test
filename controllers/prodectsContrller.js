@@ -16,6 +16,7 @@ exports.addproPost = async (req, res, next) => {
         req.body.user = req.user.id
         const prodect = req.body
         if (req.file) {
+            // prodect.image = req.file.fileName
             prodect.image = result.secure_url
 
         }

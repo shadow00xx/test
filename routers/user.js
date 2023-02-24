@@ -27,6 +27,7 @@ router.get("/profile", ensureAuth, userContrller.profile)
 //  GET /profile/edit/:id
 router.put('/edit', ensureAuth, userContrller.editProfile)
 
+
 // Logout
 router.get("/logout", userContrller.logout);
 
