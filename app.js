@@ -39,12 +39,13 @@ app.use(
             return method
         }
     }))
-
+app.set('trust proxy', 1)
 // session
 app.use(session({
     secret: 'keyboard cat',
     resave: false,
     saveUninitialized: true,
+    cookie: { secure: true },
     store: MongoStore.create({ mongoUrl: process.env.MANGO_URI }),
 }))
 
