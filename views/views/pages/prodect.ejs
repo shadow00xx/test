@@ -92,32 +92,13 @@
                                                                                         <p class="lead">
 
                                                                                             <small class="text-muted">
-                                                                                                تم الرفع بواسطه
-                                                                                                <a href="/">
-                                                                                                    <% if(e.user.displayName) { %>
-                                                                                                       
-
-
-                                                                                                        <%= e.user.displayName %>
-                                                                                                           
-
-
-                                                                                                            <% } %>
-                                                                                                                <% if(e.user.name){ %>
-                                                                                                                    
-
-                                                                                                                   
-                                                                                                                       <%=  e.user.name %>
-
-                                                                                                                        <% } %>
-                                                                                                                           
-
+                                                                                                تمت الاضافة بواسطة
+                                                                                                <a href="/" style="text-decoration: none;">
+                                                                                                        <%= e.user.displayName %>      
                                                                                                 </a>
-                                                                                                منذ
-                                                                                                <%= moment(e.createdAt).fromNow() %>
-                                                                                                   
-
-
+                                                                                             
+                                                                                                <span class="mx-2"> <%= moment(e.createdAt).locale('ar').fromNow() %></span>
+                                                                                             
                                                                                             </small>
                                                                                         </p>
                                     </div>
@@ -126,6 +107,11 @@
                             </div>
                         </div>
 
+<!-- 
+                        <form action="/prodects/addcoment" method="post">
+                            <input type="text" name="comment" id="">
+                            <button type="submit">ارسال</button>
+                        </form> -->
 
 
                 </main>
