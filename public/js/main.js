@@ -457,7 +457,7 @@ function share() {
   if (navigator.share) {
     // Browser supports native share api
     navigator.share({
-      text: window.document.textContent ,
+            title: window.document.title,
        url: window.location.href ,
      
     
