@@ -61,7 +61,8 @@ exports.showOnePro = async (req, res) => {
         const e = await prodects.findOne({ _id: req.params._id })
             .populate('user')
 
-        res.render('pages/prodect', { e, title: 'منتجاتي ' })
+                res.render('pages/prodect', { e, title: e.name})
+
 
 
     } catch (err) {
