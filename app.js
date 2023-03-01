@@ -53,7 +53,7 @@ app.use(session({
 // passport
 require('./config/passport')(passport)
 require('./config/passportGoogle')(passport)
-require('./config/passportfacebook')(passport)
+//require('./config/passportfacebook')(passport)
 
 
 // Passport middleware
