@@ -2,39 +2,38 @@ const mongoose = require('mongoose')
 
 
 const UserSchema = new mongoose.Schema({
-    name: {
-        type: String,
-        require: true
-    },
 
     username: {
         type: String,
         require: true
     },
-
     password: {
         type: String,
         require: true
     },
-    googleId: {
+    accountId: {
         type: String,
-//         required: true,
-    },
+        // required: true,
+    },   
+      provider: {
+        type: String,
+      },
     displayName: {
         type: String,
-//         required: true,
+        required: true,
     },
     firstName: {
         type: String,
-//         required: true,
+        // required: true,
     },
     lastName: {
         type: String,
-//         required: true,
+        // required: true,
     },
     image: {
         type: String,
     },
+    isVerified: { type: Boolean, default: false },
 
 },
     { timestamps: true }
