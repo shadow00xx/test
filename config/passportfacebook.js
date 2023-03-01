@@ -12,15 +12,15 @@ passport.use(
       },
       async function (accessToken, refreshToken, profile, cb) {
         const user = await User.findOne({
-          accountId: profile.id,
-          provider: 'facebook',
+          accountId: profile.id
+         
         });
         if (!user) {
           console.log('Adding new facebook user to DB..');
           const user = new User({
             accountId: profile.id,
             displayName: profile.displayName,
-            provider: profile.provider,
+            
           });
           await user.save();
           // console.log(user);
