@@ -84,7 +84,6 @@ app.use(layouts)
 app.set('layout', './layouts/main')
 app.set('view engine', 'ejs')
 
-
 // routers
 app.use('/', require('./routers/index'))
 app.use('/user', require('./routers/user'))
