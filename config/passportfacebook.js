@@ -53,7 +53,9 @@ function(accessToken, refreshToken, profile, done) {
     } else { //else create a new User
       user = new User({
         facebookId: profile.id, //pass in the id and displayName params from Facebook
-        displayName: profile.displayName
+        displayName: profile.displayName,
+        image: profile.photos[0].value,
+        
       });
       user.save(function(err) { //Save User if there are no errors else redirect to login route
         if(err) {
