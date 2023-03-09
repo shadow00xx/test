@@ -1,0 +1,21 @@
+
+
+<div class="row row-cols-2 row-cols-lg-5 g-2 g-lg-3">
+    
+    <% contact.forEach(function(con, index){ %>
+      
+         <h1> <%= con.contact %></h1>
+         <h2 class="lead m-2">
+            <small class="text-muted">    تمت الاضافة بواسطة
+              <a href="/user/<%= con.createby.id %>/profile" style="text-decoration: none;">
+              <%= con.createby.displayName %>      
+              </a>
+                   <span class="mx-2"> <%= moment(con.createdAt).locale('ar').fromNow() %></span>
+
+            </small>
+        </h2>
+  
+      <% }) %>
+      
+       
+</div>

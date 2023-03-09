@@ -6,6 +6,8 @@
 
 
         <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+      <%- include ('./partials/error') %>
+
           <div
             class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
             <h1 class="h2">
@@ -45,16 +47,20 @@
 
               <!-- المنتجات -->
 
+
+
+            
+
+
               <!-- Latest Start -->
 
-              <section class="pb-4 pt-4">
+              <section class="pb-4 pt-4 ">
                 <div class="d-flex mb-2 align-items-center">
                   <h2> احدث الاضافات </h2>
                   <a href="/latest" class="ms-auto">عرض المزيد</a>
                 </div>
 
                 <div class="row row-cols-2 row-cols-lg-5 g-2 g-lg-3">
-
                   <% if(pros !='' ) { %>
                     <% pros.latest.forEach(function(prodect, index){ %>
                       <a href="/prodects/<%= prodect._id %>" class="col text-center category__link">
@@ -318,10 +324,13 @@
               <!-- Others End -->
 
               <!-- footer -->
-              <%- include ('./partials/_footer') %>
 
                 <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
                     class="bi bi-arrow-up-short"></i> </a>
+                    <%- include ('./partials/_footer') %>
+
         </main>
+
     </div>
+
   </div>

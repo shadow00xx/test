@@ -10,106 +10,89 @@
                     <%- include ('../partials/_ads') %>
 
 
-                        <div class="prodect-secetion">
-                            <div class="row">
+                    <%- include ('../partials/error') %>
 
-                                <div class="col-12 col-md-4">
-                                    <img src="<%- e.image %>" class="img-fluid sticky-top" style="top: 20px; z-index: 1;"
-                                        alt="<%- e.name %>" loading="lazy">
-                                </div>
+                    <div class="prodect_container">
+                        <div class="d-flex conn">
+                        <div class="img_form">
+                            <img src="<%- e.image %>" class="img-fluid sticky-top" style="top: 20px; z-index: 1;"
+                            alt="<%- e.name %>" loading="lazy">
+                        </div>
+                        <div class="detail_form">
+                    <h2> <span class="text-info">اسم السلعة </span>: <%- e.name %>  </h2>
+                    <h2> <span class="text-info">العنوان البائع </span>: <%- e.address %></h2>
+                    <h2><span class="text-info"> رقم الهاتف  </span> :<%- e.phone %> </h2>
+                    <h2> <span class="text-info"> التفاصيل</span> : <%- e.body %></h2>
 
+                    <% if(e.modal){ %>               
+                    <h2> <span class="text-info"> موديل</span> : <%= e.modal %></h2>
+                    <% } %>
 
-                                <div class="col-12 col-md-8">
-                                    <div class="row py-2">
+                    <% if(e.gas){ %>
+                    <h2> <span class="text-info">  نوع اوقود </span> :<%= e.gas %> </h2>
+                    <% } %>
 
-                                        <div class="col-12">
+                    <% if(e.conditions){ %>
+                     <% if(e.conditions==="new" ){ %>
+                        <h1>
+                            <span class="text-info">  الحالة  </span> : جديد
+                       </h1>
+                     <% } %>
+                     <% if(e.conditions==="use" ){ %>
+                       <h1>
+                        <span class="text-info">  الحالة  </span>  : مستخدم
+                      </h1>
+                     <% } %>
+                   <% } %>
 
-                                            <h1>
-                                                اسم السلعة : <%- e.name %>
-                                          
-                                            </h1>
-                                        </div>
-
-                                        <h4>
-                                            
-                                        </h4>
-
-
-                                        <h4>
-                                            العنوان البائع : <%- e.address %>
-                                        </h4>
-
-
-                                        <h4>
-                                            رقم الهاتف : <%- e.phone %>
-                                        </h4>
-
-
-                                        <h4>
-                                            التفاصيل : <%- e.body %>
-                                        </h4>
-
-                                        <div class="col-12 mb-4"><i class="bi bi-tag"></i>
-                                            السعر : <%= e.prise %> SDG
-                                        </div>
-
-                                        <% if(e.modal){ %>
-                                            <h1>
-                                                موديل : <%= e.modal %>
-                                            </h1>
-                                            <% } %>
-
-                                                <% if(e.gas){ %>
-                                                    <h1>
-                                                        نوع اوقود : <%= e.gas %>
-                                                    </h1>
-                                                    <% } %>
+                    <% if(e.owners){ %>
+                    <h2> <span class="text-info">  نوع الملكية </span> :<%= e.owners %> </h2>
+                    <% } %>
 
 
-                                                        <% if(e.conditions){ %>
-                                                            <% if(e.conditions==="new" ){ %>
-                                                                <h1>
-                                                                    الحالة : جديد
-                                                                </h1>
-                                                                <% } %>
-                                                                    <% if(e.conditions==="use" ){ %>
-                                                                        <h1>
-                                                                            الحالة : مستخدم
-                                                                        </h1>
-                                                                        <% } %>
-                                                                            <% } %>
+                    <h2> <span class="text-info"> السعر</span> : <%= e.prise %> ج س </h2>
+
+
+                    <h2 class="lead m-2">
+                        <small class="text-muted">    تمت الاضافة بواسطة
+                          <a href="/user/<%= e.user.id %>/profile" style="text-decoration: none;">
+                          <%= e.user.displayName %>      
+                          </a>
+                               <span class="mx-2"> <%= moment(e.createdAt).locale('ar').fromNow() %></span>
+        
+                        </small>
+                    </h2>
+
+
+              
+                   
+                    </div>
+                        </div>
+                        <div class="icons">
+                    <form action="/prodects/<%= e._id %>/report" method="post" id="report">
+                        <button onclick="report()" type="submit" class="btn mb-4" id="shareBtn">الابلاغ عن السلعة  <i class="fa fa-flag"></i></button>    
+                    </form>
+
+                    <form action="/prodects/<%= e.id %>/favorite" method="post">
+                        <input type="hidden" name="_method" value="put">
+
+                    <button type="submit" class="btn mb-4" id="shareBtn">اضافه الي المفضلة  <i class="fa fa-heart"></i></button>    
+                    </form>
+
+                    <button onclick="share()" class="btn mb-4" id="shareBtn">المشاركة  <i class="fa fa-share"></i></button>    
+                    
+                        </div>
+                    </div>
 
 
 
-
-                                                                                <% if(e.owners){ %>
-                                                                                    <h1>
-                                                                                        <%= e.owners %>
-                                                                                    </h1>
-                                                                                    <% } %>
-
-
-                                                                                        <p class="lead">
-
-                                                                                            <small class="text-muted">
-                                                                                                تم الرفع بواسطه
-                                                                                                <a href="/">
-                                                                                                        <%= e.user.displayName %>      
-                                                                                                </a>
-                                                                                                منذ
-                                                                                                <%= moment(e.createdAt).fromNow() %>
-                                             
-                                                                                            </small>
-                                                                                        </p>
+                                      
+                              
                                     </div>
                                 </div>
-
                             </div>
                         </div>
-<div class="mb-3">
-                        <button onclick="share()" class="btn" id="shareBtn">المشاركة  <i class="fa fa-share"></i></button>    
-</div>
-
+                      
                 </main>
         </div> 
     </div>
