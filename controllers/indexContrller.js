@@ -1,8 +1,12 @@
 
 const prodects = require('../models/Prodects')
 const User = require('../models/User')
+const contacts = require('../models/Contact')
+const Favorite = require('../models/Favorite')
 
 const Category = require('../models/Categorys');
+
+let errors = []
 
 
 // get
@@ -39,10 +43,23 @@ exports.exploreLatest = async (req, res) => {
         const limitNumber = 20;
         const prodect = await prodects.find({}).sort({ createdAt: 'desc' }).limit(limitNumber)
         res.render('pages/latest', { title: 'احدث الاضافات', prodect });
-    } catch (error) {
-        res.satus(500).send({ message: error.message || "Error Occured" });
+    } catch (err) {
+       console.log(err)
+       res.render('error/500')
     }
 }
+
+// exports.exploreRandom = async (req, res) => {
+//     try {
+//       let count = await prodects.find().countDocuments();
+//       let random = Math.floor(Math.random() * count);
+//       let randompro = await prodects.findOne().skip(random).exec();
+//       res.render('', { randompro });
+//     } catch (err) {
+//        console.log(err)
+//        res.render('error/500')
+//     }
+//   }
 
 // post
 // search
@@ -57,15 +74,6 @@ exports.search = async (req, res) => {
         res.render('error/500')
     }
 
-    // try {
-    //     let searchTerm = req.body.searchTerm;
-    //     let search = await prodects.find({ $text: { $search: "shadow" } });
-    //     res.render('pages/search', { search });
-    //     console.log(search);
-    // } catch (err) {
-    //     console.log(err);
-    //     res.render('error/500')
-    // }
 }
 
 // get
@@ -112,6 +120,7 @@ exports.exploreCategories = async (req, res) => {
         res.render('pages/categories', { title: 'الاقسام', categories });
     } catch (error) {
         console.log(error);
+        res.render('error/500' )
     }
 }
 
@@ -130,10 +139,60 @@ exports.exploreCategoriesById = async (req, res) => {
         res.render('pages/categories', { categoryById });
     } catch (error) {
         console.log(error);
-
+     res.render('error/500' )
     }
 }
 
+// addcontact
+// post
+
+exports.addcontact = async(req, res)=>{
+    try {
+        const connt = {
+            contact:req.body.contact,
+            createby:req.user.id
+        }
+        const contact = await new contacts(connt)
+      const xx = await contact.save(contact)
+        // console.log(xx);
+        req.flash(
+            'success_msg',
+            ' نشكرك علي التواصل معنا' );
+        res.redirect('/');
+  
+       
+    } catch (err) {
+        console.log(err);
+        res.render('error/500' )
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+// exports.showlike =  async(req, res)=>{
+//     try {
+//         const post = await prodects.find({likes:req.user.id})
+//         .populate('user')
+
+//         // if (post.likes.some((like) => like.toString() === req.user.id)) {
+//         //     console.log(post);
+//         // }
+        
+//         res.render('pages/test11', {post})
+//     } catch (err) {
+//         console.error(err);
+//         res.render('error/500' )
+//     }
+    
+// }
 
 
 

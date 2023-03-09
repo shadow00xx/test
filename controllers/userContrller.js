@@ -2,6 +2,7 @@ const path = require('path');
 const User = require('../models/User')
 const passport = require('passport');
 const bcrypt = require('bcryptjs');
+const prodects = require('../models/Prodects')
 
 
 
@@ -69,15 +70,17 @@ exports.loginPost = (req, res, next) => {
 // get
 // profile
 exports.profile = async (req, res) => {
-    try {
+    
 
-        const user = await User.find({ _id: req.user.id }).lean()
+        // const user = await User.findOne( { _id: req.params._id })
+        // .lean()
+        // const userpro = await prodects.find({user:req.params._id })
+        //      .populate('user')
+        //      .lean()
 
-        res.render('profile', { user, title: 'الملف الشخصي' })
+        res.render('profile', { user:req.user, title: 'الملف الشخصي' })
 
-    } catch (err) {
-        console.log(err);
-    }
+    
 
 }
 
@@ -111,3 +114,49 @@ exports.logout = (req, res) => {
         res.redirect("/user/login");
     });
 }
+
+// showUsersMyProfile
+exports.showUsersMyProfile = async (req, res) => {
+    
+try {
+    const user = await User.findOne( { _id: req.params._id })
+    .lean()
+    const userpro = await prodects.find({user:req.params._id })
+         .populate('user')
+         .lean()
+
+    res.render('pages/showUsersMyProfile', { user,userpro, title: 'الملف الشخصي' })
+} catch (error) {
+    console.error(err)
+    return res.render('error/500')
+}
+  
+
+
+
+}
+
+// editpro
+// router.put('/:user.id', ensureAuth, async (req, res) => {
+//     try {
+//       let displayName = await User.findById(req.params.displayName).lean()
+  
+//       if (!displayName) {
+//         return res.send('error/404')
+//       }
+  
+//       if (displayName.user != req.user.id) {
+//         res.redirect('/editpro')
+//       } else {
+//         displayName = await User.findOneAndUpdate({ displayName: req.params.id }, req.body, {
+//           new: true,
+//           runValidators: true,
+//         })
+  
+//         res.redirect('/dashboard')
+//       }
+//     } catch (err) {
+//       console.error(err)
+//       return res.render('error/500')
+//     }
+//   })
