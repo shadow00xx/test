@@ -39,6 +39,16 @@ app.use(
             return method
         }
     }))
+
+
+// // session
+// app.use(session({
+//     secret: 'keyboard cat',
+//     resave: false,
+//     saveUninitialized: true,
+//     store: MongoStore.create({ mongoUrl: process.env.MANGO_URI }),
+    
+// }))
 app.set('trust proxy', 1)
 // session
 app.use(session({
@@ -84,11 +94,13 @@ app.use(layouts)
 app.set('layout', './layouts/main')
 app.set('view engine', 'ejs')
 
+
 // routers
 app.use('/', require('./routers/index'))
 app.use('/user', require('./routers/user'))
 app.use('/prodects', require('./routers/prodects'))
 app.use('/auth', require('./routers/auth'))
+app.use('/admin', require('./routers/admin'))
 
 
 // moment js
