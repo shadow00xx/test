@@ -235,7 +235,11 @@ exports.Favorite = async (req, res) => {
 
         // Check if the post has already been liked
         if (post.Favorite.some((like) => like.toString() === req.user.id)) {
-            return res.status(400).json({ msg: 'Post already liked' });
+            // return res.status(400).json({ msg: 'Post already liked' });
+              req.flash(
+                'success_msg',
+                '  تمت الاضافه مسبقا' )
+            res.redirect(`/prodects/${req.params.id}`)
         }
 
         post.Favorite.unshift(req.user.id);
@@ -268,8 +272,12 @@ exports.unFavorite = async (req, res) => {
         );
 
         await post.save();
-
-        return res.json(post.Favorite);
+        req.flash(
+            'success_msg',
+            ' تمت الاضافه بنجاح' );
+            res.redirect(`/prodects/${req.params.id}`);
+            
+        // return res.json(post.Favorite);
     } catch (err) {
         console.error(err);
         res.render('error/500')
