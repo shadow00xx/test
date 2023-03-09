@@ -240,13 +240,18 @@ exports.Favorite = async (req, res) => {
                 'success_msg',
                 '  تمت الاضافه مسبقا' )
             res.redirect(`/prodects/${req.params.id}`)
+        }else{
+
+            post.Favorite.unshift(req.user.id);
+
+            await post.save();
+    
+            req.flash(
+                'success_msg',
+                ' تمت الاضافه بنجاح' );
+                res.redirect(`/prodects/${req.params.id}`);
         }
 
-        post.Favorite.unshift(req.user.id);
-
-        await post.save();
-
-        return res.json(post.Favorite);
 
     } catch (err) {
         console.error(err);
