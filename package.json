@@ -4,8 +4,8 @@
   "description": "just for fun",
   "main": "index.js",
   "scripts": {
-    "start": "cross-env NODE_ENV=production node app",
-    "dev": "cross-env NODE_ENV=develpmont nodemon app"
+    "start": "node app",
+    "dev": "nodemon app"
   },
   "author": "Nabil",
   "license": "ISC",
