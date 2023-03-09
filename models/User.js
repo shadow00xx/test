@@ -11,7 +11,7 @@ const UserSchema = new mongoose.Schema({
         type: String,
         require: true
     },
-    accountId: {
+   facebookId: {
         type: String,
         // required: true,
     },   
@@ -32,8 +32,12 @@ const UserSchema = new mongoose.Schema({
     },
     image: {
         type: String,
+        default:''
     },
     isVerified: { type: Boolean, default: false },
+    isStore:{type: Boolean, default: false },
+    isAdmin:{type: Boolean, default: false },
+    isowner:{type: Boolean, default: false },
 
 },
     { timestamps: true }

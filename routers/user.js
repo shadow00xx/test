@@ -22,10 +22,13 @@ router.post("/signup", userContrller.signupPost)
 router.post('/login', userContrller.loginPost);
 
 // profile
-router.get("/profile", ensureAuth, userContrller.profile)
+router.get("/profile",ensureAuth, userContrller.profile)
 
 //  GET /profile/edit/:id
 router.put('/edit', ensureAuth, userContrller.editProfile)
+
+// showUsersMyProfile
+router.get("/:_id/profile",ensureAuth, userContrller.showUsersMyProfile)
 
 
 // Logout

@@ -1,7 +1,6 @@
 const mongoose = require('mongoose');
 
 
-
 const ProdectsSchema = new mongoose.Schema({
 
     name: {
@@ -41,7 +40,7 @@ const ProdectsSchema = new mongoose.Schema({
 
     user: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'User'
+        ref: 'User',
     },
     category: {
         type: String,
@@ -77,15 +76,44 @@ const ProdectsSchema = new mongoose.Schema({
     reson: {
         type: String,
         enum: ['sale', 'rent']
-    },
+    }
+      ,
+      comments: [
+        {
+            createdby: {
+                type: mongoose.Schema.Types.ObjectId,
+                ref: 'User' 
+          },
+          text: {
+            type: String,
+            required: true
+          },
+        
+          avatar: {
+            type: String
+          },
+          date: {
+            type: Date,
+            default: Date.now
+          }
+        }
+      ],
 
+      Favorite:[{ type: mongoose.Schema.Types.ObjectId,
+        ref: 'User' }],
+
+        report:[{ type: mongoose.Schema.Types.ObjectId,
+        ref: 'User' }],
+  
 
 },
     { timestamps: true }
 
 );
 
-
+// ProdectsSchema.virtual('url').get(function(){
+//     return '/prodects/' + this._id
+//  })
 ProdectsSchema.index({ name: 'text', description: 'text' });
 // ProdectsSchema.index({ "$**": 'text' });
 
