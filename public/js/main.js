@@ -451,14 +451,18 @@ categorys.style.display= 'none'
     }
 }
 
+
+
+
 function share() {
 
   // Check for Web Share api support
   if (navigator.share) {
     // Browser supports native share api
     navigator.share({
-            title: window.document.title,
+      title: window.document.title,
        url: window.location.href ,
+      
      
     
     }).then(() => {
@@ -467,12 +471,12 @@ function share() {
       .catch((err) => console.error(err));
   } else {
     // Fallback
-    alert("The current browser does not support the share function. Please, manually share the link")
+    alert("المتصفح لديك لا يدعم المشاركة ... من فضلك انسخ الرابط يدويا")
   }
 }
 
-
-
-
+function report(e) {
+  e.preventDefault()
+}
 
 
