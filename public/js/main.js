@@ -124,7 +124,8 @@ function xb() {
 </div>
 
 <div class="mb-3">
-<input type="file" class="form-control" name="image" required>
+  <input type="file" class="form-control" name="image" required multiple max="3">
+
 </div>
   
  <button class="btn btn-primary w-100 mb-3" type="submit">ارسال</button>
@@ -167,7 +168,8 @@ function xb() {
   <input type="hidden" name="category" value="${category}" id="">
  
   <div class="mb-3">
-  <input type="file" class="form-control" name="image" required>
+    <input type="file" class="form-control" name="image" required multiple max="3">
+
 </div>
   <button class="btn btn-primary w-100 mb-3" type="submit">ارسال</button>
 
@@ -231,7 +233,8 @@ function xb() {
   <input type="hidden" name="category" value="${category}" id="">
   
 <div class="mb-3">
-  <input type="file" class="form-control" name="image" required>
+    <input type="file" class="form-control" name="image" required multiple max="3">
+
 </div>
 <button class="btn btn-primary w-100 mb-3" type="submit">ارسال</button>
 
@@ -273,7 +276,8 @@ categorys.style.display= 'none'
   <input type="hidden" name="category" value="${category}" id="">
   
 <div class="mb-3">
-  <input type="file" class="form-control" name="image" required>
+    <input type="file" class="form-control" name="image" required multiple max="3">
+
 </div>
  <button class="btn btn-primary w-100 mb-3" type="submit">ارسال</button>
 
@@ -315,7 +319,8 @@ categorys.style.display= 'none'
   <input type="hidden" name="category" value="${category}" id="">
 
 <div class="mb-3">
-  <input type="file" class="form-control" name="image" required>
+    <input type="file" class="form-control" name="image" required multiple max="3">
+
 </div>
  <button class="btn btn-primary w-100 mb-3" type="submit">ارسال</button>
 
@@ -357,7 +362,8 @@ categorys.style.display= 'none'
   <input type="hidden" name="category" value="${category}" id="">
 
 <div class="mb-3">
-  <input type="file" class="form-control" name="image" required>
+    <input type="file" class="form-control" name="image" required multiple max="3">
+
 </div>
  <button class="btn btn-primary w-100 mb-3" type="submit">ارسال</button>
 
@@ -399,7 +405,8 @@ categorys.style.display= 'none'
         <input type="hidden" name="category" value="${category}" id="">
    
     <div class="mb-3">
-        <input type="file" class="form-control" name="image" required>
+          <input type="file" class="form-control" name="image" required multiple max="3">
+
     </div>
        <button class="btn btn-primary w-100 mb-3" type="submit">ارسال</button>
       
@@ -441,7 +448,7 @@ categorys.style.display= 'none'
   <input type="hidden" name="category" value="${category}" id="">
  
 <div class="mb-3">
-  <input type="file" class="form-control" name="image" required>
+  <input type="file" class="form-control" name="image" required multiple max="3">
 </div>
  <button class="btn btn-primary w-100 mb-3" type="submit">ارسال</button>
 
@@ -462,8 +469,9 @@ function share() {
     navigator.share({
       title: window.document.title,
        url: window.location.href ,
-      
-     
+      //  window.location.href.slice(7)
+    files:[]
+    
     
     }).then(() => {
       console.log('Thanks for sharing!');
