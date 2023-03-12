@@ -17,6 +17,7 @@
                           مرحبا بكم
                           <% } %>
             </h1>
+
             <div class="btn-toolbar mb-2 mb-md-0">
               <div class="btn-group me-2">
                 <!-- <button type="button" class="btn btn-sm btn-outline-secondary">مشاركة <i
@@ -65,7 +66,7 @@
                     <% pros.latest.forEach(function(prodect, index){ %>
                       <a href="/prodects/<%= prodect._id %>" class="col text-center category__link">
                         <div class="category__img category__img--large shadow">
-                          <img src="<%= prodect.image %>" alt="<%= prodect.name %>" loading="lazy">
+                          <img src="<%= prodect.image[0] %>" alt="<%= prodect.name %>" loading="lazy">
                         </div>
                         <div class="pt-1">
                           <%= prodect.name %>
@@ -96,7 +97,7 @@
                     <% pros.Electronics.forEach(function(prodect, index){ %>
                       <a href="/prodects/<%= prodect._id %>" class="col text-center category__link">
                         <div class="category__img category__img--large shadow">
-                          <img src="<%= prodect.image %>" alt="<%= prodect.name %>" loading="lazy">
+                          <img src="<%= prodect.image[0] %>" alt="<%= prodect.name %>" loading="lazy">
                         </div>
                         <div class="pt-1">
                           <%= prodect.name %>
@@ -126,7 +127,7 @@
                     <% pros.Vehicles.forEach(function(prodect, index){ %>
                       <a href="/prodects/<%= prodect._id %>" class="col text-center category__link">
                         <div class="category__img category__img--large shadow">
-                          <img src="<%= prodect.image %>" alt="<%= prodect.name %>" loading="lazy">
+                          <img src="<%= prodect.image[0] %>" alt="<%= prodect.name %>" loading="lazy">
                         </div>
                         <div class="pt-1">
                           <%= prodect.name %>
@@ -156,7 +157,7 @@
                     <% pros.Realestate.forEach(function(prodect, index){ %>
                       <a href="/prodects/<%= prodect._id %>" class="col text-center category__link">
                         <div class="category__img category__img--large shadow">
-                          <img src="<%= prodect.image %>" alt="<%= prodect.name %>" loading="lazy">
+                          <img src="<%= prodect.image[0] %>" alt="<%= prodect.name %>" loading="lazy">
                         </div>
                         <div class="pt-1">
                           <%= prodect.name %>
@@ -186,7 +187,7 @@
                     <% pros.Fashions.forEach(function(prodect, index){ %>
                       <a href="/prodects/<%= prodect._id %>" class="col text-center category__link">
                         <div class="category__img category__img--large shadow">
-                          <img src="<%= prodect.image %>" alt="<%= prodect.name %>" loading="lazy">
+                          <img src="<%= prodect.image[0] %>" alt="<%= prodect.name %>" loading="lazy">
                         </div>
                         <div class="pt-1">
                           <%= prodect.name %>
@@ -216,7 +217,7 @@
                     <% pros.Makup.forEach(function(prodect, index){ %>
                       <a href="/prodects/<%= prodect._id %>" class="col text-center category__link">
                         <div class="category__img category__img--large shadow">
-                          <img src="<%= prodect.image %>" alt="<%= prodect.name %>" loading="lazy">
+                          <img src="<%= prodect.image[0] %>" alt="<%= prodect.name %>" loading="lazy">
                         </div>
                         <div class="pt-1">
                           <%= prodect.name %>
@@ -246,7 +247,7 @@
                     <% pros.ForKides.forEach(function(prodect, index){ %>
                       <a href="/prodects/<%= prodect._id %>" class="col text-center category__link">
                         <div class="category__img category__img--large shadow">
-                          <img src="<%= prodect.image %>" alt="<%= prodect.name %>" loading="lazy">
+                          <img src="<%= prodect.image[0] %>" alt="<%= prodect.name %>" loading="lazy">
                         </div>
                         <div class="pt-1">
                           <%= prodect.name %>
@@ -276,7 +277,7 @@
                     <% pros.Foods.forEach(function(prodect, index){ %>
                       <a href="/prodects/<%= prodect._id %>" class="col text-center category__link">
                         <div class="category__img category__img--large shadow">
-                          <img src="<%= prodect.image %>" alt="<%= prodect.name %>" loading="lazy">
+                          <img src="<%= prodect.image[0] %>" alt="<%= prodect.name %>" loading="lazy">
                         </div>
                         <div class="pt-1">
                           <%= prodect.name %>
@@ -306,7 +307,7 @@
                     <% pros.Others.forEach(function(prodect, index){ %>
                       <a href="/prodects/<%= prodect._id %>" class="col text-center category__link">
                         <div class="category__img category__img--large shadow">
-                          <img src="<%= prodect.image %>" alt="<%= prodect.name %>" loading="lazy">
+                          <img src="<%= prodect.image[0] %>" alt="<%= prodect.name %>" loading="lazy">
                         </div>
                         <div class="pt-1">
                           <%= prodect.name %>

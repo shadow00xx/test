@@ -12,16 +12,63 @@
 
                     <%- include ('../partials/error') %>
 
+
+
+                    <div class="carousel-pro">
+
+         
+                    <div id="myCarousel" class="carousel slide slide_pro" data-bs-ride="carousel">
+
+                      <div class="carousel-inner">
+                          <div class="carousel-item active">
+                              <img src="<%- e.image[0] %>" width="100%" alt="<%- e.image[0] %>" srcset="">
+                  
+                              
+                          </div>
+                          <div class="carousel-item">
+                              <img src="<%- e.image[1] %>" width="100%" alt="<%- e.image[1] %>" srcset="">
+                  
+                              t877977t87-
+                          </div>
+                          <div class="carousel-item">
+                              <img src="<%- e.image[2] %>" width="100%" alt="<%- e.image[2] %>" srcset="">
+                  
+                          </div>
+                      </div>
+                      <button class="carousel-control-prev" type="button" data-bs-target="#myCarousel" data-bs-slide="prev">
+                          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                          <span class="visually-hidden">السابق</span>
+                      </button>
+                      <button class="carousel-control-next" type="button" data-bs-target="#myCarousel" data-bs-slide="next">
+                          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                          <span class="visually-hidden">التالي</span>
+                      </button>
+
+              
+                  </div>
+      
+                  <div class="carousel-indicato">
+                    <img src="<%- e.image[0] %>" data-bs-target="#myCarousel" data-bs-slide-to="0" class="active" aria-current="true"
+                        aria-label="Slide 1">
+                    <img src="<%- e.image[1] %> " data-bs-target="#myCarousel" data-bs-slide-to="1" aria-label="Slide 2">
+                    <img src="<%- e.image[2] %> " data-bs-target="#myCarousel" data-bs-slide-to="2" aria-label="Slide 3">
+                  </div> 
+
+                </div>  
+
+                
+
                     <div class="prodect_container">
                         <div class="d-flex conn">
-                        <div class="img_form">
-                            <img src="<%- e.image %>" class="img-fluid sticky-top" style="top: 20px; z-index: 1;"
-                            alt="<%- e.name %>" loading="lazy">
-                        </div>
+
+                               
+
+  
+                      
                         <div class="detail_form">
                     <h2> <span class="text-info">اسم السلعة </span>: <%- e.name %>  </h2>
                     <h2> <span class="text-info">العنوان البائع </span>: <%- e.address %></h2>
-                    <h2><span class="text-info"> رقم الهاتف  </span> :<%- e.phone %> </h2>
+                    <h2><span class="text-info"> رقم الهاتف  </span> : <a class="btn  btn-outline-dark" href="tel:<%- e.phone %>"><%- e.phone %></a></h2>
                     <h2> <span class="text-info"> التفاصيل</span> : <%- e.body %></h2>
 
                     <% if(e.modal){ %>               
@@ -73,18 +120,25 @@
                         <button onclick="report()" type="submit" class="btn mb-4" id="shareBtn">الابلاغ عن السلعة  <i class="fa fa-flag"></i></button>    
                     </form>
 
-                    <form action="/prodects/<%= e.id %>/favorite" method="post">
-                        <input type="hidden" name="_method" value="put">
-
-                    <button type="submit" class="btn mb-4" id="shareBtn">اضافه الي المفضلة  <i class="fa fa-heart"></i></button>    
-                    </form>
-
+              
+                    <% if (!x) { %>
+                        <form action="/prodects/<%= e.id %>/favorite" method="post">
+                            <input type="hidden" name="_method" value="put">
+                     
+                        <button type="submit" class="btn mb-4" id="shareBtn">اضافه للمفضلة  <i class="fa fa-heart"></i></button>    
+                        </form>
+                        <% } %> 
+                        <% if (x) { %>
+                            <form action="/prodects/<%= e.id %>/unfavorite" method="post">
+                                <input type="hidden" name="_method" value="put">
+                         
+                            <button type="submit" class="btn mb-4" id="shareBtn">ازالة من المفضلة  <i class="fa fa-heart text-danger"></i></button>    
+                            </form>
+                            <% } %> 
                     <button onclick="share()" class="btn mb-4" id="shareBtn">المشاركة  <i class="fa fa-share"></i></button>    
                     
                         </div>
                     </div>
-
-
 
                                       
                               
@@ -96,3 +150,100 @@
                 </main>
         </div> 
     </div>
+
+
+<!-- 
+    <style>
+
+.home .carousel-item{
+	height: 500px;
+	position: relative;
+	z-index: 1;
+}
+
+.home .carousel-item .container{
+	position: absolute;
+	left: 50%;
+
+	transform: translate(-50%,-50%);
+	text-align: center;
+}
+
+
+.home .carousel-controls{
+	position: absolute;
+	left: 50%;
+	bottom: 40px;
+	z-index: 10;
+	transform: translateX(-50%);
+}
+
+.home .carousel-indicators{
+	position: relative;
+	margin:0;
+}
+
+.home .carousel-indicators li{
+	height: 70px;
+	width: 70px;
+	margin:0 5px;
+	border-radius: 30%;
+	background-position: center;
+	background-size: cover;
+	border:3px solid transparent;
+	transition: all 0.3s ease;
+}
+.home .carousel-indicators li.active{
+	border-color: #ffffff;
+	transform: scale(1.2);
+}
+
+.home .carousel-control-next, 
+.home .carousel-control-prev{
+	height: 60px;
+	width: 60px;
+	opacity: 1;
+	z-index: 3;
+	top: 50%;
+	transform: translateY(-50%);
+	border-radius: 50%;
+	transition: all 0.3s ease;
+}
+.home .carousel-control-next:hover, 
+.home .carousel-control-prev:hover{
+   box-shadow: 0 0 10px #ffffff;
+}
+.home .carousel-control-next img, 
+.home .carousel-control-prev img{
+   width: 30px;
+}
+.home .carousel-control-next{
+	right: -90px;
+}
+.home .carousel-control-prev{
+	left: -90px;
+}
+
+/*responsive*/
+@media(max-width: 767px){
+  .home .carousel-control-next, 
+  .home .carousel-control-prev{
+  	display: none;
+  }
+  .home .carousel-indicators li{
+  	height: 60px;
+  	width: 60px;
+  }
+  .home .carousel-indicators{
+    bottom: -120px;
+  }
+  .home .carousel-item{
+	height: 200px;
+
+} 
+}
+
+
+
+
+    </style> -->

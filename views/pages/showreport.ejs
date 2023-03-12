@@ -9,7 +9,7 @@
       <% report.forEach(function(prodect, index){ %>
         <a href="/prodects/<%= prodect.Report._id %>" class="col text-center category__link">
           <div class="category__img category__img--large shadow">
-            <img src="<%= prodect.Report.image %>" alt="<%= prodect.name %>" loading="lazy">
+            <img src="<%= prodect.Report.image[0] %>" alt="<%= prodect.name %>" loading="lazy">
           </div>
           <div class="pt-1">
             <%= prodect.name %>
