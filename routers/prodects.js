@@ -14,7 +14,7 @@ const prodectsContrller = require('../controllers/prodectsContrller');
 router.get('/add-prodect', ensureAuth, prodectsContrller.addprodect)
 
 // add prodect
-router.post('/add-prodect', ensureAuth, upload.single('image'), prodectsContrller.addproPost)
+router.post('/add-prodect', ensureAuth, upload.any('image', 3), prodectsContrller.addproPost)
 
 // show my prodectes
 router.get('/myProdects', ensureAuth, prodectsContrller.showMyPro)

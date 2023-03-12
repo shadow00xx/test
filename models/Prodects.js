@@ -25,19 +25,19 @@ const ProdectsSchema = new mongoose.Schema({
         require: true
     },
 
-    image: {
+    image: [{
         type: String,
-    },
-    image1: {
-        type: String,
-    },
-    image2: {
-        type: String,
-    },
-    image3: {
-        type: String,
-    },
-
+       
+    }],
+    // images: [{
+       
+    //     public_id:{type: String,
+    //         require: true},
+    //         url:{type: String,
+    //             require: true}
+    // }],
+  
+    
     user: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User',
@@ -47,14 +47,7 @@ const ProdectsSchema = new mongoose.Schema({
         enum: ['Vehicles', 'Electronics', 'Fashions', 'Realestate', 'Makup', 'ForKides', 'Foods', 'Others'],
         required: true
     },
-    img: {
-        public_id: {
-            type: 'string',
-        },
-        secure_url: {
-            type: 'string',
-        }
-    },  
+      
     cloudinary_id: {
         type: String,
       },
@@ -111,9 +104,7 @@ const ProdectsSchema = new mongoose.Schema({
 
 );
 
-// ProdectsSchema.virtual('url').get(function(){
-//     return '/prodects/' + this._id
-//  })
+
 ProdectsSchema.index({ name: 'text', description: 'text' });
 // ProdectsSchema.index({ "$**": 'text' });
 

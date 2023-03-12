@@ -3,6 +3,7 @@ const express = require('express');
 const router = express.Router();
 const { ensureAuth, ensureGuest } = require('../middlewares/auth')
 
+const upload = require('../middlewares/up');
 
 
 const userContrller = require('../controllers/userContrller');
@@ -25,10 +26,14 @@ router.post('/login', userContrller.loginPost);
 router.get("/profile",ensureAuth, userContrller.profile)
 
 //  GET /profile/edit/:id
-router.put('/edit', ensureAuth, userContrller.editProfile)
+router.put('/edit', ensureAuth,upload.single('image'), userContrller.editProfile)
 
+router.put('/:user.id', ensureAuth, userContrller.editPro)
 // showUsersMyProfile
 router.get("/:_id/profile",ensureAuth, userContrller.showUsersMyProfile)
+
+
+// router.get("/:_id/profile",ensureAuth, userContrller.showUsersMyProfile)
 
 
 // Logout

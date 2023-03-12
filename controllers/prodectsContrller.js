@@ -1,7 +1,9 @@
+// const path = require('path')
 const mongoose = require("mongoose");
 const prodects = require('../models/Prodects')
 const User = require('../models/User')
 const cloudinary = require("../utils/cloudinary");
+
 const fs = require('fs');
 
 // get
@@ -9,29 +11,33 @@ const fs = require('fs');
 exports.addprodect = (req, res) => {
     res.render('add_prodect', { title: 'اضافه سلعه' })
 }
+
 // post
 // add prodect 
 exports.addproPost = async (req, res, next) => {
 
     try {
-        const result = await cloudinary.uploader.upload(req.file.path)
-        req.body.user = req.user.id
+        
         const prodect = req.body
-        if (req.file) {
-            // prodect.image = req.file.fileName
-            prodect.image = result.secure_url
+        let imageURIs = []
+        let image = req.files
 
+        if (image) {
+            let multiplePicturePromise = image.map((picture) =>
+                cloudinary.uploader.upload(picture.path))
+            let imageResponses = await Promise.all(multiplePicturePromise);
+            imageResponses.map(x => {
+                const urls = x.secure_url
+                imageURIs.push(urls)
+            })
         }
 
-
-        if (prodect.cloudinary_id) {
-            cloudinary_id: result.public_id
-
+        if (req.files) {
+            prodect.image = imageURIs
         }
+
         const x = await new prodects(prodect)
         await x.save()
-        console.log(x);
-
         res.redirect('/')
     } catch (err) {
         console.log(err);
@@ -56,62 +62,62 @@ exports.showMyPro = async (req, res) => {
 
     }
 }
- 
+
 // post
 // addComment
 exports.addComment = async (req, res) => {
     try {
         const user = await User.findById(req.user.id).select('-password');
         const post = await prodects.findById(req.params.id);
-  
+
         const newComment = {
-          text: req.body.text,
-          name: user.displayName,
-          avatar: user.image,
-          createby: req.user.id
+            text: req.body.text,
+            name: user.displayName,
+            avatar: user.image,
+            createby: req.user.id
         };
-  
+
         post.comments.unshift(newComment);
-  
+
         await post.save();
-  
+
         res.json(post.comments);
-      } catch (err) {
+    } catch (err) {
         console.log(err);
         res.render('error/500')
-      }
+    }
 }
 
 // delete Comment
 exports.deleteComment = async (req, res) => {
     try {
-      const post = await prodects.findById(req.params.id);
-  
-      // Pull out comment
-      const comment = post.comments.find(
-        (comment) => comment.id === req.params.comment_id
-      );
-      // Make sure comment exists
-      if (!comment) {
-        return res.status(404).json({ msg: 'Comment does not exist' });
-      }
-      // Check user
-      if (comment.createdby.toString() !== req.user.id) {
-        return res.status(401).json({ msg: 'User not authorized' });
-      }
-  
-      post.comments = post.comments.filter(
-        ({ id }) => id !== req.params.comment_id
-      );
-  
-      await post.save();
-  
-      return res.json(post.comments);
+        const post = await prodects.findById(req.params.id);
+
+        // Pull out comment
+        const comment = post.comments.find(
+            (comment) => comment.id === req.params.comment_id
+        );
+        // Make sure comment exists
+        if (!comment) {
+            return res.status(404).json({ msg: 'Comment does not exist' });
+        }
+        // Check user
+        if (comment.createdby.toString() !== req.user.id) {
+            return res.status(401).json({ msg: 'User not authorized' });
+        }
+
+        post.comments = post.comments.filter(
+            ({ id }) => id !== req.params.comment_id
+        );
+
+        await post.save();
+
+        return res.json(post.comments);
     } catch (err) {
-      console.error(err.message);
-      return res.status(500).send('Server Error');
+        console.error(err.message);
+        return res.status(500).send('Server Error');
     }
-  }
+}
 
 // exports.addComment = async(req, res)=>{
 //     let prodect_id=req.params._id;
@@ -200,10 +206,14 @@ exports.deleteComment = async (req, res) => {
 
 exports.showOnePro = async (req, res) => {
     try {
+        const post = await prodects.findById(req.params.id);
+
+
+        const x = post.Favorite.some((like) => like.toString() === req.user.id)
         const e = await prodects.findOne({ _id: req.params.id })
             .populate('user')
 
-        res.render('pages/prodect', { e, title: e.name, })
+        res.render('pages/prodect', { e, x, title: e.name, })
 
     } catch (err) {
         console.log(err);
@@ -216,10 +226,10 @@ exports.showOnePro = async (req, res) => {
 // delete my prodects
 exports.deletePro = async (req, res) => {
     try {
- 
 
-     await prodects.findByIdAndRemove({ _id: req.params.id })
-   
+
+        await prodects.findByIdAndRemove({ _id: req.params.id })
+
         res.redirect('/prodects/myProdects')
     } catch (err) {
         console.log(err);
@@ -236,20 +246,20 @@ exports.Favorite = async (req, res) => {
         // Check if the post has already been liked
         if (post.Favorite.some((like) => like.toString() === req.user.id)) {
             // return res.status(400).json({ msg: 'Post already liked' });
-              req.flash(
+            req.flash(
                 'success_msg',
-                '  تمت الاضافه مسبقا' )
+                '  تمت الاضافه مسبقا')
             res.redirect(`/prodects/${req.params.id}`)
-        }else{
+        } else {
 
             post.Favorite.unshift(req.user.id);
 
             await post.save();
-    
+
             req.flash(
                 'success_msg',
-                ' تمت الاضافه بنجاح' );
-                res.redirect(`/prodects/${req.params.id}`);
+                ' تمت الاضافه بنجاح');
+            res.redirect(`/prodects/${req.params.id}`);
         }
 
 
@@ -260,7 +270,7 @@ exports.Favorite = async (req, res) => {
 }
 
 
-// like 
+// unFavorite 
 // put 
 exports.unFavorite = async (req, res) => {
     try {
@@ -279,9 +289,9 @@ exports.unFavorite = async (req, res) => {
         await post.save();
         req.flash(
             'success_msg',
-            ' تمت الاضافه بنجاح' );
-            res.redirect(`/prodects/${req.params.id}`);
-            
+            ' تمت الازالة بنجاح');
+        res.redirect(`/prodects/${req.params.id}`);
+
         // return res.json(post.Favorite);
     } catch (err) {
         console.error(err);
@@ -299,34 +309,34 @@ exports.addreport = async (req, res) => {
         const post = await prodects.findById(req.params.id)
         const rep = await report.find()
 
-        if(rep.some((Rep) => Rep.user.toString() === req.user.id)){
+        if (rep.some((Rep) => Rep.user.toString() === req.user.id)) {
             req.flash(
                 'success_msg',
-                ' لقد ابلغت ضد هذا مسبقا' );
+                ' لقد ابلغت ضد هذا مسبقا');
             res.redirect(`/prodects/${req.params.id}`);
 
         }
-  
 
-    const newReport = {
-        cos: req.body.cos,
-        Report: req.params.id,
-        user: req.user.id
-       
-     };
 
-     const r =  await new report(newReport)
-     console.log(r);
-     await r.save();
+        const newReport = {
+            cos: req.body.cos,
+            Report: req.params.id,
+            user: req.user.id
 
-     req.flash(
-        'success_msg',
-        'نشكرك ... سيتم النظر للامر في اقرب وقت ممكن' );
+        };
+
+        const r = await new report(newReport)
+        console.log(r);
+        await r.save();
+
+        req.flash(
+            'success_msg',
+            'نشكرك ... سيتم النظر للامر في اقرب وقت ممكن');
         res.redirect(`/prodects/${req.params.id}`);
-      } catch (err) {
+    } catch (err) {
         console.log(err);
         res.render('error/500')
-      }
+    }
 }
 
 
@@ -334,47 +344,50 @@ exports.addfavorite = async (req, res) => {
     try {
 
         // const post = await prodects.findById(req.params.id)
-        const rep = await Favorite.find({Fav:req.params.id})
+        const rep = await Favorite.find({ Fav: req.params.id })
 
 
-        if(rep.some((Rep) => Rep.Fav.toString() === req.params.id)){
+        if (rep.some((Rep) => Rep.Fav.toString() === req.params.id)) {
             req.flash(
                 'success_msg',
-                '  تمت الاضافه مسبقا' )
+                '  تمت الاضافه مسبقا')
             res.redirect(`/prodects/${req.params.id}`)
         }
 
-            const r = new Favorite({ Fav: req.params.id,
-                user: req.user.id})
-            
-             await r.save();
-               console.log(r);
-     req.flash(
-        'success_msg',
-        ' تمت الاضافه بنجاح' );
+        const r = new Favorite({
+            Fav: req.params.id,
+            user: req.user.id
+        })
+
+        await r.save();
+        console.log(r);
+        req.flash(
+            'success_msg',
+            ' تمت الاضافه بنجاح');
         res.redirect(`/prodects/${req.params.id}`);
-        
 
 
-   
-      } catch (err) {
+
+
+    } catch (err) {
         console.log(err);
         res.render('error/500')
-      }
+    }
 }
 
 
-exports.showMyFav = async (req, res)=>{
-      try {
-         
-    const favorites = await prodects.find({ Favorite:req.user.id}).sort({ _id: -1 });
-    
-        res.render('pages/myfav',{favorites})
-    
-      } catch (err) {
-      console.log(err)
-      res.render('error/500')}
-  }
+exports.showMyFav = async (req, res) => {
+    try {
+
+        const favorites = await prodects.find({ Favorite: req.user.id }).sort({ _id: -1 });
+
+        res.render('pages/myfav', { favorites })
+
+    } catch (err) {
+        console.log(err)
+        res.render('error/500')
+    }
+}
 
 
 

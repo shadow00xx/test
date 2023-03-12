@@ -84,21 +84,37 @@ exports.profile = async (req, res) => {
 
 }
 
+const mongoose = require("mongoose");
+const fs = require('fs');
 
+const cloudinary = require("../utils/cloudinary");
 
 // @desc    Show edit page
 // @route   GET /profile/edit/:id
 exports.editProfile = async (req, res) => {
     try {
+        // const result = await cloudinary.uploader.upload(req.file.path)
 
         let user = await User.find({ _id: req.user.id }).lean()
 
-        user = await User.findOneAndUpdate({ _id: req.user.id }, req.body, {
+const v = req.body
+// if (req.file) {
+//     // prodect.image = req.file.fileName
+//     user.image = result.secure_url
+// }
+
+// if (user.cloudinary_id) {
+//     cloudinary_id: result.public_id
+// }
+
+
+        user = await User.findOneAndUpdate({ _id: req.user.id }, v,
+            {
             new: true,
             runValidators: true,
         })
 
-        res.redirect('/dashboard')
+        res.redirect('/')
     }
     catch (err) {
         console.error(err)
@@ -137,26 +153,27 @@ try {
 }
 
 // editpro
-// router.put('/:user.id', ensureAuth, async (req, res) => {
-//     try {
-//       let displayName = await User.findById(req.params.displayName).lean()
+exports.editPro = async (req, res) => {
+    try {
+      let checkUser = await User.findById({id:req.user.id})
   
-//       if (!displayName) {
-//         return res.send('error/404')
-//       }
   
-//       if (displayName.user != req.user.id) {
-//         res.redirect('/editpro')
-//       } else {
-//         displayName = await User.findOneAndUpdate({ displayName: req.params.id }, req.body, {
-//           new: true,
-//           runValidators: true,
-//         })
+      if (!checkUser) {
+        return res.send('error/404')
+      }
   
-//         res.redirect('/dashboard')
-//       }
-//     } catch (err) {
-//       console.error(err)
-//       return res.render('error/500')
-//     }
-//   })
+      if (checkUser != req.user.id) {
+        res.redirect('/')
+      } else {
+        checkUser = await User.findOneAndUpdate({ id: req.params.id }, req.body, {
+          new: true,
+          runValidators: true,
+        })
+  
+        res.redirect('/')
+      }
+    } catch (err) {
+      console.error(err)
+      return res.render('error/500')
+    }
+  }

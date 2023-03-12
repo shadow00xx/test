@@ -85,7 +85,7 @@ exports.store = (req, res) => {
 // get
 // test 
 exports.test = (req, res) => {
-    res.render('pages/test', { title: 'test', layout:"layouts/chat" })
+    res.render('test', { title: 'test', layout:"layouts/chat" })
 }
 
 // get
@@ -136,7 +136,7 @@ exports.exploreCategoriesById = async (req, res) => {
         const limitNumber = 20;
         const categoryById = await prodects.find({ 'category': categoryId }).limit(limitNumber)
             .sort({ createdAt: 'desc' })
-        res.render('pages/categories', { categoryById });
+        res.render('pages/categories', { categoryById} );
     } catch (error) {
         console.log(error);
      res.render('error/500' )

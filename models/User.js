@@ -32,8 +32,10 @@ const UserSchema = new mongoose.Schema({
     },
     image: {
         type: String,
-        default:''
     },
+    cloudinary_id: {
+        type: String,
+      },
     isVerified: { type: Boolean, default: false },
     isStore:{type: Boolean, default: false },
     isAdmin:{type: Boolean, default: false },
