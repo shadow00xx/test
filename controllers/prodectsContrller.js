@@ -206,11 +206,11 @@ exports.deleteComment = async (req, res) => {
 
 exports.showOnePro = async (req, res) => {
     try {
-        const post = await prodects.findById(req.params.id);
+        const post = await prodects.findById(req.params._id);
 
 
         const x = post.Favorite.some((like) => like.toString() === req.user.id)
-        const e = await prodects.findOne({ _id: req.params.id })
+        const e = await prodects.findOne({ _id: req.params._id })
             .populate('user')
 
         res.render('pages/prodect', { e, x, title: e.name, })
