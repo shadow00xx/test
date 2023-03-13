@@ -64,7 +64,7 @@
                 <div class="row row-cols-2 row-cols-lg-5 g-2 g-lg-3">
                   <% if(pros !='' ) { %>
                     <% pros.latest.forEach(function(prodect, index){ %>
-                      <a href="/prodects/<%= prodect.id %>" class="col text-center category__link">
+                      <a href="/prodects/<%= prodect._id %>" class="col text-center category__link">
                         <div class="category__img category__img--large shadow">
                           <img src="<%= prodect.image[0] %>" alt="<%= prodect.name %>" loading="lazy">
                         </div>

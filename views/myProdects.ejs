@@ -48,7 +48,9 @@
                     <div class="btn-group">
                       <a href="/prodects/<%= prodect._id %>" class="btn mx-1 btn-sm btn-outline-primary">عرض</a>
                   
-                     
+                      <button type="submit" class="btn btn-sm btn-outline-danger">
+                        <i class="fa fa-trash text-danger"></i> حزف
+                       </button>
                        <form action="/prodects/<%= prodect._id %>" method="post"
                         id="delete-form">
                         <input type="hidden" name="_method" value="DELETE">

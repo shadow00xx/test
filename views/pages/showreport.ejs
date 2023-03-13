@@ -5,17 +5,19 @@
 </h1>
 
 <div class="row row-cols-2 row-cols-lg-5 g-2 g-lg-3">
-    
-      <% report.forEach(function(prodect, index){ %>
-        <a href="/prodects/<%= prodect.Report._id %>" class="col text-center category__link">
-          <div class="category__img category__img--large shadow">
-            <img src="<%= prodect.Report.image[0] %>" alt="<%= prodect.name %>" loading="lazy">
-          </div>
-          <div class="pt-1">
-            <%= prodect.name %>
-          </div>
-        </a>
-        <% }) %>
+
+    <% pro.forEach(function(prodect, index){ %>
+      <a href="/prodects/<%= prodect._id %>" class="col text-center category__link">
+        <div class="category__img category__img--large shadow">
+          <img src="<%= prodect.image[0] %>" alt="<%= prodect.name %>" loading="lazy">
+        </div>
+        <div class="pt-1">
+          <%= prodect.name %>
+        </div>
+      </a>
+      <% }) %>
+ 
+   
         
          
   </div>

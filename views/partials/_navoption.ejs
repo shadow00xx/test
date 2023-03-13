@@ -4,16 +4,16 @@
 
     <% if(categories !='' ) { %>
         <% categories.forEach(function(category, index) { %>
-            <a href="/categories/<%- category.name %>" class="col btn-dark">
+            <a href="/categories/<%- category.name %>" class="col btn btn-nav">
 
-                <div class="pt-1 ">
+                <div class="pt-1">
                     <%- category.ar %>
                 </div>
             </a>
             <% }) %>
                 <% } %>
 
-                    <a href="/categories" class="col text-center   btn-dark">
+                    <a href="/categories" class="col text-center btn btn-nav">
 
                         <div class="pt-1">عرض الكل</div>
                     </a>

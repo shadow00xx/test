@@ -28,7 +28,6 @@
                           <div class="carousel-item">
                               <img src="<%- e.image[1] %>" width="100%" alt="<%- e.image[1] %>" srcset="">
                   
-                              t877977t87-
                           </div>
                           <div class="carousel-item">
                               <img src="<%- e.image[2] %>" width="100%" alt="<%- e.image[2] %>" srcset="">
@@ -116,8 +115,11 @@
                     </div>
                         </div>
                         <div class="icons">
-                    <form action="/prodects/<%= e._id %>/report" method="post" id="report">
-                        <button onclick="report()" type="submit" class="btn mb-4" id="shareBtn">الابلاغ عن السلعة  <i class="fa fa-flag"></i></button>    
+                    <form action="/prodects/<%= e.id %>/report" method="post" id="report">
+                        <input type="hidden" name="_method" value="put">
+                        
+                        
+                <button onclick="report()" type="submit" class="btn mb-4" id="shareBtn">الابلاغ عن السلعة  <i class="fa fa-flag"></i></button>    
                     </form>
 
               
