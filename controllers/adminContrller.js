@@ -1,37 +1,27 @@
 const User = require('../models/User')
 const prodects = require('../models/Prodects')
-const reports = require('../models/Report')
+
 const contacts = require('../models/Contact')
 
 
-exports.report = async(req, res) => {
-try {
-const report = await prodects.find({likes})
-
-    res.render('admin', { title: 'اضافه سلعه' })
-} catch (err) {
-    console.log(err);
-}
-}
 
 
 
-
-// get
-// show report 
-exports.showreportx = async(req, res)=>{
+exports.showreport = async (req, res) => {
     try {
-const report = await reports.find().sort('desc')
-     .populate('user')
-     .populate('Report')
 
+        const pro = await prodects.find({report:444}).sort({ _id: -1 });
 
-        res.render('pages/showreport', {report})
+        res.render('pages/showreport', { pro })
+
     } catch (err) {
-        console.log(err);
+        console.log(err)
         res.render('error/500')
     }
 }
+
+
+
 
 
 

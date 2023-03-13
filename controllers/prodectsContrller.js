@@ -63,155 +63,14 @@ exports.showMyPro = async (req, res) => {
     }
 }
 
-// post
-// addComment
-exports.addComment = async (req, res) => {
-    try {
-        const user = await User.findById(req.user.id).select('-password');
-        const post = await prodects.findById(req.params.id);
-
-        const newComment = {
-            text: req.body.text,
-            name: user.displayName,
-            avatar: user.image,
-            createby: req.user.id
-        };
-
-        post.comments.unshift(newComment);
-
-        await post.save();
-
-        res.json(post.comments);
-    } catch (err) {
-        console.log(err);
-        res.render('error/500')
-    }
-}
-
-// delete Comment
-exports.deleteComment = async (req, res) => {
-    try {
-        const post = await prodects.findById(req.params.id);
-
-        // Pull out comment
-        const comment = post.comments.find(
-            (comment) => comment.id === req.params.comment_id
-        );
-        // Make sure comment exists
-        if (!comment) {
-            return res.status(404).json({ msg: 'Comment does not exist' });
-        }
-        // Check user
-        if (comment.createdby.toString() !== req.user.id) {
-            return res.status(401).json({ msg: 'User not authorized' });
-        }
-
-        post.comments = post.comments.filter(
-            ({ id }) => id !== req.params.comment_id
-        );
-
-        await post.save();
-
-        return res.json(post.comments);
-    } catch (err) {
-        console.error(err.message);
-        return res.status(500).send('Server Error');
-    }
-}
-
-// exports.addComment = async(req, res)=>{
-//     let prodect_id=req.params._id;
-// 	if(!mongoose.Types.ObjectId.isValid(prodect_id)){
-// 		return res.status(400).send({
-// 	  		message:'Invalid prodect id',
-// 	  		data:{}
-// 	  	});
-// 	}
-// 	prodects.findOne({_id:prodect_id}).then(async (blog)=>{
-// 		if(!blog){
-// 			return res.status(400).send({
-// 				message:'No prodect found',
-// 				data:{}
-// 			});	
-// 		}else{
-
-// 			try{
-
-
-//                 let comment = new comments({
-//                     text:req.body.text,
-//                     prodect_id:prodect_id,
-//                     createby:req.user._id})
-
-// 				let commentData=await comment.save();
-
-// 				await prodects.updateOne(
-// 					{_id:prodect_id},
-// 					{
-// 						$push: { comments :commentData._id  } 
-// 					}
-// 				)
-
-
-// 				let query=[
-// 					{
-// 						$lookup:
-// 						{
-// 						 from: "users",
-// 						 localField: "user_id",
-// 						 foreignField: "_id",
-// 						 as: "user"
-// 						}
-// 					},
-// 					{$unwind: '$user'},
-// 					{
-// 						$match:{
-// 							'_id':mongoose.Types.ObjectId(commentData._id)
-// 						}
-// 					},
-
-// 				];
-
-// 				let comments=await BlogComment.aggregate(query);
-
-// 				return res.status(200).send({
-// 					message:'Comment successfully added',
-// 					data:comments[0]
-// 				});
-
-
-// 			}catch(err){
-// 				return res.status(400).send({
-// 			  		message:err.message,
-// 			  		data:err
-// 			  	});
-// 			}
-
-
-// 		}
-// 	}).catch((err)=>{
-// 		return res.status(400).send({
-// 	  		message:err.message,
-// 	  		data:err
-// 	  	});
-// 	})
-
-// }
-
-
-
-
-// get
-// show one prodecte detail
-
+// showOnePro
 exports.showOnePro = async (req, res) => {
     try {
-        const post = await prodects.findById(req.params.id);
 
-
+        const e = await prodects.findOne({ _id: req.params.id }).populate('user')
+        const post = await prodects.findById({_id:req.params.id});
         const x = post.Favorite.some((like) => like.toString() === req.user.id)
-        const e = await prodects.findOne({ _id: req.params.id })
-            .populate('user')
+       
 
         res.render('pages/prodect', { e, x, title: e.name, })
 
@@ -300,44 +159,35 @@ exports.unFavorite = async (req, res) => {
 }
 
 
-// post
-// addreport
 
+// addreport 
+// put 
 exports.addreport = async (req, res) => {
     try {
+        const post = await prodects.findById(req.params.id);
 
-        const post = await prodects.findById(req.params.id)
-        const rep = await report.find()
 
-        if (rep.some((Rep) => Rep.user.toString() === req.user.id)) {
+
+            post.report.unshift('444');
+
+            await post.save();
+
             req.flash(
                 'success_msg',
-                ' لقد ابلغت ضد هذا مسبقا');
+                ' تمت الابلاغ بنجاح سيتم التحقق من المنشور قريبا ... نشكرك');
             res.redirect(`/prodects/${req.params.id}`);
-
         }
 
 
-        const newReport = {
-            cos: req.body.cos,
-            Report: req.params.id,
-            user: req.user.id
-
-        };
-
-        const r = await new report(newReport)
-        console.log(r);
-        await r.save();
-
-        req.flash(
-            'success_msg',
-            'نشكرك ... سيتم النظر للامر في اقرب وقت ممكن');
-        res.redirect(`/prodects/${req.params.id}`);
-    } catch (err) {
-        console.log(err);
+     catch (err) {
+        console.error(err);
         res.render('error/500')
     }
 }
+
+
+
+
 
 
 exports.addfavorite = async (req, res) => {
