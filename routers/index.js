@@ -33,8 +33,6 @@ router.get('/test', indexContrller.test);
 router.post('/contact', ensureAuth,indexContrller.addcontact);
 
 
-
-
 router.get('/categories', indexContrller.exploreCategories);
 router.get('/categories/:id', indexContrller.exploreCategoriesById);
 

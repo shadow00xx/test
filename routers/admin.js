@@ -8,13 +8,13 @@ const {admin, } = require('../middlewares/userType')
 
 
 
-
+// showreport
+router.get('/showreport', adminContrller.showreport);
 
 
 // showcontacts
 router.get('/showcontacts', adminContrller.showcontact);
 
-// showreport
-router.get('/showreport', adminContrller.showreportx);
+
 
 module.exports = router
