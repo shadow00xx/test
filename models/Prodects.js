@@ -95,10 +95,13 @@ const ProdectsSchema = new mongoose.Schema({
       Favorite:[{ type: mongoose.Schema.Types.ObjectId,
         ref: 'User' }],
 
-        report:[{ type: mongoose.Schema.Types.ObjectId,
-        ref: 'User' }],
+        report:[{ type:Number,
+       }],
   
-
+        // report:{
+        //     type: Boolean,
+        //     default:false
+        // },
 },
     { timestamps: true }
 
