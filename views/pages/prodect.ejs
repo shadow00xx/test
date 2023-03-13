@@ -101,7 +101,7 @@
 
                     <h2 class="lead m-2">
                         <small class="text-muted">    تمت الاضافة بواسطة
-                          <a href="/user/<%= e.user._id %>/profile" style="text-decoration: none;">
+                          <a href="/user/<%= e.user.id %>/profile" style="text-decoration: none;">
                           <%= e.user.displayName %>      
                           </a>
                                <span class="mx-2"> <%= moment(e.createdAt).locale('ar').fromNow() %></span>
