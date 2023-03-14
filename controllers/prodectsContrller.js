@@ -72,9 +72,17 @@ exports.showOnePro = async (req, res) => {
     
              
         const post = await prodects.findById(req.params.id);
+    if (req.user) {
         const x = post.Favorite.some((like) => like.toString() === req.user.id)
-
         res.render('pages/prodect', { e, x, title: e.name, })
+
+    }
+if (!req.user) {
+    const x = post.Favorite.some((like) => like.toString() === '')
+
+    res.render('pages/prodect', { e, x, title: e.name, })
+    
+}
 
     } catch (err) {
         console.log(err);
