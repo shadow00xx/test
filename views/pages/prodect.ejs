@@ -101,9 +101,9 @@
 
                     <h2 class="lead m-2">
                         <small class="text-muted">    تمت الاضافة بواسطة
-                       
-                               
-                        
+                          <a href="/user/<%= e.user._id %>/profile" style="text-decoration: none;">
+                          <%= e.user.displayName %>      
+                          </a>
                                <span class="mx-2"> <%= moment(e.createdAt).locale('ar').fromNow() %></span>
         
                         </small>
@@ -115,7 +115,7 @@
                     </div>
                         </div>
                         <div class="icons">
-                    <form action="/prodects/<%= e.id %>/report" method="post" id="report">
+                    <form action="/prodects/<%= e._id %>/report" method="post" id="report">
                         <input type="hidden" name="_method" value="put">
                         
                         
@@ -124,14 +124,14 @@
 
               
                     <% if (!x) { %>
-                        <form action="/prodects/<%= e.id %>/favorite" method="post">
+                        <form action="/prodects/<%= e._id %>/favorite" method="post">
                             <input type="hidden" name="_method" value="put">
                      
                         <button type="submit" class="btn mb-4" id="shareBtn">اضافه للمفضلة  <i class="fa fa-heart"></i></button>    
                         </form>
                         <% } %> 
                         <% if (x) { %>
-                            <form action="/prodects/<%= e.id %>/unfavorite" method="post">
+                            <form action="/prodects/<%= e._id %>/unfavorite" method="post">
                                 <input type="hidden" name="_method" value="put">
                          
                             <button type="submit" class="btn mb-4" id="shareBtn">ازالة من المفضلة  <i class="fa fa-heart text-danger"></i></button>    
