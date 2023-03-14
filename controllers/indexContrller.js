@@ -169,7 +169,25 @@ exports.addcontact = async(req, res)=>{
 
 
 
+exports.showMyFav = async (req, res) => {
+    try {
 
+        const favorites = await prodects.find({ Favorite: req.user.id })
+              .sort({ _id: -1 });
+
+        // const favorites = await prodects.find()
+        //       .sort({ _id: -1 });
+
+        // if (favorites.some((Rep) => Rep.Favorite.toString() === req.user.id)) {
+        // }
+
+        res.render('pages/myfav', { favorites })
+
+    } catch (err) {
+        console.log(err)
+        res.render('error/500')
+    }
+}
 
 
 

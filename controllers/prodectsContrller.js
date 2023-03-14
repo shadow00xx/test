@@ -100,7 +100,7 @@ exports.deletePro = async (req, res) => {
 // put 
 exports.Favorite = async (req, res) => {
     try {
-        const post = await prodects.findById(req.params.id);
+        const post = await prodects.findById({_id:req.params.id});
 
         // Check if the post has already been liked
         if (post.Favorite.some((like) => like.toString() === req.user.id)) {
@@ -133,7 +133,7 @@ exports.Favorite = async (req, res) => {
 // put 
 exports.unFavorite = async (req, res) => {
     try {
-        const post = await prodects.findById(req.params.id);
+        const post = await prodects.findById({ _id: req.params.id });
 
         // Check if the post has not yet been liked
         if (!post.Favorite.some((like) => like.toString() === req.user.id)) {
@@ -164,7 +164,7 @@ exports.unFavorite = async (req, res) => {
 // put 
 exports.addreport = async (req, res) => {
     try {
-        const post = await prodects.findById(req.params.id);
+        const post = await prodects.findById({ _id: req.params.id });
 
 
 
@@ -226,18 +226,7 @@ exports.addfavorite = async (req, res) => {
 }
 
 
-exports.showMyFav = async (req, res) => {
-    try {
 
-        const favorites = await prodects.find({ Favorite: req.user.id }).sort({ _id: -1 });
-
-        res.render('pages/myfav', { favorites })
-
-    } catch (err) {
-        console.log(err)
-        res.render('error/500')
-    }
-}
 
 
 
