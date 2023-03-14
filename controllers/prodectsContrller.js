@@ -67,7 +67,7 @@ exports.showMyPro = async (req, res) => {
 exports.showOnePro = async (req, res) => {
     try {
 
-        const e = await prodects.findOne({ id: req.params.id }).populate('user')
+        const e = await prodects.findById({ _id: req.params.id }).populate('user')
         const post = await prodects.findById({_id:req.params.id});
         const x = post.Favorite.some((like) => like.toString() === req.user.id)
        
