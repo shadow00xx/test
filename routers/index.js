@@ -38,4 +38,6 @@ router.get('/categories/:id', indexContrller.exploreCategoriesById);
 
 
 
+// Favorite
+router.get('/myfav', ensureAuth, indexContrller.showMyFav)
 module.exports = router
