@@ -30,7 +30,7 @@ router.put('/edit', ensureAuth,upload.single('image'), userContrller.editProfile
 
 router.put('/:user.id', ensureAuth, userContrller.editPro)
 // showUsersMyProfile
-router.get("/:_id/profile",ensureAuth, userContrller.showUsersMyProfile)
+router.get("/:id/profile",ensureAuth, userContrller.showUsersMyProfile)
 
 
 // router.get("/:_id/profile",ensureAuth, userContrller.showUsersMyProfile)
