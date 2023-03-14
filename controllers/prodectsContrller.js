@@ -18,6 +18,7 @@ exports.addproPost = async (req, res, next) => {
 
     try {
         
+        req.body.user = req.user.id
         const prodect = req.body
         let imageURIs = []
         let image = req.files
@@ -50,9 +51,8 @@ exports.addproPost = async (req, res, next) => {
 // show my prodectes
 exports.showMyPro = async (req, res) => {
     try {
-        // const user = User.findById({ })
-        const march = await prodects.find({ user: req.user.id })
-            .populate('user')
+        // const user = User.findById({ id:req.user.id})
+        const march = await prodects.find({ user: req.user._id })
             .sort({ createdAt: 'desc' })
         res.render('myProdects', { march, title: 'منتجاتي ' })
 
@@ -63,14 +63,16 @@ exports.showMyPro = async (req, res) => {
     }
 }
 
+
 // showOnePro
 exports.showOnePro = async (req, res) => {
     try {
 
-        const e = await prodects.findById({ _id: req.params.id }).populate('user')
-        const post = await prodects.findById({_id:req.params.id});
+        const e = await prodects.findById(req.params.id).populate('user').lean()
+    
+             
+        const post = await prodects.findById(req.params.id);
         const x = post.Favorite.some((like) => like.toString() === req.user.id)
-       
 
         res.render('pages/prodect', { e, x, title: e.name, })
 

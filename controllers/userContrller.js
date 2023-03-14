@@ -135,9 +135,9 @@ exports.logout = (req, res) => {
 exports.showUsersMyProfile = async (req, res) => {
     
 try {
-    const user = await User.findOne( { _id: req.params._id })
+    const user = await User.findOne( { _id: req.params.id })
     .lean()
-    const userpro = await prodects.find({user:req.params._id })
+    const userpro = await prodects.find({user:req.params.id }) 
          .populate('user')
          .lean()
 
