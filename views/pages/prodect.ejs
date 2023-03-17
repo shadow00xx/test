@@ -20,19 +20,19 @@
                     <div id="myCarousel" class="carousel slide slide_pro" data-bs-ride="carousel">
 
                       <div class="carousel-inner">
-                          <div class="carousel-item active">
-                              <img src="<%- e.image[0] %>" width="100%" alt="<%- e.image[0] %>" srcset="">
+                          <a href="<%- e.image[0] %>" class="carousel-item active">
+                              <img id="img1" src="<%- e.image[0] %>" alt="<%- e.image[0] %>" srcset="">
                   
                               
-                          </div>
-                          <div class="carousel-item">
-                              <img src="<%- e.image[1] %>" width="100%" alt="<%- e.image[1] %>" srcset="">
+                          </a>
+                          <a href="<%- e.image[1] %>"  class="carousel-item">
+                              <img src="<%- e.image[1] %>" alt="<%- e.image[1] %>" srcset="">
                   
-                          </div>
-                          <div class="carousel-item">
-                              <img src="<%- e.image[2] %>" width="100%" alt="<%- e.image[2] %>" srcset="">
+                          </a>
+                          <a href="<%- e.image[2] %>"  class="carousel-item">
+                              <img src="<%- e.image[2] %>" alt="<%- e.image[2] %>" srcset="">
                   
-                          </div>
+                          </a>
                       </div>
                       <button class="carousel-control-prev" type="button" data-bs-target="#myCarousel" data-bs-slide="prev">
                           <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -57,47 +57,84 @@
 
                 
 
-                    <div class="prodect_container">
-                        <div class="d-flex conn">
 
-                               
+                <div class="table-responsive m-2 t_pro">
+                    <table class="table table-striped table-sm">
+                      <!-- <thead>
+                        <tr>
+                          <th scope="col"> </th>
+                          <th scope="col"></th>
+                        </tr>
+                      </thead> -->
+                      <tbody>
+                        <tr>
+                          <td>الاسم </td>
+                          <td> <%- e.name %></td>
+                        </tr>
+                        <tr>
+                          <td>العنوان </td>
+                          <td><%- e.address %></td>
+                        </tr>
+                        
+                        <tr>
+                          <td>للتواصل</td>
+                          <td><a class="btn  btn-outline-dark" href="tel:<%- e.phone %>"><%- e.phone %></a></td>
+                        </tr>
 
-  
+                        <tr>
+                          <td>التفاصيل</td>
+                          <td><%- e.body %></td>
+                        </tr>
+
+                        <% if(e.modal){ %>               
+                            <tr>
+                                <td>موديل</td>
+                                <td><%= e.modal %></td>
+                            </tr>
+                        <% } %>
+                        
                       
-                        <div class="detail_form">
-                    <h2> <span class="text-info">اسم السلعة </span>: <%- e.name %>  </h2>
-                    <h2> <span class="text-info">العنوان البائع </span>: <%- e.address %></h2>
-                    <h2><span class="text-info"> رقم الهاتف  </span> : <a class="btn  btn-outline-dark" href="tel:<%- e.phone %>"><%- e.phone %></a></h2>
-                    <h2> <span class="text-info"> التفاصيل</span> : <%- e.body %></h2>
-
-                    <% if(e.modal){ %>               
-                    <h2> <span class="text-info"> موديل</span> : <%= e.modal %></h2>
-                    <% } %>
-
+                       
                     <% if(e.gas){ %>
-                    <h2> <span class="text-info">  نوع اوقود </span> :<%= e.gas %> </h2>
+                        <tr>
+                          <td>الوقود</td>
+                          <td><%= e.gas %></td>
+                        </tr>
                     <% } %>
+
 
                     <% if(e.conditions){ %>
-                     <% if(e.conditions==="new" ){ %>
-                        <h1>
-                            <span class="text-info">  الحالة  </span> : جديد
-                       </h1>
-                     <% } %>
-                     <% if(e.conditions==="use" ){ %>
-                       <h1>
-                        <span class="text-info">  الحالة  </span>  : مستخدم
-                      </h1>
-                     <% } %>
-                   <% } %>
-
-                    <% if(e.owners){ %>
-                    <h2> <span class="text-info">  نوع الملكية </span> :<%= e.owners %> </h2>
+                        <% if(e.conditions==="new" ){ %>
+                            <tr>
+                                <td>الحالة</td>
+                                <td>جديد</td>
+                            </tr>                          
+                        <% } %>
+                        <% if(e.conditions==="use" ){ %>
+                            <tr>
+                                <td>الحالة</td>
+                                <td>مستعمل</td>
+                            </tr>
+                        <% } %>
                     <% } %>
 
 
-                    <h2> <span class="text-info"> السعر</span> : <%= e.prise %> ج س </h2>
+                    <% if(e.owners){ %>                      
+                        <tr>
+                            <td>نوع الملكية </td>
+                            <td><%= e.owners %></td>
+                        </tr>
+                    <% } %>
+                        
 
+                        <tr>
+                          <td>السعر</td>
+                          <td><%= e.prise %> ج س </td>
+                        </tr>
+                    
+                      </tbody>
+                    </table>
+                  </div>
 
                     <h2 class="lead m-2">
                         <small class="text-muted">    تمت الاضافة بواسطة
@@ -109,10 +146,6 @@
                         </small>
                     </h2>
 
-              
-                   
-                    </div>
-                        </div>
                         <div class="icons">
                     <form action="/prodects/<%= e._id %>/report" method="post" id="report">
                         <input type="hidden" name="_method" value="put">
@@ -139,112 +172,9 @@
                     <button onclick="share()" class="btn mb-4" id="shareBtn">المشاركة  <i class="fa fa-share"></i></button>    
                     
                         </div>
-                    </div>
-
-                                      
-                              
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                   
+                  
                       
                 </main>
         </div> 
     </div>
-
-
-<!-- 
-    <style>
-
-.home .carousel-item{
-	height: 500px;
-	position: relative;
-	z-index: 1;
-}
-
-.home .carousel-item .container{
-	position: absolute;
-	left: 50%;
-
-	transform: translate(-50%,-50%);
-	text-align: center;
-}
-
-
-.home .carousel-controls{
-	position: absolute;
-	left: 50%;
-	bottom: 40px;
-	z-index: 10;
-	transform: translateX(-50%);
-}
-
-.home .carousel-indicators{
-	position: relative;
-	margin:0;
-}
-
-.home .carousel-indicators li{
-	height: 70px;
-	width: 70px;
-	margin:0 5px;
-	border-radius: 30%;
-	background-position: center;
-	background-size: cover;
-	border:3px solid transparent;
-	transition: all 0.3s ease;
-}
-.home .carousel-indicators li.active{
-	border-color: #ffffff;
-	transform: scale(1.2);
-}
-
-.home .carousel-control-next, 
-.home .carousel-control-prev{
-	height: 60px;
-	width: 60px;
-	opacity: 1;
-	z-index: 3;
-	top: 50%;
-	transform: translateY(-50%);
-	border-radius: 50%;
-	transition: all 0.3s ease;
-}
-.home .carousel-control-next:hover, 
-.home .carousel-control-prev:hover{
-   box-shadow: 0 0 10px #ffffff;
-}
-.home .carousel-control-next img, 
-.home .carousel-control-prev img{
-   width: 30px;
-}
-.home .carousel-control-next{
-	right: -90px;
-}
-.home .carousel-control-prev{
-	left: -90px;
-}
-
-/*responsive*/
-@media(max-width: 767px){
-  .home .carousel-control-next, 
-  .home .carousel-control-prev{
-  	display: none;
-  }
-  .home .carousel-indicators li{
-  	height: 60px;
-  	width: 60px;
-  }
-  .home .carousel-indicators{
-    bottom: -120px;
-  }
-  .home .carousel-item{
-	height: 200px;
-
-} 
-}
-
-
-
-
-    </style> -->
