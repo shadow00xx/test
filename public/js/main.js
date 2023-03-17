@@ -462,15 +462,17 @@ categorys.style.display= 'none'
 
 
 function share() {
+  const url = document.querySelector('link[rel=canonical]') ? document.querySelector('link[rel=canonical]').href : document.location.href;
 
   // Check for Web Share api support
   if (navigator.share) {
     // Browser supports native share api
     navigator.share({
       title: window.document.title,
-       url: window.location.href ,
+       url:url,
+       
       //  window.location.href.slice(7)
-    files:[]
+    // files: []
     
     
     }).then(() => {
