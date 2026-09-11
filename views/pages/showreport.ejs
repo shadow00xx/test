@@ -1,23 +1,53 @@
+<h1>السلع المبلغ عنها</h1>
 
+<% if (!pro || pro.length === 0) { %>
+  <div class="alert alert-success">لا توجد بلاغات معلقة حالياً.</div>
+<% } else { %>
+  <div class="row g-3">
+    <% pro.forEach(function(prodect){ %>
+      <div class="col-12 col-md-6 col-lg-4">
+        <div class="card h-100 shadow-sm">
+          <a href="/prodects/<%= prodect._id %>" class="text-decoration-none text-dark">
+            <img
+              src="<%= prodect.image && prodect.image[0] ? prodect.image[0] : '' %>"
+              class="card-img-top"
+              alt="<%= prodect.name %>"
+              loading="lazy"
+              style="height:220px;object-fit:cover;"
+            >
+          </a>
+          <div class="card-body">
+            <h5 class="card-title"><%= prodect.name %></h5>
 
-<h1>
-    السلع المبلغ عنها
-</h1>
+            <% if (prodect.reports && prodect.reports.length) { %>
+              <p class="mb-2">
+                <strong>عدد البلاغات:</strong> <%= prodect.reports.length %>
+              </p>
+              <ul class="small mb-3">
+                <% prodect.reports.forEach(function(report){ %>
+                  <li>
+                    <%= report.user && (report.user.displayName || report.user.username)
+                      ? (report.user.displayName || report.user.username)
+                      : 'مستخدم غير معروف' %>
+                    <% if (report.createdAt) { %>
+                      — <%= new Date(report.createdAt).toLocaleString('ar') %>
+                    <% } %>
+                  </li>
+                <% }) %>
+              </ul>
+            <% } else { %>
+              <p class="text-muted">بلاغ قديم من النظام السابق.</p>
+            <% } %>
 
-<div class="row row-cols-2 row-cols-lg-5 g-2 g-lg-3">
-
-    <% pro.forEach(function(prodect, index){ %>
-      <a href="/prodects/<%= prodect._id %>" class="col text-center category__link">
-        <div class="category__img category__img--large shadow">
-          <img src="<%= prodect.image[0] %>" alt="<%= prodect.name %>" loading="lazy">
+            <div class="d-flex gap-2">
+              <a href="/prodects/<%= prodect._id %>" class="btn btn-primary btn-sm">عرض السلعة</a>
+              <form action="/admin/reports/<%= prodect._id %>/dismiss?_method=PUT" method="POST" class="d-inline">
+                <button type="submit" class="btn btn-outline-success btn-sm">إغلاق البلاغ</button>
+              </form>
+            </div>
+          </div>
         </div>
-        <div class="pt-1">
-          <%= prodect.name %>
-        </div>
-      </a>
-      <% }) %>
- 
-   
-        
-         
+      </div>
+    <% }) %>
   </div>
+<% } %>
