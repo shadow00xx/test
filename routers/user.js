@@ -1,45 +1,23 @@
-
 const express = require('express');
 const router = express.Router();
-const { ensureAuth, ensureGuest } = require('../middlewares/auth')
-
+const { ensureAuth, ensureGuest } = require('../middlewares/auth');
 const upload = require('../middlewares/up');
-
-
 const userContrller = require('../controllers/userContrller');
 
-
-
-// login
-router.get("/login", ensureGuest, userContrller.login)
-
-// signup
-router.get("/signup", ensureGuest, userContrller.signup)
-
-// signup
-router.post("/signup", userContrller.signupPost)
-
-// login
+// Login
+router.get('/login', ensureGuest, userContrller.login);
 router.post('/login', userContrller.loginPost);
 
-// profile
-router.get("/profile",ensureAuth, userContrller.profile)
+// Signup
+router.get('/signup', ensureGuest, userContrller.signup);
+router.post('/signup', ensureGuest, userContrller.signupPost);
 
-//  GET /profile/edit/:id
-router.put('/edit', ensureAuth,upload.single('image'), userContrller.editProfile)
-
-router.put('/:user.id', ensureAuth, userContrller.editPro)
-// showUsersMyProfile
-router.get("/:id/profile",ensureAuth, userContrller.showUsersMyProfile)
-
-
-// router.get("/:_id/profile",ensureAuth, userContrller.showUsersMyProfile)
-
+// Profile
+router.get('/profile', ensureAuth, userContrller.profile);
+router.put('/edit', ensureAuth, upload.single('image'), userContrller.editProfile);
+router.get('/:id/profile', ensureAuth, userContrller.showUsersMyProfile);
 
 // Logout
-router.get("/logout", userContrller.logout);
+router.get('/logout', ensureAuth, userContrller.logout);
 
-
-
-
-module.exports = router
+module.exports = router;
