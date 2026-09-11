@@ -1,18 +1,19 @@
-
 const mongoose = require('mongoose');
-
 
 const connectDB = async () => {
     try {
-        mongoose.set("strictQuery", false)
-        const conn = await mongoose.connect(process.env.MANGO_URI, { useNewUrlParser: true, useUnifiedTopology: true })
-        console.log(`mongoDB connected .....`);
+        const mongoUri = process.env.MONGO_URI || process.env.MANGO_URI;
+        if (!mongoUri) {
+            throw new Error('MONGO_URI is required');
+        }
+
+        mongoose.set('strictQuery', false);
+        await mongoose.connect(mongoUri);
+        console.log('mongoDB connected .....');
     } catch (err) {
-        console.log(err)
-        process.exit(1)
+        console.error(err);
+        process.exit(1);
     }
-}
+};
 
-
-
-module.exports = connectDB
+module.exports = connectDB;
