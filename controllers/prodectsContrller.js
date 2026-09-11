@@ -136,16 +136,22 @@ exports.deletePro = async (req, res) => {
 
 exports.Favorite = async (req, res) => {
     try {
-        const post = await prodects.findById(req.params.id);
-        if (!post) return res.status(404).render('error/404');
-
         const userId = req.user._id;
-        if (!post.Favorite.some((like) => like.toString() === userId.toString())) {
-            post.Favorite.push(userId);
-            await post.save();
-            req.flash('success_msg', 'تمت الاضافة بنجاح');
-        } else {
+        const updated = await prodects.findOneAndUpdate(
+            {
+                _id: req.params.id,
+                Favorite: { $ne: userId },
+            },
+            { $addToSet: { Favorite: userId } },
+            { new: true }
+        );
+
+        if (!updated) {
+            const post = await prodects.findById(req.params.id).select('_id');
+            if (!post) return res.status(404).render('error/404');
             req.flash('success_msg', 'تمت الاضافة مسبقاً');
+        } else {
+            req.flash('success_msg', 'تمت الاضافة بنجاح');
         }
 
         return res.redirect(`/prodects/${req.params.id}`);
@@ -157,13 +163,16 @@ exports.Favorite = async (req, res) => {
 
 exports.unFavorite = async (req, res) => {
     try {
-        const post = await prodects.findById(req.params.id);
-        if (!post) return res.status(404).render('error/404');
-
-        post.Favorite = post.Favorite.filter(
-            (like) => like.toString() !== req.user._id.toString()
+        const updated = await prodects.findOneAndUpdate(
+            { _id: req.params.id, Favorite: req.user._id },
+            { $pull: { Favorite: req.user._id } },
+            { new: true }
         );
-        await post.save();
+
+        if (!updated) {
+            const post = await prodects.findById(req.params.id).select('_id');
+            if (!post) return res.status(404).render('error/404');
+        }
 
         req.flash('success_msg', 'تمت الازالة بنجاح');
         return res.redirect(`/prodects/${req.params.id}`);
@@ -175,19 +184,22 @@ exports.unFavorite = async (req, res) => {
 
 exports.addreport = async (req, res) => {
     try {
-        const post = await prodects.findById(req.params.id);
-        if (!post) return res.status(404).render('error/404');
-
-        const alreadyReported = post.reports.some(
-            (report) => report.user.toString() === req.user._id.toString()
+        const userId = req.user._id;
+        const updated = await prodects.findOneAndUpdate(
+            {
+                _id: req.params.id,
+                'reports.user': { $ne: userId },
+            },
+            { $push: { reports: { user: userId } } },
+            { new: true }
         );
 
-        if (!alreadyReported) {
-            post.reports.push({ user: req.user._id });
-            await post.save();
-            req.flash('success_msg', 'تمت الابلاغ بنجاح سيتم التحقق من المنشور قريباً ... نشكرك');
-        } else {
+        if (!updated) {
+            const post = await prodects.findById(req.params.id).select('_id');
+            if (!post) return res.status(404).render('error/404');
             req.flash('success_msg', 'تم الابلاغ عن هذا المنشور مسبقاً');
+        } else {
+            req.flash('success_msg', 'تمت الابلاغ بنجاح سيتم التحقق من المنشور قريباً ... نشكرك');
         }
 
         return res.redirect(`/prodects/${req.params.id}`);
