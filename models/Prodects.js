@@ -1,114 +1,91 @@
 const mongoose = require('mongoose');
 
-
 const ProdectsSchema = new mongoose.Schema({
-
     name: {
         type: String,
-        require: true
+        required: true,
+        trim: true,
     },
     phone: {
         type: Number,
-        require: true
+        required: true,
     },
     address: {
         type: String,
-        require: true
+        required: true,
+        trim: true,
     },
     body: {
         type: String,
-        require: true
+        required: true,
     },
-
     prise: {
         type: Number,
-        require: true
+        required: true,
     },
-
     image: [{
         type: String,
-       
     }],
-    // images: [{
-       
-    //     public_id:{type: String,
-    //         require: true},
-    //         url:{type: String,
-    //             require: true}
-    // }],
-  
-    
     user: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User',
+        required: true,
     },
     category: {
         type: String,
         enum: ['Vehicles', 'Electronics', 'Fashions', 'Realestate', 'Makup', 'ForKides', 'Foods', 'Others'],
-        required: true
+        required: true,
     },
-      
     cloudinary_id: {
         type: String,
-      },
-
-    // cars
-    modal: {
-        type: String,
     },
+    modal: { type: String },
     gas: { type: String },
-
     conditions: {
         type: String,
-        enum: ['use', 'new']
+        enum: ['use', 'new'],
     },
-
-    // realstate
-    location: { type: String }, num: { type: Number },
-    owners: { type: String ,enum: ['owner', 'middle']},
+    location: { type: String },
+    num: { type: Number },
+    owners: { type: String, enum: ['owner', 'middle'] },
     reson: {
         type: String,
-        enum: ['sale', 'rent']
-    }
-      ,
-      comments: [
-        {
-            createdby: {
-                type: mongoose.Schema.Types.ObjectId,
-                ref: 'User' 
-          },
-          text: {
+        enum: ['sale', 'rent'],
+    },
+    comments: [{
+        createdby: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'User',
+        },
+        text: {
             type: String,
-            required: true
-          },
-        
-          avatar: {
-            type: String
-          },
-          date: {
+            required: true,
+        },
+        avatar: { type: String },
+        date: {
             type: Date,
-            default: Date.now
-          }
-        }
-      ],
+            default: Date.now,
+        },
+    }],
+    Favorite: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User',
+    }],
+    // New report structure. The legacy numeric `report` field is kept for old documents.
+    reports: [{
+        user: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'User',
+            required: true,
+        },
+        createdAt: {
+            type: Date,
+            default: Date.now,
+        },
+    }],
+    report: [{ type: Number }],
+}, { timestamps: true });
 
-      Favorite:[{ type: mongoose.Schema.Types.ObjectId,
-        ref: 'User' }],
+ProdectsSchema.index({ name: 'text', body: 'text' });
 
-        report:[{ type:Number,
-       }],
-  
-        // report:{
-        //     type: Boolean,
-        //     default:false
-        // },
-},
-    { timestamps: true }
-
-);
-
-
-ProdectsSchema.index({ name: 'text', description: 'text' });
-// ProdectsSchema.index({ "$**": 'text' });
-
-module.exports = mongoose.model('Prodects', ProdectsSchema)
+module.exports = mongoose.model('Prodects', ProdectsSchema);
