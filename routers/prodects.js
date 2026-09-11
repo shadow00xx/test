@@ -1,46 +1,18 @@
-
 const express = require('express');
 const router = express.Router();
-const { ensureAuth } = require('../middlewares/auth')
+const { ensureAuth } = require('../middlewares/auth');
 const upload = require('../middlewares/up');
 const checkObjectId = require('../middlewares/checkObjectId');
-
-
 const prodectsContrller = require('../controllers/prodectsContrller');
 
+router.get('/add-prodect', ensureAuth, prodectsContrller.addprodect);
+router.post('/add-prodect', ensureAuth, upload.array('image', 3), prodectsContrller.addproPost);
+router.get('/myProdects', ensureAuth, prodectsContrller.showMyPro);
 
+router.get('/:id', checkObjectId('id'), prodectsContrller.showOnePro);
+router.put('/:id/favorite', ensureAuth, checkObjectId('id'), prodectsContrller.Favorite);
+router.put('/:id/unfavorite', ensureAuth, checkObjectId('id'), prodectsContrller.unFavorite);
+router.put('/:id/report', ensureAuth, checkObjectId('id'), prodectsContrller.addreport);
+router.delete('/:id', ensureAuth, checkObjectId('id'), prodectsContrller.deletePro);
 
-// add prodect 
-router.get('/add-prodect', ensureAuth, prodectsContrller.addprodect)
-
-// add prodect
-router.post('/add-prodect', ensureAuth, upload.any('image', 3), prodectsContrller.addproPost)
-
-// show my prodectes
-router.get('/myProdects', ensureAuth, prodectsContrller.showMyPro)
-
-// show one prodecte detail
-router.get('/:id', prodectsContrller.showOnePro)
-
-// add favorite
-router.put('/:id/favorite', ensureAuth, prodectsContrller.Favorite)
-
-//  unfavorite
-router.put('/:id/unfavorite', ensureAuth, prodectsContrller.unFavorite)
-
-
-
-
-// report
-router.put('/:id/report', ensureAuth, prodectsContrller.addreport)
-
-
-
-
-
-// delete my prodect
-router.delete('/:id', ensureAuth, prodectsContrller.deletePro)
-// checkObjectId('id')
-
-module.exports = router
-
+module.exports = router;
