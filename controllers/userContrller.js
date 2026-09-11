@@ -31,7 +31,12 @@ exports.signupPost = async (req, res) => {
         }
 
         const hashedPassword = await bcrypt.hash(password, 12);
-        await User.create({ displayName, username, password: hashedPassword });
+        await User.create({
+            displayName,
+            username,
+            password: hashedPassword,
+            provider: 'local',
+        });
 
         req.flash('success_msg', 'تم التسجيل بنجاح');
         return res.redirect('/user/login');
@@ -58,7 +63,7 @@ exports.profile = (req, res) => {
 // Edit only the current user's safe profile fields.
 exports.editProfile = async (req, res) => {
     try {
-        const allowedFields = ['displayName', 'firstName', 'lastName', 'image'];
+        const allowedFields = ['displayName', 'firstName', 'lastName'];
         const updates = {};
 
         for (const field of allowedFields) {
@@ -67,17 +72,8 @@ exports.editProfile = async (req, res) => {
             }
         }
 
-        // Do not allow profile editing to change identity, password, or privileges.
-        delete updates.username;
-        delete updates.password;
-        delete updates.isAdmin;
-        delete updates.isStore;
-        delete updates.isVerified;
-        delete updates.isowner;
-        delete updates.provider;
-        delete updates.googleId;
-        delete updates.facebookId;
-
+        // The image upload is handled separately until its storage flow is unified.
+        // Never accept identity, password, provider, or privilege fields from the form.
         const updatedUser = await User.findByIdAndUpdate(req.user._id, updates, {
             new: true,
             runValidators: true,
