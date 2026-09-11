@@ -32,7 +32,32 @@ exports.addproPost = async (req, res) => {
     const uploadedPublicIds = [];
 
     try {
-        const productData = { ...req.body, user: req.user._id };
+        // Never spread req.body into a product document. Only allow fields that
+        // belong to a product so users cannot submit protected fields such as
+        // Favorite, reports, cloudinary_ids, or arbitrary model properties.
+        const allowedFields = [
+            'name',
+            'phone',
+            'address',
+            'body',
+            'prise',
+            'category',
+            'modal',
+            'gas',
+            'conditions',
+            'location',
+            'num',
+            'owners',
+            'reson',
+        ];
+
+        const productData = { user: req.user._id };
+        for (const field of allowedFields) {
+            if (req.body[field] !== undefined) {
+                productData[field] = req.body[field];
+            }
+        }
+
         const files = Array.isArray(req.files) ? req.files : [];
         const imageURIs = [];
 
