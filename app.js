@@ -3,113 +3,92 @@ const express = require('express');
 const dotenv = require('dotenv');
 const layouts = require('express-ejs-layouts');
 const morgan = require('morgan');
-const methodOverride = require('method-override')
+const methodOverride = require('method-override');
 const session = require('express-session');
 const MongoStore = require('connect-mongo');
 const passport = require('passport');
-const connectDB = require('./config/db')
+const connectDB = require('./config/db');
 const flash = require('connect-flash');
 
-// require('./config/database')
+// Load configuration from the local environment file when present.
+dotenv.config({ path: './config/config.env' });
 
-// load config 
-dotenv.config({ path: './config/config.env' })
+const app = express();
 
-// init app
-const app = express()
-
-// morgan for login
-if (process.env.NODE_ENV === 'develpmont') {
-    app.use(morgan('dev'))
+if (process.env.NODE_ENV === 'development') {
+    app.use(morgan('dev'));
 }
 
-connectDB()
+connectDB();
 
-// Body parser
-app.use(express.json())
-app.use(express.urlencoded({ extended: true }))
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
-// Method override
-app.use(
-    methodOverride(function (req, res) {
-        if (req.body && typeof req.body === 'object' && '_method' in req.body) {
-            // look in urlencoded POST bodies and delete it
-            let method = req.body._method
-            delete req.body._method
-            return method
-        }
-    }))
+app.use(methodOverride((req) => {
+    if (req.body && typeof req.body === 'object' && '_method' in req.body) {
+        const method = req.body._method;
+        delete req.body._method;
+        return method;
+    }
+}));
 
+app.set('trust proxy', 1);
 
-// // session
-// app.use(session({
-//     secret: 'keyboard cat',
-//     resave: false,
-//     saveUninitialized: true,
-//     store: MongoStore.create({ mongoUrl: process.env.MANGO_URI }),
-    
-// }))
-app.set('trust proxy', 1)
-// session
+const sessionSecret = process.env.SESSION_SECRET;
+if (!sessionSecret) {
+    throw new Error('SESSION_SECRET is required');
+}
+
 app.use(session({
-    secret: 'keyboard cat',
+    secret: sessionSecret,
     resave: false,
-    saveUninitialized: true,
-    cookie: { secure: true },
-    store: MongoStore.create({ mongoUrl: process.env.MANGO_URI }),
-}))
+    saveUninitialized: false,
+    cookie: {
+        httpOnly: true,
+        secure: process.env.NODE_ENV === 'production',
+        sameSite: 'lax',
+        maxAge: 1000 * 60 * 60 * 24 * 7,
+    },
+    store: MongoStore.create({
+        mongoUrl: process.env.MONGO_URI || process.env.MANGO_URI,
+    }),
+}));
 
+require('./config/passport')(passport);
+require('./config/passportGoogle')(passport);
+require('./config/passportfacebook')(passport);
 
-// passport
-require('./config/passport')(passport)
-require('./config/passportGoogle')(passport)
-require('./config/passportfacebook')(passport)
-
-
-// Passport middleware
 app.use(passport.initialize());
 app.use(passport.session());
 
-// flash
-app.use(flash())
+app.use(flash());
 app.use((req, res, next) => {
-    res.locals.error = req.flash('error')
-    res.locals.success_msg = req.flash('success_msg')
-    next()
-})
+    res.locals.error = req.flash('error');
+    res.locals.success_msg = req.flash('success_msg');
+    next();
+});
 
-// Set global var user
-app.use(function (req, res, next) {
-    res.locals.user = req.user || null
-    next()
-})
+app.use((req, res, next) => {
+    res.locals.user = req.user || null;
+    next();
+});
 
-// require('./middlewares/img')
+app.use(express.static(path.join(__dirname, 'public')));
 
-// static folders
-app.use(express.static(path.join(__dirname, 'public')))
+app.use(layouts);
+app.set('layout', './layouts/main');
+app.set('view engine', 'ejs');
 
-// view engine and layouts
-app.use(layouts)
-app.set('layout', './layouts/main')
-app.set('view engine', 'ejs')
+app.use('/', require('./routers/index'));
+app.use('/user', require('./routers/user'));
+app.use('/prodects', require('./routers/prodects'));
+app.use('/auth', require('./routers/auth'));
+app.use('/admin', require('./routers/admin'));
 
-
-// routers
-app.use('/', require('./routers/index'))
-app.use('/user', require('./routers/user'))
-app.use('/prodects', require('./routers/prodects'))
-app.use('/auth', require('./routers/auth'))
-app.use('/admin', require('./routers/admin'))
-
-
-// moment js
 app.locals.moment = require('moment');
 
+const port = process.env.PORT || process.env.port || 3000;
 
-// port
-const port = process.env.port || 3000
-
-// listining on
-app.listen(port,
-    console.log(`server running on port ${port} in ${process.env.NODE_ENV} mode`))
+app.listen(port, () => {
+    console.log(`server running on port ${port} in ${process.env.NODE_ENV || 'development'} mode`);
+});
