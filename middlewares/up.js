@@ -1,53 +1,20 @@
-// const path = require('path');
-// const multer = require('multer');
+const multer = require('multer');
+const path = require('path');
 
+const allowedMimeTypes = new Set(['image/jpeg', 'image/png', 'image/webp']);
+const allowedExtensions = new Set(['.jpg', '.jpeg', '.png', '.webp']);
 
-// var storage = multer.diskStorage({
-//     destination: (req, file, cb) => {
-//         cb(null, 'public/uploads')
-//     },
-//     filename: (req, file, cb) => {
-//         const suffix = file.mimetype.split('/');
-//         cb(null, `${file.fieldname}-${Date.now()}.${suffix[1]}`);
-//     }
-// })
-
-// var upload = multer({
-//     storage: storage,
-//     fileFilter: function (req, file, callback) {
-//         if (file.mimetype == 'image/jpg' || file.mimetype == 'image/png' || file.mimetype == 'image/jpeg') {
-//             callback(null, true)
-//             console.log('img uploaded');
-//         }
-//         else {
-//             console.log('only img alows')
-//             callback(null, false)
-//         }
-//     }, limits: {
-//         fileSize: 1024 * 1024 * 5
-//     }
-// })
-
-
-// module.exports = upload
-
-
-
-
-
-
-
-const multer = require("multer");
-const path = require("path"); 
-// Multer config
 module.exports = multer({
-  storage: multer.diskStorage({}),
-  fileFilter: (req, file, cb) => {
-    let ext = path.extname(file.originalname);
-      if (ext !== ".jpg" && ext !== ".jpeg" && ext !== ".png") {
-      cb(new Error("File type is not supported"), false);
-      return;
-    }
-    cb(null, true);
-  },
+    storage: multer.diskStorage({}),
+    limits: {
+        fileSize: 5 * 1024 * 1024,
+        files: 3,
+    },
+    fileFilter: (req, file, cb) => {
+        const extension = path.extname(file.originalname).toLowerCase();
+        if (!allowedMimeTypes.has(file.mimetype) || !allowedExtensions.has(extension)) {
+            return cb(new Error('Only JPG, PNG, and WEBP images are supported'));
+        }
+        return cb(null, true);
+    },
 });
