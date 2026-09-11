@@ -12,11 +12,25 @@ const removeTempFile = async (file) => {
     }
 };
 
+const removeCloudinaryImages = async (publicIds = []) => {
+    for (const publicId of publicIds) {
+        if (!publicId) continue;
+        try {
+            await cloudinary.uploader.destroy(publicId);
+        } catch (err) {
+            // Image cleanup must not turn a successful product operation into a failure.
+            console.error(`Cloudinary cleanup failed for ${publicId}:`, err.message);
+        }
+    }
+};
+
 exports.addprodect = (req, res) => {
     res.render('add_prodect', { title: 'اضافه سلعه' });
 };
 
 exports.addproPost = async (req, res) => {
+    const uploadedPublicIds = [];
+
     try {
         const productData = { ...req.body, user: req.user._id };
         const files = Array.isArray(req.files) ? req.files : [];
@@ -26,6 +40,7 @@ exports.addproPost = async (req, res) => {
             try {
                 const uploaded = await cloudinary.uploader.upload(file.path);
                 imageURIs.push(uploaded.secure_url);
+                uploadedPublicIds.push(uploaded.public_id);
             } finally {
                 await removeTempFile(file);
             }
@@ -33,13 +48,15 @@ exports.addproPost = async (req, res) => {
 
         if (imageURIs.length > 0) {
             productData.image = imageURIs;
+            productData.cloudinary_ids = uploadedPublicIds;
         }
 
         await prodects.create(productData);
-        res.redirect('/');
+        return res.redirect('/');
     } catch (err) {
+        await removeCloudinaryImages(uploadedPublicIds);
         console.error(err);
-        res.render('error/500');
+        return res.render('error/500');
     }
 };
 
@@ -84,6 +101,7 @@ exports.deletePro = async (req, res) => {
             return res.status(403).redirect('/prodects/myProdects');
         }
 
+        await removeCloudinaryImages(deleted.cloudinary_ids);
         return res.redirect('/prodects/myProdects');
     } catch (err) {
         console.error(err);
