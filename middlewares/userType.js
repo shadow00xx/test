@@ -1,41 +1,26 @@
-
-const mongoose = require('mongoose');
-const user = require('../models/User');
 module.exports = {
-    admin: async (req, res, next)=> {
-let ad = await user.findOne({isAdmin:true})
-      if (ad) {
-        return next()
-      } else {
-        console.log("you are not admin");
-        res.redirect('/')
-      }
+    admin: function (req, res, next) {
+        if (req.isAuthenticated() && req.user && req.user.isAdmin === true) {
+            return next();
+        }
+        return res.status(403).redirect('/');
     },
-    store:  async(req, res, next)=> {
-        let sto = await user.findOne({isStore:true})
-        if (sto) {
-          return next()
-        } else {
-          console.log("you are not store");
-          res.redirect('/')
+    store: function (req, res, next) {
+        if (req.isAuthenticated() && req.user && req.user.isStore === true) {
+            return next();
         }
-    },   
-    Verified:  async(req, res, next) => {
-        let val = await user.findOne({isVerified:true})
-        if (val) {
-          return next()
-        } else {
-          console.log("you are not Verified");
-          res.redirect('/')
+        return res.status(403).redirect('/');
+    },
+    Verified: function (req, res, next) {
+        if (req.isAuthenticated() && req.user && req.user.isVerified === true) {
+            return next();
         }
-  },
-  owner:  async(req, res, next) => {
-    let val = await user.findOne({isowner:true})
-    if (val) {
-      return next()
-    } else {
-      console.log("you are not owner");
-      res.redirect('/')
-    }
-}
-}
+        return res.status(403).redirect('/');
+    },
+    owner: function (req, res, next) {
+        if (req.isAuthenticated() && req.user && req.user.isowner === true) {
+            return next();
+        }
+        return res.status(403).redirect('/');
+    },
+};
