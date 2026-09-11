@@ -8,12 +8,33 @@ exports.showreport = async (req, res) => {
                 { 'reports.0': { $exists: true } },
                 { report: 444 },
             ],
-        }).sort({ _id: -1 });
+        })
+            .populate('reports.user', 'displayName username')
+            .sort({ updatedAt: -1, _id: -1 });
 
         res.render('pages/showreport', { pro });
     } catch (err) {
         console.error(err);
         res.render('error/500');
+    }
+};
+
+exports.dismissReport = async (req, res) => {
+    try {
+        const product = await prodects.findById(req.params.id);
+
+        if (!product) {
+            return res.status(404).render('error/404');
+        }
+
+        product.reports = [];
+        product.report = [];
+        await product.save();
+
+        return res.redirect('/admin/showreport');
+    } catch (err) {
+        console.error(err);
+        return res.render('error/500');
     }
 };
 
