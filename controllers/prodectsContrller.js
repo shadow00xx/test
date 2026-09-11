@@ -1,270 +1,155 @@
-// const path = require('path')
-const mongoose = require("mongoose");
-const prodects = require('../models/Prodects')
-const User = require('../models/User')
-const cloudinary = require("../utils/cloudinary");
-
+const prodects = require('../models/Prodects');
+const cloudinary = require('../utils/cloudinary');
 const fs = require('fs');
 
-// get
-// add prodect 
-exports.addprodect = (req, res) => {
-    res.render('add_prodect', { title: 'اضافه سلعه' })
-}
-
-// post
-// add prodect 
-exports.addproPost = async (req, res, next) => {
-
+const removeTempFile = async (file) => {
+    if (!file || !file.path) return;
     try {
-        
-        req.body.user = req.user.id
-        const prodect = req.body
-        let imageURIs = []
-        let image = req.files
-
-        if (image) {
-            let multiplePicturePromise = image.map((picture) =>
-                cloudinary.uploader.upload(picture.path))
-            let imageResponses = await Promise.all(multiplePicturePromise);
-            imageResponses.map(x => {
-                const urls = x.secure_url
-                imageURIs.push(urls)
-            })
-        }
-
-        if (req.files) {
-            prodect.image = imageURIs
-        }
-
-        const x = await new prodects(prodect)
-        await x.save()
-        res.redirect('/')
+        await fs.promises.unlink(file.path);
     } catch (err) {
-        console.log(err);
-        res.render('error/500')
-
+        // The upload can succeed even when the temporary file is already gone.
+        if (err.code !== 'ENOENT') console.error(err);
     }
-}
+};
 
-// get
-// show my prodectes
+exports.addprodect = (req, res) => {
+    res.render('add_prodect', { title: 'اضافه سلعه' });
+};
+
+exports.addproPost = async (req, res) => {
+    try {
+        const productData = { ...req.body, user: req.user._id };
+        const files = Array.isArray(req.files) ? req.files : [];
+        const imageURIs = [];
+
+        for (const file of files) {
+            try {
+                const uploaded = await cloudinary.uploader.upload(file.path);
+                imageURIs.push(uploaded.secure_url);
+            } finally {
+                await removeTempFile(file);
+            }
+        }
+
+        if (imageURIs.length > 0) {
+            productData.image = imageURIs;
+        }
+
+        await prodects.create(productData);
+        res.redirect('/');
+    } catch (err) {
+        console.error(err);
+        res.render('error/500');
+    }
+};
+
 exports.showMyPro = async (req, res) => {
     try {
-        // const user = User.findById({ id:req.user.id})
         const march = await prodects.find({ user: req.user._id })
-            .sort({ createdAt: 'desc' })
-        res.render('myProdects', { march, title: 'منتجاتي ' })
-
+            .sort({ createdAt: 'desc' });
+        res.render('myProdects', { march, title: 'منتجاتي ' });
     } catch (err) {
-        console.log(err);
-        res.render('error/500')
-
+        console.error(err);
+        res.render('error/500');
     }
-}
+};
 
-
-// showOnePro
 exports.showOnePro = async (req, res) => {
     try {
+        const e = await prodects.findById(req.params.id).populate('user').lean();
 
-        const e = await prodects.findById(req.params.id).populate('user').lean()
-    
-             
-        const post = await prodects.findById(req.params.id);
-    if (req.user) {
-        const x = post.Favorite.some((like) => like.toString() === req.user.id)
-        res.render('pages/prodect', { e, x, title: e.name, })
+        if (!e) {
+            return res.status(404).render('error/404');
+        }
 
-    }
-if (!req.user) {
-    const x = post.Favorite.some((like) => like.toString() === '')
+        const userId = req.user ? req.user._id.toString() : null;
+        const favorites = Array.isArray(e.Favorite) ? e.Favorite : [];
+        const x = userId ? favorites.some((like) => like.toString() === userId) : false;
 
-    res.render('pages/prodect', { e, x, title: e.name, })
-    
-}
-
+        return res.render('pages/prodect', { e, x, title: e.name });
     } catch (err) {
-        console.log(err);
-        res.render('error/500')
-
+        console.error(err);
+        return res.render('error/500');
     }
-}
+};
 
-// delete
-// delete my prodects
 exports.deletePro = async (req, res) => {
     try {
+        const deleted = await prodects.findOneAndDelete({
+            _id: req.params.id,
+            user: req.user._id,
+        });
 
+        if (!deleted) {
+            return res.status(403).redirect('/prodects/myProdects');
+        }
 
-        await prodects.findByIdAndRemove({ _id: req.params.id })
-
-        res.redirect('/prodects/myProdects')
+        return res.redirect('/prodects/myProdects');
     } catch (err) {
-        console.log(err);
-        res.render('error/500')
+        console.error(err);
+        return res.render('error/500');
     }
-}
+};
 
-// Favorite 
-// put 
 exports.Favorite = async (req, res) => {
     try {
-        const post = await prodects.findById({_id:req.params.id});
+        const post = await prodects.findById(req.params.id);
+        if (!post) return res.status(404).render('error/404');
 
-        // Check if the post has already been liked
-        if (post.Favorite.some((like) => like.toString() === req.user.id)) {
-            // return res.status(400).json({ msg: 'Post already liked' });
-            req.flash(
-                'success_msg',
-                '  تمت الاضافه مسبقا')
-            res.redirect(`/prodects/${req.params.id}`)
-        } else {
-
-            post.Favorite.unshift(req.user.id);
-
+        const userId = req.user._id;
+        if (!post.Favorite.some((like) => like.toString() === userId.toString())) {
+            post.Favorite.push(userId);
             await post.save();
-
-            req.flash(
-                'success_msg',
-                ' تمت الاضافه بنجاح');
-            res.redirect(`/prodects/${req.params.id}`);
+            req.flash('success_msg', 'تمت الاضافة بنجاح');
+        } else {
+            req.flash('success_msg', 'تمت الاضافة مسبقاً');
         }
 
-
+        return res.redirect(`/prodects/${req.params.id}`);
     } catch (err) {
         console.error(err);
-        res.render('error/500')
+        return res.render('error/500');
     }
-}
+};
 
-
-// unFavorite 
-// put 
 exports.unFavorite = async (req, res) => {
     try {
-        const post = await prodects.findById({ _id: req.params.id });
+        const post = await prodects.findById(req.params.id);
+        if (!post) return res.status(404).render('error/404');
 
-        // Check if the post has not yet been liked
-        if (!post.Favorite.some((like) => like.toString() === req.user.id)) {
-            return res.status(400).json({ msg: 'Post has not yet been liked' });
-        }
-
-        // remove the like
         post.Favorite = post.Favorite.filter(
-            (l) => l.toString() !== req.user.id
+            (like) => like.toString() !== req.user._id.toString()
         );
-
         await post.save();
-        req.flash(
-            'success_msg',
-            ' تمت الازالة بنجاح');
-        res.redirect(`/prodects/${req.params.id}`);
 
-        // return res.json(post.Favorite);
+        req.flash('success_msg', 'تمت الازالة بنجاح');
+        return res.redirect(`/prodects/${req.params.id}`);
     } catch (err) {
         console.error(err);
-        res.render('error/500')
+        return res.render('error/500');
     }
-}
+};
 
-
-
-// addreport 
-// put 
 exports.addreport = async (req, res) => {
     try {
-        const post = await prodects.findById({ _id: req.params.id });
+        const post = await prodects.findById(req.params.id);
+        if (!post) return res.status(404).render('error/404');
 
+        const alreadyReported = post.reports.some(
+            (report) => report.user.toString() === req.user._id.toString()
+        );
 
-
-            post.report.unshift('444');
-
+        if (!alreadyReported) {
+            post.reports.push({ user: req.user._id });
             await post.save();
-
-            req.flash(
-                'success_msg',
-                ' تمت الابلاغ بنجاح سيتم التحقق من المنشور قريبا ... نشكرك');
-            res.redirect(`/prodects/${req.params.id}`);
+            req.flash('success_msg', 'تمت الابلاغ بنجاح سيتم التحقق من المنشور قريباً ... نشكرك');
+        } else {
+            req.flash('success_msg', 'تم الابلاغ عن هذا المنشور مسبقاً');
         }
 
-
-     catch (err) {
-        console.error(err);
-        res.render('error/500')
-    }
-}
-
-
-
-
-
-
-exports.addfavorite = async (req, res) => {
-    try {
-
-        // const post = await prodects.findById(req.params.id)
-        const rep = await Favorite.find({ Fav: req.params.id })
-
-
-        if (rep.some((Rep) => Rep.Fav.toString() === req.params.id)) {
-            req.flash(
-                'success_msg',
-                '  تمت الاضافه مسبقا')
-            res.redirect(`/prodects/${req.params.id}`)
-        }
-
-        const r = new Favorite({
-            Fav: req.params.id,
-            user: req.user.id
-        })
-
-        await r.save();
-        console.log(r);
-        req.flash(
-            'success_msg',
-            ' تمت الاضافه بنجاح');
-        res.redirect(`/prodects/${req.params.id}`);
-
-
-
-
+        return res.redirect(`/prodects/${req.params.id}`);
     } catch (err) {
-        console.log(err);
-        res.render('error/500')
+        console.error(err);
+        return res.render('error/500');
     }
-}
-
-
-
-
-
-
-// @desc    edit prodect
-// @route   PUT /stories/:id
-
-// router.put('/edit:id', ensureAuth, async (req, res) => {
-//     try {
-//         let e = await Story.findById(req.params.id).lean()
-
-//         if (!story) {
-//             return res.render('error/404')
-//         }
-
-//         if (story.user != req.user.id) {
-//             res.redirect('/stories')
-//         } else {
-//             story = await Story.findOneAndUpdate({ _id: req.params.id }, req.body, {
-//                 new: true,
-//                 runValidators: true,
-//             })
-
-//             res.redirect('/dashboard')
-//         }
-//     } catch (err) {
-//         console.error(err)
-//         return res.render('error/500')
-//     }
-// })
-
-
+};
