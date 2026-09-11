@@ -26,6 +26,11 @@ const ProdectsSchema = new mongoose.Schema({
     image: [{
         type: String,
     }],
+    // Public IDs for images uploaded to Cloudinary. Kept separate from the
+    // legacy cloudinary_id field so existing documents remain compatible.
+    cloudinary_ids: [{
+        type: String,
+    }],
     user: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User',
@@ -71,7 +76,6 @@ const ProdectsSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User',
     }],
-    // New report structure. The legacy numeric `report` field is kept for old documents.
     reports: [{
         user: {
             type: mongoose.Schema.Types.ObjectId,
