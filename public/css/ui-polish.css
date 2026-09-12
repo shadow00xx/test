@@ -1,0 +1,19 @@
+/* Delala UI polish - lightweight visual improvements */
+:root{--delala-primary:#183153;--delala-accent:#2c9999;--delala-soft:#f5f7fa;--delala-text:#253247}
+body{background:linear-gradient(180deg,#f8fafc 0%,#fff 45%);color:var(--delala-text)}
+.card{border:0!important;border-radius:16px!important;box-shadow:0 5px 18px rgba(24,49,83,.08);overflow:hidden;transition:transform .2s ease,box-shadow .2s ease}
+.card:hover{transform:translateY(-3px);box-shadow:0 10px 28px rgba(24,49,83,.14)}
+.card img{object-fit:cover}
+.btn{border-radius:10px;transition:transform .15s ease,box-shadow .15s ease}
+.btn:hover{transform:translateY(-1px)}
+.btn-primary,.btn-nav{background-color:var(--delala-primary)!important;border-color:var(--delala-primary)!important}
+.icons{max-width:800px;width:calc(100% - 24px);gap:10px;flex-wrap:wrap;align-items:center;justify-content:center}
+.icons .btn{font-size:1rem!important;box-shadow:0 3px 10px rgba(24,49,83,.08)}
+.category__img,.category__img1{border-radius:14px;box-shadow:0 4px 14px rgba(0,0,0,.08);transition:transform .2s ease,box-shadow .2s ease}
+.category__link:hover .category__img,.category__link1:hover .category__img1{transform:translateY(-3px);box-shadow:0 8px 20px rgba(0,0,0,.12)}
+.ads{box-shadow:0 5px 18px rgba(24,49,83,.08)!important;border:0!important}
+.slide_pro,.slide_pro .carousel-item{border-radius:16px;overflow:hidden}
+.carousel-indicato{display:flex;gap:8px;justify-content:center;margin-top:10px}
+.carousel-indicato img{width:64px;height:52px;object-fit:cover;border-radius:8px;opacity:.7;cursor:pointer;transition:opacity .2s,transform .2s}
+.carousel-indicato img:hover,.carousel-indicato img.active{opacity:1;transform:translateY(-2px)}
+@media(max-width:768px){.products{width:100%;margin-left:0}.prodects-form,.add_pro_con{width:calc(100% - 24px);height:auto}.icons{width:calc(100% - 20px)}.icons .btn{flex:1 1 140px}.brand{font-size:1.7rem}.slide_pro,.slide_pro .carousel-item{height:300px!important}}
