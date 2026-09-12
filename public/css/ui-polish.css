@@ -1,6 +1,6 @@
 /* Delala UI polish - lightweight visual improvements */
 :root{--delala-primary:#183153;--delala-accent:#2c9999;--delala-soft:#f5f7fa;--delala-text:#253247}
-body{background:linear-gradient(180deg,#f8fafc 0%,#fff 45%);color:var(--delala-text)}
+body{background:linear-gradient(180deg,#f8fafc 0%,#fff 45%);color:var(--delala-text);overflow-x:hidden}
 .card{border:0!important;border-radius:16px!important;box-shadow:0 5px 18px rgba(24,49,83,.08);overflow:hidden;transition:transform .2s ease,box-shadow .2s ease}
 .card:hover{transform:translateY(-3px);box-shadow:0 10px 28px rgba(24,49,83,.14)}
 .card img{object-fit:cover}
@@ -16,4 +16,22 @@ body{background:linear-gradient(180deg,#f8fafc 0%,#fff 45%);color:var(--delala-t
 .carousel-indicato{display:flex;gap:8px;justify-content:center;margin-top:10px}
 .carousel-indicato img{width:64px;height:52px;object-fit:cover;border-radius:8px;opacity:.7;cursor:pointer;transition:opacity .2s,transform .2s}
 .carousel-indicato img:hover,.carousel-indicato img.active{opacity:1;transform:translateY(-2px)}
-@media(max-width:768px){.products{width:100%;margin-left:0}.prodects-form,.add_pro_con{width:calc(100% - 24px);height:auto}.icons{width:calc(100% - 20px)}.icons .btn{flex:1 1 140px}.brand{font-size:1.7rem}.slide_pro,.slide_pro .carousel-item{height:300px!important}}
+@media(max-width:768px){
+  body{font-size:15px}
+  .container,.container-fluid{max-width:100%;padding-left:12px;padding-right:12px}
+  .products{width:100%;margin-left:0;padding-left:0;padding-right:0}
+  .prodects-form,.add_pro_con{width:100%;height:auto;margin-left:0;margin-right:0}
+  .icons{width:100%;padding:0 4px;gap:8px;margin:20px auto}
+  .icons .btn{flex:1 1 135px;min-height:44px;padding:10px 12px}
+  .brand{font-size:1.7rem}
+  .slide_pro,.slide_pro .carousel-item{height:300px!important}
+  .card{border-radius:13px!important}
+  .card:hover{transform:none;box-shadow:0 5px 18px rgba(24,49,83,.08)}
+  .btn{min-height:44px}
+  input,select,textarea{font-size:16px!important}
+}
+@media(max-width:480px){
+  .brand{font-size:1.5rem}
+  .icons .btn{flex:1 1 100%;width:100%}
+  .slide_pro,.slide_pro .carousel-item{height:260px!important}
+}
